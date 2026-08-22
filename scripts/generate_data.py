@@ -83,8 +83,8 @@ def gen_refund_id() -> str:
     return _gen_id("rfnd_")
 
 def gen_utr() -> str:
-    """HDFC UTR: HDFC + 13 digits"""
-    digits = ''.join(random.choices(string.digits, k=13))
+    """HDFC UTR: HDFC + 12 digits = 16 chars standard NEFT/RTGS format"""
+    digits = ''.join(random.choices(string.digits, k=12))
     return f"HDFC{digits}"
 
 def gen_shopify_id() -> str:
