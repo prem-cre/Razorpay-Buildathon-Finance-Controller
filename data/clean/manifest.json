@@ -1,0 +1,332 @@
+[
+  {
+    "record_key": "pay_000015QnuVdYXy",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00002K3yn9Ffcg",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00003vsjaSS8VF",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_0000452Ztd26fE",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00005BpdbIKaRd",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00006lgAACTP9g",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00007OHafUozD1",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00008ndTdtdD5G",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00009mSoyPstUe",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00010RL9OaYsP6",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_000110fAraVNqT",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_000123X13npgW2",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00013RxcDm4vY2",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_000148l7qgATtL",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00015Put0Sstzy",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00016JOCBnD3Xk",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00017VC2JSxyjQ",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_000189K63LSFZH",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00019u3ejxjnzu",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_0002007zUHLnnB",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00021lquCu2r6A",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00022hPInRVkLU",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00023MgV0Lh8Wv",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00024GOM5WCZKt",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00025qrK2IGloz",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_000269IvCtoStU",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00027sRhcds6NU",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00028QjY6fpIzK",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00029jkeaBKsoR",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00030ektUJrhQR",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00031UDO4lKNEf",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00032u8zF9OHzl",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00033azn0h6Oj5",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00034FYrsK9EjH",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00035RYxPY8EcF",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00036QO001xtSV",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_000374cXsxjGJX",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00038BvKNAp0mx",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00039MQSOZM4Ot",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00040ZpZDYUvh7",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00041PPKY6gob2",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00042oHyx6RHKT",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00043Ndr86ZfnN",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_000441iipkObaW",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00045cW1GC7dDy",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00046LgR0OVSnB",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00047ffTYIKIuh",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00048vIhroAIVM",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00049yiNbUnAvw",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00050qUhArQEPc",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00051RFZXe1cb5",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00052gBye1UnWe",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00053Ve6MCIJQ2",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00054CcwrN8fKx",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  },
+  {
+    "record_key": "pay_00055Z8fOcR9GL",
+    "expected_match_status": "matched",
+    "injected_defect": null,
+    "expected_confidence": "HIGH"
+  }
+]
