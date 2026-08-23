@@ -1,0 +1,2481 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RazorpayX Autonomous Finance Controller | Multi-Source Reconciliation</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --bg-primary: #07090e;
+      --bg-secondary: #0d111a;
+      --bg-tertiary: #131826;
+      --bg-card: rgba(16, 22, 36, 0.75);
+      --bg-card-hover: rgba(22, 30, 48, 0.85);
+      --bg-overlay: rgba(7, 9, 14, 0.82);
+      
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-default: rgba(255, 255, 255, 0.12);
+      --border-highlight: rgba(12, 102, 228, 0.35);
+      
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      
+      --rzp-blue: #0c66e4;
+      --rzp-blue-hover: #2563eb;
+      --rzp-blue-subtle: rgba(12, 102, 228, 0.15);
+      
+      --status-emerald: #10b981;
+      --status-emerald-bg: rgba(16, 185, 129, 0.12);
+      --status-emerald-border: rgba(16, 185, 129, 0.28);
+      
+      --status-amber: #f59e0b;
+      --status-amber-bg: rgba(245, 158, 11, 0.12);
+      --status-amber-border: rgba(245, 158, 11, 0.28);
+      
+      --status-rose: #f43f5e;
+      --status-rose-bg: rgba(244, 63, 94, 0.12);
+      --status-rose-border: rgba(244, 63, 94, 0.28);
+      
+      --status-violet: #8b5cf6;
+      --status-violet-bg: rgba(139, 92, 246, 0.12);
+      --status-violet-border: rgba(139, 92, 246, 0.28);
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-full: 9999px;
+      
+      --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 25px -5px rgba(12, 102, 228, 0.25);
+      
+      --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* Light Mode Overrides */
+    html.light {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card-hover: #ffffff;
+      --bg-overlay: rgba(15, 23, 42, 0.4);
+      
+      --border-subtle: rgba(0, 0, 0, 0.07);
+      --border-default: rgba(0, 0, 0, 0.12);
+      --border-highlight: rgba(12, 102, 228, 0.3);
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      
+      --status-emerald-bg: rgba(16, 185, 129, 0.1);
+      --status-amber-bg: rgba(245, 158, 11, 0.1);
+      --status-rose-bg: rgba(244, 63, 94, 0.1);
+      --status-violet-bg: rgba(139, 92, 246, 0.1);
+      --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    .tabular-mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Layout Shell */
+    .app-shell {
+      display: flex;
+      flex: 1;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 260px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 20;
+    }
+
+    .brand-header {
+      padding: 20px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #0c66e4, #3b82f6);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(12, 102, 228, 0.4);
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-tag {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--rzp-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-section {
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .nav-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 8px 10px 4px 10px;
+      font-weight: 600;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .nav-item.active {
+      background: var(--rzp-blue-subtle);
+      color: var(--rzp-blue);
+      font-weight: 600;
+    }
+
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 3px;
+      background: var(--rzp-blue);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+    }
+
+    .nav-badge.alert {
+      background: var(--status-rose-bg);
+      color: var(--status-rose);
+      border: 1px solid var(--status-rose-border);
+    }
+
+    .sidebar-footer {
+      padding: 16px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .agent-status-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .agent-status-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--status-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .agent-stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Main Workspace Surface */
+    .workspace {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: var(--bg-primary);
+    }
+
+    /* Global Top Bar */
+    .top-bar {
+      height: 60px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .env-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: rgba(12, 102, 228, 0.12);
+      color: var(--rzp-blue);
+      border: 1px solid var(--border-highlight);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      width: 320px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px 7px 34px;
+      font-size: 13px;
+      color: var(--text-primary);
+      outline: none;
+      transition: all 0.15s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--rzp-blue);
+      box-shadow: 0 0 0 2px var(--rzp-blue-subtle);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-shortcut {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      font-family: var(--font-mono);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      outline: none;
+    }
+
+    .btn-primary {
+      background: var(--rzp-blue);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--rzp-blue-hover);
+      box-shadow: 0 2px 10px rgba(12, 102, 228, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      border-color: var(--border-default);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--text-muted);
+    }
+
+    .btn-icon-only {
+      padding: 7px;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-icon-only:hover {
+      color: var(--text-primary);
+      background: var(--bg-card-hover);
+    }
+
+    /* Content Area */
+    .content-area {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* View Headers */
+    .view-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .view-title-group h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .view-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Golden KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card:hover {
+      border-color: var(--border-default);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: transparent;
+    }
+
+    .kpi-card.accent-emerald::after { background: var(--status-emerald); }
+    .kpi-card.accent-blue::after { background: var(--rzp-blue); }
+    .kpi-card.accent-rose::after { background: var(--status-rose); }
+    .kpi-card.accent-violet::after { background: var(--status-violet); }
+
+    .kpi-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .kpi-meta {
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .kpi-trend {
+      font-weight: 600;
+      font-size: 11px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .kpi-trend.positive {
+      background: var(--status-emerald-bg);
+      color: var(--status-emerald);
+    }
+
+    .kpi-trend.negative {
+      background: var(--status-rose-bg);
+      color: var(--status-rose);
+    }
+
+    /* Flow Radar Waterfall Visualizer */
+    .flow-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .flow-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .flow-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flow-pipeline {
+      display: grid;
+      grid-template-columns: 1.2fr auto 1fr auto 1fr auto 1.2fr auto 1fr;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+    }
+
+    @media (max-width: 1024px) {
+      .flow-pipeline {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .flow-connector {
+        transform: rotate(90deg);
+        justify-content: center;
+      }
+    }
+
+    .flow-step {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .flow-step.highlight {
+      border-color: var(--status-emerald-border);
+      background: var(--status-emerald-bg);
+    }
+
+    .flow-step.warn {
+      border-color: var(--status-rose-border);
+      background: var(--status-rose-bg);
+    }
+
+    .flow-step-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .flow-step-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .flow-step-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .flow-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+
+    /* Multi-Source Live Telemetry & Dropzone */
+    .ingestion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .ingestion-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dropzone-card {
+      background: var(--bg-secondary);
+      border: 2px dashed var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dropzone-card:hover {
+      border-color: var(--rzp-blue);
+      background: var(--rzp-blue-subtle);
+    }
+
+    .dropzone-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rzp-blue);
+    }
+
+    .live-feed-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 240px;
+    }
+
+    .feed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .feed-logs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-y: auto;
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+
+    .feed-log-item {
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-tertiary);
+      border-left: 3px solid var(--rzp-blue);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .feed-log-item.success { border-left-color: var(--status-emerald); }
+    .feed-log-item.warning { border-left-color: var(--status-amber); }
+    .feed-log-item.danger { border-left-color: var(--status-rose); }
+
+    .feed-time {
+      color: var(--text-muted);
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    /* Filter Pills & Table Controls */
+    .table-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .table-toolbar {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-wrap: wrap;
+    }
+
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill:hover {
+      color: var(--text-primary);
+      border-color: var(--border-default);
+    }
+
+    .pill.active {
+      background: var(--rzp-blue);
+      color: white;
+      border-color: var(--rzp-blue);
+    }
+
+    .pill-count {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Data Table */
+    .data-table-wrapper {
+      overflow-x: auto;
+    }
+
+    table.recon-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    table.recon-table th {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+
+    table.recon-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    table.recon-table tbody tr {
+      cursor: pointer;
+      transition: background 0.12s ease;
+    }
+
+    table.recon-table tbody tr:hover {
+      background: var(--bg-card-hover);
+    }
+
+    table.recon-table tbody tr.selected {
+      background: var(--rzp-blue-subtle);
+      border-left: 3px solid var(--rzp-blue);
+    }
+
+    /* Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .status-badge.exact {
+      background: var(--status-emerald-bg);
+      color: var(--status-emerald);
+      border: 1px solid var(--status-emerald-border);
+    }
+
+    .status-badge.drift {
+      background: var(--status-amber-bg);
+      color: var(--status-amber);
+      border: 1px solid var(--status-amber-border);
+    }
+
+    .status-badge.exception {
+      background: var(--status-rose-bg);
+      color: var(--status-rose);
+      border: 1px solid var(--status-rose-border);
+    }
+
+    .status-badge.timing {
+      background: var(--status-violet-bg);
+      color: var(--status-violet);
+      border: 1px solid var(--status-violet-border);
+    }
+
+    .confidence-meter {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meter-bar {
+      width: 45px;
+      height: 5px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+    }
+
+    /* Table Pagination */
+    .table-footer {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Split-Diff Forensic Slide-Over Drawer */
+    .drawer-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-overlay);
+      backdrop-filter: blur(4px);
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 620px;
+      max-width: 90vw;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-default);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
+      z-index: 60;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-tertiary);
+    }
+
+    .drawer-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .drawer-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .drawer-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .drawer-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .diff-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* 3-Way Diff Grid */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .diff-column {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .diff-col-header {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .diff-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .diff-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+    }
+
+    .diff-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .diff-value.variance {
+      color: var(--status-rose);
+      background: var(--status-rose-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--status-rose-border);
+      width: fit-content;
+    }
+
+    .diff-value.variance-warning {
+      color: var(--status-amber);
+      background: var(--status-amber-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--status-amber-border);
+      width: fit-content;
+    }
+
+    /* Agent Chain-of-Thought Reasoning Box */
+    .reasoning-card {
+      background: #080b12;
+      border: 1px solid var(--border-highlight);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .reasoning-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--rzp-blue);
+    }
+
+    .reasoning-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .reasoning-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .reasoning-num {
+      color: var(--rzp-blue);
+      font-weight: 700;
+    }
+
+    .drawer-footer {
+      padding: 16px 24px;
+      background: var(--bg-tertiary);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    /* Agent Studio Configuration View */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+
+    .studio-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .studio-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .config-control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .control-label-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .control-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .control-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .range-slider-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    input[type="range"] {
+      accent-color: var(--rzp-blue);
+      cursor: pointer;
+    }
+
+    /* Toggle Switch */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      transition: .2s;
+      border-radius: var(--radius-full);
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--text-muted);
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--rzp-blue);
+      border-color: var(--rzp-blue);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+      background-color: white;
+    }
+
+    /* Financial Copilot View */
+    .copilot-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      height: 620px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .copilot-messages {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message {
+      display: flex;
+      gap: 12px;
+      max-width: 85%;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .message.agent .message-avatar {
+      background: var(--rzp-blue);
+      color: white;
+    }
+
+    .message.user .message-avatar {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      color: var(--text-primary);
+    }
+
+    .message-bubble {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message.user .message-bubble {
+      background: var(--rzp-blue);
+      color: white;
+      border-color: var(--rzp-blue);
+    }
+
+    .copilot-chips {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-tertiary);
+    }
+
+    .prompt-chip {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .prompt-chip:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+      border-color: var(--rzp-blue);
+    }
+
+    .copilot-input-bar {
+      padding: 16px 20px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 12px;
+    }
+
+    .copilot-input {
+      flex: 1;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .copilot-input:focus {
+      border-color: var(--rzp-blue);
+      box-shadow: 0 0 0 2px var(--rzp-blue-subtle);
+    }
+
+    /* Toast Notification System */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 320px;
+      pointer-events: auto;
+      animation: slideUp 0.25s ease;
+      font-size: 13px;
+    }
+
+    .toast.success { border-left: 3px solid var(--status-emerald); }
+    .toast.info { border-left: 3px solid var(--rzp-blue); }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Utilities */
+    .hidden { display: none !important; }
+    .text-emerald { color: var(--status-emerald); }
+    .text-amber { color: var(--status-amber); }
+    .text-rose { color: var(--status-rose); }
+    .text-violet { color: var(--status-violet); }
+    .text-blue { color: var(--rzp-blue); }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div>
+        <div class="brand-header">
+          <div class="brand-logo-icon">R</div>
+          <div class="brand-title">
+            <span>RazorpayX Controller</span>
+            <span class="brand-tag">Autonomous Finance</span>
+          </div>
+        </div>
+
+        <nav class="nav-section">
+          <div class="nav-label">Finance Control</div>
+          <a class="nav-item active" data-tab="overview">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Command Overview
+          </a>
+          <a class="nav-item" data-tab="reconciliation">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            Reconciliation Grid
+            <span class="nav-badge" id="totalRecordsBadge">1,240</span>
+          </a>
+          <a class="nav-item" data-tab="exceptions">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            Exception Queue
+            <span class="nav-badge alert" id="exceptionBadge">18</span>
+          </a>
+          
+          <div class="nav-label" style="margin-top: 12px;">Agentic Operations</div>
+          <a class="nav-item" data-tab="studio">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Agent Studio & Rules
+          </a>
+          <a class="nav-item" data-tab="copilot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Financial Copilot
+            <span class="nav-badge" style="background: var(--rzp-blue-subtle); color: var(--rzp-blue);">Ray AI</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="agent-status-card">
+          <div class="agent-status-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="pulse-dot"></span>
+              <span>Recon Agent v3.4</span>
+            </div>
+            <span class="text-emerald tabular-mono" style="font-size: 11px;">Active</span>
+          </div>
+          <div class="agent-stat-row">
+            <span>Throughput</span>
+            <span class="tabular-mono">4,120 tx/min</span>
+          </div>
+          <div class="agent-stat-row">
+            <span>Precision</span>
+            <span class="tabular-mono text-emerald">99.82%</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- WORKSPACE SURFACE -->
+    <main class="workspace">
+      
+      <!-- TOP GLOBAL BAR -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <div class="env-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle></svg>
+            Production Batch #2026-08
+          </div>
+          
+          <div class="search-input-wrapper">
+            <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="globalSearchInput" class="search-input" placeholder="Search UTR, Order ID, Customer, Amount..." />
+            <span class="search-shortcut">/</span>
+          </div>
+        </div>
+
+        <div class="top-bar-right">
+          <button class="btn btn-secondary btn-icon-only" id="themeToggleBtn" title="Toggle Theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+          <button class="btn btn-primary" id="runBatchBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            Run Autonomous Batch
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENT PANES -->
+      <div class="content-area">
+
+        <!-- TAB 1: OVERVIEW & TELEMETRY -->
+        <section id="view-overview" class="view-pane">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Autonomous Reconciliation Radar</h1>
+              <p class="view-subtitle">Continuous multi-source verification across Razorpay Gateway, Bank Accounts (MT940), and ERP ledgers.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary" onclick="switchTab('studio')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle></svg>
+                Configure Tolerances
+              </button>
+              <button class="btn btn-secondary" onclick="exportAuditReport()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Export Audit JSON
+              </button>
+            </div>
+          </div>
+
+          <!-- GOLDEN KPIS -->
+          <div class="kpi-grid">
+            <div class="kpi-card accent-emerald">
+              <div class="kpi-title">
+                <span>Autonomous Match Rate</span>
+                <svg width="16" height="16" class="text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div class="kpi-value tabular-mono text-emerald">98.4%</div>
+              <div class="kpi-meta">
+                <span class="kpi-trend positive tabular-mono">↑ +1.2%</span>
+                <span class="text-muted">vs benchmark (95.0%)</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-blue">
+              <div class="kpi-title">
+                <span>Reconciled Volume</span>
+                <svg width="16" height="16" class="text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+              <div class="kpi-value tabular-mono">₹4,82,90,500</div>
+              <div class="kpi-meta">
+                <span class="text-secondary tabular-mono">1,240</span>
+                <span class="text-muted">processed transactions</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-emerald">
+              <div class="kpi-title">
+                <span>Bank Matched & Settled</span>
+                <svg width="16" height="16" class="text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+              </div>
+              <div class="kpi-value tabular-mono">₹4,75,18,090</div>
+              <div class="kpi-meta">
+                <span class="kpi-trend positive tabular-mono">1,222 Clean</span>
+                <span class="text-muted">zero manual touches</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-rose">
+              <div class="kpi-title">
+                <span>Value at Risk (Suspense)</span>
+                <svg width="16" height="16" class="text-rose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+              <div class="kpi-value tabular-mono text-rose">₹7,72,410</div>
+              <div class="kpi-meta">
+                <span class="kpi-trend negative tabular-mono">18 Items</span>
+                <span class="text-muted">in exception triage</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- WATERFALL FLOW CARD -->
+          <div class="flow-card">
+            <div class="flow-card-header">
+              <div class="flow-title">
+                <svg width="16" height="16" class="text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                Reconciliation Flow Breakdown (Synthetic 50+ Batch)
+              </div>
+              <span class="tabular-mono text-muted" style="font-size: 12px;">Live Cycle: T+1 Rolling Settlement</span>
+            </div>
+
+            <div class="flow-pipeline">
+              <div class="flow-step">
+                <div class="flow-step-label">1. Gross Ingested</div>
+                <div class="flow-step-value tabular-mono">₹4,82,90,500</div>
+                <div class="flow-step-sub tabular-mono">1,240 Orders</div>
+              </div>
+              <div class="flow-connector">➔</div>
+              <div class="flow-step">
+                <div class="flow-step-label">2. MDR Fees Deduced</div>
+                <div class="flow-step-value tabular-mono text-amber">-₹9,65,810</div>
+                <div class="flow-step-sub tabular-mono">Avg 2.0%</div>
+              </div>
+              <div class="flow-connector">➔</div>
+              <div class="flow-step">
+                <div class="flow-step-label">3. GST on Fees</div>
+                <div class="flow-step-value tabular-mono text-amber">-₹1,73,845</div>
+                <div class="flow-step-sub tabular-mono">18% Statutory</div>
+              </div>
+              <div class="flow-connector">➔</div>
+              <div class="flow-step highlight">
+                <div class="flow-step-label">4. Bank Matched (ICICI/HDFC)</div>
+                <div class="flow-step-value tabular-mono text-emerald">₹4,71,50,845</div>
+                <div class="flow-step-sub tabular-mono">1,222 Entries Validated</div>
+              </div>
+              <div class="flow-connector">➔</div>
+              <div class="flow-step warn">
+                <div class="flow-step-label">5. Suspense Queue</div>
+                <div class="flow-step-value tabular-mono text-rose">₹7,72,410</div>
+                <div class="flow-step-sub tabular-mono">18 Exceptions</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MULTI-SOURCE INGESTION SIMULATOR & LIVE TELEMETRY -->
+          <div class="ingestion-grid">
+            <div class="dropzone-card" id="dropzoneSim" onclick="simulateUpload()">
+              <div class="dropzone-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--text-primary);">Upload Bank / Gateway Ledgers</div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Drag & drop Razorpay Settlement CSV, ICICI Bank MT940, or Tally XML</div>
+              </div>
+              <div style="display: flex; gap: 8px; margin-top: 4px;">
+                <span class="nav-badge">ICICI Bank MT940</span>
+                <span class="nav-badge">HDFC Bank Feed</span>
+                <span class="nav-badge">Zoho Books XML</span>
+              </div>
+            </div>
+
+            <div class="live-feed-card">
+              <div class="feed-header">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="pulse-dot"></span>
+                  <span>Agent Reasoning Stream</span>
+                </div>
+                <span class="tabular-mono text-muted" style="font-size: 11px;">Real-time Telemetry</span>
+              </div>
+              <div class="feed-logs" id="telemetryLogs">
+                <div class="feed-log-item success">
+                  <span class="feed-time">14:02:45</span>
+                  <span>[MATCH] Verified UTR202608229910 with ICICI. Applied 2% MDR + 18% GST formula. Auto-Posted to Tally.</span>
+                </div>
+                <div class="feed-log-item warning">
+                  <span class="feed-time">14:02:44</span>
+                  <span>[DRIFT] Detected ₹2.40 rounding drift on pay_O3kJ9xLz7. Reconciled under Auto-Tolerance Rule #4.</span>
+                </div>
+                <div class="feed-log-item danger">
+                  <span class="feed-time">14:02:43</span>
+                  <span>[EXCEPTION] Missing bank credit for pay_N8vL2pQx1 (₹1,42,850.00). Escalate to ICICI Settlement Desk.</span>
+                </div>
+                <div class="feed-log-item success">
+                  <span class="feed-time">14:02:40</span>
+                  <span>[MATCH] Matched batch payout ₹28,40,000 against 34 Swiggy order records. Exact aggregate reconciliation.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: DEEP RECONCILIATION GRID -->
+        <section id="view-reconciliation" class="view-pane hidden">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Multi-Ledger Forensic Grid</h1>
+              <p class="view-subtitle">Direct 3-way line-item cross-check between Razorpay Settlement, Bank Credits, and ERP Ledgers.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary" onclick="filterTableByStatus('all')">Reset Filters</button>
+              <button class="btn btn-primary" onclick="switchTab('exceptions')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon></svg>
+                View 18 Exceptions
+              </button>
+            </div>
+          </div>
+
+          <!-- TABLE CONTAINER -->
+          <div class="table-container">
+            <div class="table-toolbar">
+              <div class="filter-pills">
+                <div class="pill active" onclick="filterTableByStatus('all', this)">
+                  All Records <span class="pill-count" id="countAll">50</span>
+                </div>
+                <div class="pill" onclick="filterTableByStatus('exact', this)">
+                  ● Exact Match <span class="pill-count" id="countExact">38</span>
+                </div>
+                <div class="pill" onclick="filterTableByStatus('drift', this)">
+                  ▲ Fee Drift <span class="pill-count" id="countDrift">5</span>
+                </div>
+                <div class="pill" onclick="filterTableByStatus('timing', this)">
+                  ⏱ Timing Mismatch <span class="pill-count" id="countTiming">4</span>
+                </div>
+                <div class="pill" onclick="filterTableByStatus('exception', this)">
+                  ✖ Exceptions <span class="pill-count" id="countException">3</span>
+                </div>
+              </div>
+
+              <div style="font-size: 12px; color: var(--text-muted);">
+                Showing <strong class="text-primary tabular-mono" id="renderedCount">50</strong> items
+              </div>
+            </div>
+
+            <div class="data-table-wrapper">
+              <table class="recon-table">
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Order / Txn ID</th>
+                    <th>Merchant / Counterparty</th>
+                    <th>Gateway Gross</th>
+                    <th>Gateway Net</th>
+                    <th>Bank Credit</th>
+                    <th>Variance</th>
+                    <th>Bank UTR</th>
+                    <th>Confidence</th>
+                    <th>Agent Decision</th>
+                  </tr>
+                </thead>
+                <tbody id="reconTableBody">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-footer">
+              <div>Press <kbd style="background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-default);">J</kbd> / <kbd style="background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-default);">K</kbd> to navigate rows • Click any row for 3-Way Split Diff</div>
+              <div class="pagination-controls">
+                <button class="btn btn-secondary btn-icon-only"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+                <span class="tabular-mono">Page 1 of 1</span>
+                <button class="btn btn-secondary btn-icon-only"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: EXCEPTION QUEUE -->
+        <section id="view-exceptions" class="view-pane hidden">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Human-in-the-Loop Exception Queue</h1>
+              <p class="view-subtitle">Autonomous agent escalated items requiring review, manual override, or bank inquiry.</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary" onclick="batchApproveTolerance()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Auto-Resolve ₹5 Tolerance Items (5)
+              </button>
+              <button class="btn btn-primary" onclick="exportSuspenseToICICI()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Dispatch Inquiries to ICICI Ops
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <div class="data-table-wrapper">
+              <table class="recon-table">
+                <thead>
+                  <tr>
+                    <th>Escalation Type</th>
+                    <th>Txn ID</th>
+                    <th>Merchant</th>
+                    <th>Expected vs Received</th>
+                    <th>Variance</th>
+                    <th>Reasoning Cause</th>
+                    <th>Recommended Action</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="exceptionTableBody">
+                  <!-- Populated via script -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: AGENT STUDIO & RULES CONFIGURATOR -->
+        <section id="view-studio" class="view-pane hidden">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Agent Studio & Autonomous Guardrails</h1>
+              <p class="view-subtitle">Configure agent verification confidence thresholds, variance tolerance bounds, and auto-bookkeeping rules.</p>
+            </div>
+            <button class="btn btn-primary" onclick="saveAgentRules()">Save Configuration</button>
+          </div>
+
+          <div class="studio-grid">
+            <div class="studio-card">
+              <div class="studio-card-header">
+                <svg width="18" height="18" class="text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path></svg>
+                <span>Confidence & Tolerance Gates</span>
+              </div>
+
+              <div class="config-control-group">
+                <div class="control-row">
+                  <div class="control-label-group">
+                    <div class="control-title">Autonomous Approval Confidence Threshold</div>
+                    <div class="control-desc">Only transactions with confidence above this gate are auto-settled.</div>
+                  </div>
+                  <div class="range-slider-wrapper">
+                    <input type="range" id="confidenceRange" min="80" max="99.9" step="0.1" value="95.0" oninput="updateConfidenceVal(this.value)" />
+                    <span class="tabular-mono" id="confidenceVal" style="font-weight: 700; width: 45px;">95.0%</span>
+                  </div>
+                </div>
+
+                <div class="control-row">
+                  <div class="control-label-group">
+                    <div class="control-title">Fee Rounding Tolerance Bound</div>
+                    <div class="control-desc">Auto-reconcile minor MDR & GST rounding discrepancies below this value.</div>
+                  </div>
+                  <div class="range-slider-wrapper">
+                    <input type="range" id="toleranceRange" min="0" max="25" step="1" value="5" oninput="updateToleranceVal(this.value)" />
+                    <span class="tabular-mono" id="toleranceVal" style="font-weight: 700; width: 45px;">±₹5.00</span>
+                  </div>
+                </div>
+
+                <div class="control-row">
+                  <div class="control-label-group">
+                    <div class="control-title">Timing Lag Window</div>
+                    <div class="control-desc">Maximum acceptable bank clearing delay before raising an anomaly.</div>
+                  </div>
+                  <select class="search-input" style="width: 140px;">
+                    <option>T + 1 Business Day</option>
+                    <option selected>T + 2 Business Days</option>
+                    <option>T + 3 Business Days</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="studio-card">
+              <div class="studio-card-header">
+                <svg width="18" height="18" class="text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>Automated ERP Bookkeeping Sync</span>
+              </div>
+
+              <div class="config-control-group">
+                <div class="control-row">
+                  <div class="control-label-group">
+                    <div class="control-title">Auto-Post Journal Entries to Tally ERP</div>
+                    <div class="control-desc">Automatically create credit/debit vouchers for clean 100% matched items.</div>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="control-row">
+                  <div class="control-label-group">
+                    <div class="control-title">Zoho Books Real-Time Ledger Sync</div>
+                    <div class="control-desc">Sync settled payment receipts with customer receivables automatically.</div>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="control-row">
+                  <div class="control-label-group">
+                    <div class="control-title">Escalate Large Discrepancies to Slack / Email</div>
+                    <div class="control-desc">Notify CFO and Finance Ops on anomalies exceeding ₹50,000.</div>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5: FINANCIAL COPILOT -->
+        <section id="view-copilot" class="view-pane hidden">
+          <div class="view-header">
+            <div class="view-title-group">
+              <h1>Financial Intelligence Copilot</h1>
+              <p class="view-subtitle">Ask questions about settlement variances, cash positions, and forensic audit trails in plain English.</p>
+            </div>
+          </div>
+
+          <div class="copilot-container">
+            <div class="copilot-messages" id="copilotChat">
+              <div class="message agent">
+                <div class="message-avatar">R</div>
+                <div class="message-bubble">
+                  <div>Hello! I am your <strong>RazorpayX Autonomous Finance Controller Agent</strong>. I have indexed the current batch of <strong>1,240 records (₹4.82 Cr)</strong> across Razorpay Settlement, ICICI/HDFC bank feeds, and Zoho Books.</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">You can query variances, check missing UTRs, or ask for forensic explanations.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="copilot-chips">
+              <div class="prompt-chip" onclick="sendPrompt('Show all transactions where MDR fee exceeded 2.2%')">💡 Show transactions where MDR fee &gt; 2.2%</div>
+              <div class="prompt-chip" onclick="sendPrompt('Why is our HDFC settlement short by ₹14,200 today?')">💡 Why is our HDFC settlement short today?</div>
+              <div class="prompt-chip" onclick="sendPrompt('Which records are held due to active chargebacks?')">💡 Which records are held due to chargebacks?</div>
+              <div class="prompt-chip" onclick="sendPrompt('Summarize total TDS and GST deducted across batch')">💡 Summarize total TDS and GST deducted</div>
+            </div>
+
+            <form class="copilot-input-bar" onsubmit="handleCopilotSubmit(event)">
+              <input type="text" id="copilotInput" class="copilot-input" placeholder="Ask financial copilot anything (e.g. 'Explain discrepancy on pay_O3kJ9xLz7')..." />
+              <button type="submit" class="btn btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Ask Agent
+              </button>
+            </form>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- 3-WAY SPLIT-DIFF FORENSIC SLIDE-OVER DRAWER -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+  <div class="drawer" id="recordDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <div class="drawer-title">
+          <span id="drawerTxnId">pay_O3kJ9xLz7</span>
+          <span class="status-badge exact" id="drawerStatusBadge">● Exact Match</span>
+        </div>
+        <div class="drawer-subtitle" id="drawerMerchant">Zomato Ltd • Food & Grocery</div>
+      </div>
+      <button class="btn btn-secondary btn-icon-only" onclick="closeDrawer()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- 3-WAY DIFF -->
+      <div class="diff-section-title">
+        <span>3-Way Ledger Cross-Verification</span>
+        <span class="tabular-mono text-emerald" id="drawerConfidence">Confidence: 99.4%</span>
+      </div>
+
+      <div class="diff-grid">
+        <!-- Gateway Column -->
+        <div class="diff-column">
+          <div class="diff-col-header">
+            <svg width="14" height="14" class="text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            Razorpay Gateway
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Gross Amount</span>
+            <span class="diff-value tabular-mono" id="diffGatewayGross">₹1,45,000.00</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">MDR Fee (2%)</span>
+            <span class="diff-value tabular-mono" id="diffGatewayFee">₹2,900.00</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">GST (18%)</span>
+            <span class="diff-value tabular-mono" id="diffGatewayGST">₹522.00</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Net Settlement</span>
+            <span class="diff-value tabular-mono" id="diffGatewayNet">₹1,41,578.00</span>
+          </div>
+        </div>
+
+        <!-- Bank Column -->
+        <div class="diff-column">
+          <div class="diff-col-header">
+            <svg width="14" height="14" class="text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"></path><path d="M3 10h18"></path><path d="M5 6l7-3 7 3"></path><path d="M4 10v11"></path><path d="M20 10v11"></path></svg>
+            Bank Statement
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Bank Credit</span>
+            <span class="diff-value tabular-mono" id="diffBankCredit">₹1,41,578.00</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Bank UTR</span>
+            <span class="diff-value tabular-mono" style="font-size: 11px;" id="diffBankUTR">UTR202608229910</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Clearing Date</span>
+            <span class="diff-value tabular-mono" id="diffBankDate">2026-08-22</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Variance</span>
+            <span class="diff-value tabular-mono text-emerald" id="diffVariance">₹0.00</span>
+          </div>
+        </div>
+
+        <!-- ERP Column -->
+        <div class="diff-column">
+          <div class="diff-col-header">
+            <svg width="14" height="14" class="text-violet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+            Tally / Zoho ERP
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Voucher Ref</span>
+            <span class="diff-value tabular-mono" id="diffERPVoucher">VCH-2026-8819</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Ledger State</span>
+            <span class="diff-value" id="diffERPLedger">Accrued Receivable</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">TDS Deducted</span>
+            <span class="diff-value tabular-mono">₹0.00</span>
+          </div>
+          <div class="diff-field">
+            <span class="diff-label">Posting Status</span>
+            <span class="diff-value text-emerald" id="diffERPStatus">Synced 🟢</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGENT REASONING LOG (CHAIN OF THOUGHT) -->
+      <div class="reasoning-card">
+        <div class="reasoning-header">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Agent Chain-of-Thought Decision Logic
+          </div>
+          <span class="tabular-mono" style="font-size: 11px;">Rule #1: Exact 3-Way Match</span>
+        </div>
+        <div class="reasoning-steps" id="drawerReasoningSteps">
+          <div class="reasoning-step-item">
+            <span class="reasoning-num">1.</span>
+            <span>Located candidate ICICI statement entry with UTR202608229910 matching settlement timestamp (Δt = 2h 14m).</span>
+          </div>
+          <div class="reasoning-step-item">
+            <span class="reasoning-num">2.</span>
+            <span>Calculated statutory deductions: ₹1,45,000.00 - (₹2,900.00 MDR + ₹522.00 GST) = ₹1,41,578.00 Net.</span>
+          </div>
+          <div class="reasoning-step-item">
+            <span class="reasoning-num">3.</span>
+            <span>Bank statement credit of ₹1,41,578.00 exactly equals expected net. Variance is ₹0.00.</span>
+          </div>
+          <div class="reasoning-step-item">
+            <span class="reasoning-num">4.</span>
+            <span>Autonomous Action: Confidence 99.4% &gt; threshold (95.0%). Approved and auto-posted journal entry to Tally ERP.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn btn-secondary" onclick="flagToSuspense()">Flag to Suspense</button>
+      <div style="display: flex; gap: 8px;">
+        <button class="btn btn-secondary" onclick="requestBankTrace()">Request Bank UTR Trace</button>
+        <button class="btn btn-primary" onclick="approveAndPostERP()">Approve & Post to ERP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATIONS -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    // State Management & Mock Fintech Dataset
+    const merchants = [
+      "Zomato Ltd", "Swiggy Delivery Hub", "Zepto Quick Commerce", "Blinkit Retail",
+      "Urban Company", "Nykaa Fashion", "Lenskart Solutions", "Boat Lifestyle",
+      "Mamaearth Wellness", "Pepperfry Home", "Khatabook Tech", "Razorpay Payroll",
+      "Cred Financial", "Groww Invest", "PhysicsWallah EdTech", "Unacademy Learning",
+      "Delhivery Logistics", "Cleartrip Flights", "MakeMyTrip India", "BookMyShow"
+    ];
+
+    let dataset = [];
+    let currentSelectedId = null;
+
+    // Generate 50+ rich synthetic records
+    function generateDataset() {
+      const records = [];
+      const paymentModes = ["UPI", "Credit Card", "Debit Card", "Netbanking", "Corporate Card"];
+      
+      for (let i = 1; i <= 50; i++) {
+        const id = "pay_" + Math.random().toString(36).substring(2, 11);
+        const merchant = merchants[i % merchants.length];
+        const gross = Math.floor(Math.random() * 450000) + 12000;
+        const feeRate = 0.02; // 2% MDR
+        const fee = Math.round(gross * feeRate);
+        const gst = Math.round(fee * 0.18);
+        let net = gross - fee - gst;
+        
+        let status = "exact";
+        let bankCredit = net;
+        let variance = 0;
+        let confidence = (98.5 + Math.random() * 1.4).toFixed(1);
+        let reason = "Exact 3-Way match across Gateway, Bank UTR, and ERP Accrual.";
+        let utr = "UTR202608" + (20000000 + i);
+
+        // Inject Realistic Edge Cases
+        if (i % 9 === 0) {
+          status = "drift";
+          variance = (Math.random() > 0.5 ? 2.40 : -3.20);
+          bankCredit = Number((net + variance).toFixed(2));
+          confidence = "94.2";
+          reason = `MDR fee rounding drift of ${variance > 0 ? '+' : ''}₹${variance.toFixed(2)}. Reconciled under Auto-Tolerance.`;
+        } else if (i % 14 === 0) {
+          status = "timing";
+          confidence = "92.8";
+          reason = "Settled on T+1, bank cleared on T+2. Timestamp drift validated.";
+        } else if (i === 13 || i === 27 || i === 41) {
+          status = "exception";
+          bankCredit = 0;
+          variance = -net;
+          utr = "PENDING_BANK_TRACE";
+          confidence = "62.4";
+          reason = i === 13 ? "Missing bank credit in ICICI statement. Settlement in transit." :
+                   i === 27 ? "Chargeback hold of ₹25,000 deducted by gateway risk engine." :
+                              "Double debit detected on customer UPI VPA.";
+        }
+
+        records.push({
+          id,
+          merchant,
+          mode: paymentModes[i % paymentModes.length],
+          gross,
+          fee,
+          gst,
+          net,
+          bankCredit,
+          variance,
+          status,
+          confidence,
+          utr,
+          date: "2026-08-2" + ((i % 5) + 1),
+          reason
+        });
+      }
+      return records;
+    }
+
+    // Format Currency (INR)
+    function formatINR(val) {
+      return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 }).format(val);
+    }
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.toggle('active', item.getAttribute('data-tab') === tabId);
+      });
+      document.querySelectorAll('.view-pane').forEach(pane => {
+        pane.classList.toggle('hidden', pane.id !== 'view-' + tabId);
+      });
+    }
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = item.getAttribute('data-tab');
+        if (tab) switchTab(tab);
+      });
+    });
+
+    // Render Table
+    function renderReconTable(dataToRender) {
+      const tbody = document.getElementById('reconTableBody');
+      tbody.innerHTML = '';
+      
+      document.getElementById('renderedCount').innerText = dataToRender.length;
+
+      dataToRender.forEach(row => {
+        const tr = document.createElement('tr');
+        if (currentSelectedId === row.id) tr.classList.add('selected');
+        
+        let statusBadge = '';
+        if (row.status === 'exact') statusBadge = '<span class="status-badge exact">● Exact Match</span>';
+        else if (row.status === 'drift') statusBadge = `<span class="status-badge drift">▲ Drift ${row.variance > 0 ? '+' : ''}₹${row.variance.toFixed(2)}</span>`;
+        else if (row.status === 'timing') statusBadge = '<span class="status-badge timing">⏱ T+2 Drift</span>';
+        else statusBadge = '<span class="status-badge exception">✖ Exception</span>';
+
+        const varianceColor = row.variance === 0 ? 'text-emerald' : row.status === 'drift' ? 'text-amber' : 'text-rose';
+
+        tr.innerHTML = `
+          <td>${statusBadge}</td>
+          <td><span class="tabular-mono" style="font-weight: 600; color: var(--text-primary);">${row.id}</span></td>
+          <td>
+            <div style="font-weight: 500; color: var(--text-primary);">${row.merchant}</div>
+            <div style="font-size: 11px; color: var(--text-muted);">${row.mode}</div>
+          </td>
+          <td class="tabular-mono">${formatINR(row.gross)}</td>
+          <td class="tabular-mono" style="font-weight: 600; color: var(--text-primary);">${formatINR(row.net)}</td>
+          <td class="tabular-mono">${formatINR(row.bankCredit)}</td>
+          <td class="tabular-mono ${varianceColor}" style="font-weight: 600;">${row.variance > 0 ? '+' : ''}${formatINR(row.variance)}</td>
+          <td><span class="tabular-mono" style="font-size: 11px;">${row.utr}</span></td>
+          <td>
+            <div class="confidence-meter">
+              <div class="meter-bar">
+                <div class="meter-fill" style="width: ${row.confidence}%; background: ${row.confidence > 95 ? 'var(--status-emerald)' : row.confidence > 85 ? 'var(--status-amber)' : 'var(--status-rose)'};"></div>
+              </div>
+              <span class="tabular-mono" style="font-size: 11px;">${row.confidence}%</span>
+            </div>
+          </td>
+          <td>
+            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="event.stopPropagation(); openRecordDrawer('${row.id}')">
+              Audit
+            </button>
+          </td>
+        `;
+
+        tr.addEventListener('click', () => openRecordDrawer(row.id));
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Populate Exception Table
+    function renderExceptionTable() {
+      const tbody = document.getElementById('exceptionTableBody');
+      const exceptions = dataset.filter(r => r.status === 'exception' || r.status === 'drift');
+      tbody.innerHTML = '';
+
+      exceptions.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="status-badge ${row.status === 'exception' ? 'exception' : 'drift'}">${row.status === 'exception' ? 'Critical Discrepancy' : 'MDR Rounding Drift'}</span></td>
+          <td><span class="tabular-mono font-weight: 600;">${row.id}</span></td>
+          <td>${row.merchant}</td>
+          <td class="tabular-mono">Exp: ${formatINR(row.net)} <br><span class="text-muted">Rcv: ${formatINR(row.bankCredit)}</span></td>
+          <td class="tabular-mono ${row.status === 'exception' ? 'text-rose' : 'text-amber'}" style="font-weight: 700;">${formatINR(row.variance)}</td>
+          <td style="font-size: 12px; max-width: 250px;">${row.reason}</td>
+          <td><span class="nav-badge" style="font-size: 11px;">${row.status === 'exception' ? 'ICICI Trace Required' : 'Auto-Approve Tolerance'}</span></td>
+          <td>
+            <button class="btn btn-primary" style="padding: 4px 10px; font-size: 11px;" onclick="openRecordDrawer('${row.id}')">
+              Resolve
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Filter by Status Pill
+    function filterTableByStatus(status, pillElement) {
+      if (pillElement) {
+        document.querySelectorAll('.filter-pills .pill').forEach(p => p.classList.remove('active'));
+        pillElement.classList.add('active');
+      }
+
+      if (status === 'all') {
+        renderReconTable(dataset);
+      } else {
+        const filtered = dataset.filter(r => r.status === status);
+        renderReconTable(filtered);
+      }
+    }
+
+    // Global Search
+    document.getElementById('globalSearchInput').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      const filtered = dataset.filter(r => 
+        r.id.toLowerCase().includes(q) ||
+        r.merchant.toLowerCase().includes(q) ||
+        r.utr.toLowerCase().includes(q) ||
+        r.gross.toString().includes(q)
+      );
+      renderReconTable(filtered);
+    });
+
+    // Keyboard shortcut '/'
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== document.getElementById('globalSearchInput')) {
+        e.preventDefault();
+        document.getElementById('globalSearchInput').focus();
+      } else if (e.key === 'Escape') {
+        closeDrawer();
+      }
+    });
+
+    // Open Slide-Over Record Audit Drawer
+    function openRecordDrawer(txnId) {
+      const record = dataset.find(r => r.id === txnId);
+      if (!record) return;
+
+      currentSelectedId = txnId;
+      document.getElementById('drawerTxnId').innerText = record.id;
+      document.getElementById('drawerMerchant').innerText = `${record.merchant} • ${record.mode}`;
+      document.getElementById('drawerConfidence').innerText = `Confidence: ${record.confidence}%`;
+      
+      const badge = document.getElementById('drawerStatusBadge');
+      badge.className = 'status-badge ' + (record.status === 'exact' ? 'exact' : record.status === 'drift' ? 'drift' : record.status === 'timing' ? 'timing' : 'exception');
+      badge.innerText = record.status === 'exact' ? '● Exact Match' : record.status === 'drift' ? `▲ Drift ₹${record.variance.toFixed(2)}` : record.status === 'timing' ? '⏱ Timing Drift' : '✖ Critical Exception';
+
+      document.getElementById('diffGatewayGross').innerText = formatINR(record.gross);
+      document.getElementById('diffGatewayFee').innerText = formatINR(record.fee);
+      document.getElementById('diffGatewayGST').innerText = formatINR(record.gst);
+      document.getElementById('diffGatewayNet').innerText = formatINR(record.net);
+      
+      document.getElementById('diffBankCredit').innerText = formatINR(record.bankCredit);
+      document.getElementById('diffBankUTR').innerText = record.utr;
+      document.getElementById('diffBankDate').innerText = record.date;
+      
+      const varEl = document.getElementById('diffVariance');
+      varEl.innerText = (record.variance > 0 ? '+' : '') + formatINR(record.variance);
+      varEl.className = 'diff-value tabular-mono ' + (record.variance === 0 ? 'text-emerald' : record.status === 'drift' ? 'variance-warning' : 'variance');
+
+      // Update Reasoning Steps
+      const reasoningBox = document.getElementById('drawerReasoningSteps');
+      reasoningBox.innerHTML = `
+        <div class="reasoning-step-item">
+          <span class="reasoning-num">1.</span>
+          <span>Matched transaction ${record.id} against ${record.mode} payment gateway log.</span>
+        </div>
+        <div class="reasoning-step-item">
+          <span class="reasoning-num">2.</span>
+          <span>Calculated: Gross ${formatINR(record.gross)} - (MDR ${formatINR(record.fee)} + GST ${formatINR(record.gst)}) = Expected Net ${formatINR(record.net)}.</span>
+        </div>
+        <div class="reasoning-step-item">
+          <span class="reasoning-num">3.</span>
+          <span>Bank Statement UTR ${record.utr} verified with credit amount of ${formatINR(record.bankCredit)}. Delta: ${formatINR(record.variance)}.</span>
+        </div>
+        <div class="reasoning-step-item">
+          <span class="reasoning-num">4.</span>
+          <span>${record.reason}</span>
+        </div>
+      `;
+
+      document.getElementById('drawerBackdrop').classList.add('open');
+      document.getElementById('recordDrawer').classList.add('open');
+    }
+
+    function closeDrawer() {
+      currentSelectedId = null;
+      document.getElementById('drawerBackdrop').classList.remove('open');
+      document.getElementById('recordDrawer').classList.remove('open');
+    }
+
+    // Drawer Actions
+    function approveAndPostERP() {
+      showToast('Approved & Posted adjusting journal voucher to Tally ERP.', 'success');
+      closeDrawer();
+    }
+
+    function flagToSuspense() {
+      showToast('Record flagged to Finance Suspense Queue for manual audit.', 'info');
+      closeDrawer();
+    }
+
+    function requestBankTrace() {
+      showToast('Initiated automated UTR trace request to ICICI Settlement API.', 'info');
+      closeDrawer();
+    }
+
+    function batchApproveTolerance() {
+      showToast('Batch resolved 5 rounding drift items under ₹5.00 auto-tolerance rule.', 'success');
+      switchTab('reconciliation');
+    }
+
+    function exportSuspenseToICICI() {
+      showToast('Exported & dispatched 3 unresolved exception tickets to ICICI Settlement Desk.', 'success');
+    }
+
+    function exportAuditReport() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataset, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "razorpay_reconciliation_audit_batch_2026.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('Reconciliation audit batch report exported.', 'success');
+    }
+
+    // Ingestion Simulation
+    function simulateUpload() {
+      showToast('Ingesting ICICI Bank MT940 statement and Zoho Books ledger...', 'info');
+      const logs = document.getElementById('telemetryLogs');
+      
+      const newLog = document.createElement('div');
+      newLog.className = 'feed-log-item success';
+      newLog.innerHTML = `<span class="feed-time">Just Now</span><span>[INGEST] Ingested 124 records from ICICI_MT940_AUG22.DAT. Checksums validated.</span>`;
+      logs.prepend(newLog);
+    }
+
+    document.getElementById('runBatchBtn').addEventListener('click', () => {
+      showToast('Running autonomous 3-Way reconciliation engine across 1,240 records...', 'info');
+      setTimeout(() => {
+        showToast('Autonomous batch complete: 98.4% match rate verified with zero drift.', 'success');
+      }, 1400);
+    });
+
+    // Toast System
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <svg width="16" height="16" class="${type === 'success' ? 'text-emerald' : 'text-blue'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          ${type === 'success' ? '<polyline points="20 6 9 17 4 12"></polyline>' : '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>'}
+        </svg>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.25s ease';
+        setTimeout(() => toast.remove(), 250);
+      }, 3500);
+    }
+
+    // Agent Studio Controls
+    function updateConfidenceVal(val) {
+      document.getElementById('confidenceVal').innerText = val + '%';
+    }
+    function updateToleranceVal(val) {
+      document.getElementById('toleranceVal').innerText = '±₹' + Number(val).toFixed(2);
+    }
+    function saveAgentRules() {
+      showToast('Agent tolerance thresholds and ERP auto-bookkeeping rules updated.', 'success');
+    }
+
+    // Financial Copilot Handling
+    function handleCopilotSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('copilotInput');
+      const text = input.value.trim();
+      if (!text) return;
+      
+      sendPrompt(text);
+      input.value = '';
+    }
+
+    function sendPrompt(query) {
+      const chat = document.getElementById('copilotChat');
+      
+      // User Message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message user';
+      userMsg.innerHTML = `
+        <div class="message-avatar">You</div>
+        <div class="message-bubble">${query}</div>
+      `;
+      chat.appendChild(userMsg);
+
+      // Agent Response with realistic answers
+      setTimeout(() => {
+        let response = "";
+        if (query.includes('MDR') || query.includes('2.2%')) {
+          response = `Found <strong>5 transactions</strong> where MDR fee variance was observed due to international corporate card surcharge. Average fee was <strong>2.35%</strong>. All 5 transactions have been tagged in the <a href="#" onclick="switchTab('reconciliation'); filterTableByStatus('drift');" style="color: var(--rzp-blue); text-decoration: underline;">Reconciliation Grid</a>.`;
+        } else if (query.includes('HDFC') || query.includes('short')) {
+          response = `The HDFC settlement delta of <strong>₹14,200</strong> is caused by <strong>2 transactions</strong>: 1 chargeback withholding of ₹10,000 on pay_N8vL2pQx1, and 1 timing drift of ₹4,200 clearing in tomorrow's T+2 cycle.`;
+        } else if (query.includes('chargeback')) {
+          response = `Currently <strong>1 active dispute (₹25,000)</strong> is held under Razorpay Risk Management. The counterparty submitted chargeback evidence on 2026-08-21.`;
+        } else {
+          response = `I analyzed the ledger for: "<em>${query}</em>". Current dataset demonstrates a <strong>98.4% match rate</strong> with <strong>₹4.75 Cr</strong> auto-settled. All line items are indexed with cryptographic UTR audit hashes.`;
+        }
+
+        const agentMsg = document.createElement('div');
+        agentMsg.className = 'message agent';
+        agentMsg.innerHTML = `
+          <div class="message-avatar">R</div>
+          <div class="message-bubble">
+            <div>${response}</div>
+          </div>
+        `;
+        chat.appendChild(agentMsg);
+        chat.scrollTop = chat.scrollHeight;
+      }, 500);
+    }
+
+    // Theme Toggle
+    document.getElementById('themeToggleBtn').addEventListener('click', () => {
+      document.documentElement.classList.toggle('light');
+      document.documentElement.classList.toggle('dark');
+      showToast('Theme preference updated.', 'info');
+    });
+
+    // Initialize App
+    window.addEventListener('DOMContentLoaded', () => {
+      dataset = generateDataset();
+      renderReconTable(dataset);
+      renderExceptionTable();
+    });
+  </script>
+</body>
+</html>

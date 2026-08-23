@@ -1,0 +1,1267 @@
+[
+  {
+    "record_key": "pay_000015QnuVdYXy",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000015QnuVdYXy",
+      "order": "#1001",
+      "order_total_paise": 179471,
+      "payment_amount_paise": 179471,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00002K3yn9Ffcg",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00002K3yn9Ffcg",
+      "order": "#1002",
+      "order_total_paise": 221289,
+      "payment_amount_paise": 221289,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00003vsjaSS8VF",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00003vsjaSS8VF",
+      "order": "#1003",
+      "order_total_paise": 149946,
+      "payment_amount_paise": 149946,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_0000452Ztd26fE",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_0000452Ztd26fE",
+      "order": "#1004",
+      "order_total_paise": 208085,
+      "payment_amount_paise": 208085,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00005BpdbIKaRd",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00005BpdbIKaRd",
+      "order": "#1005",
+      "order_total_paise": 194845,
+      "payment_amount_paise": 194845,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00006lgAACTP9g",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00006lgAACTP9g",
+      "order": "#1006",
+      "order_total_paise": 203987,
+      "payment_amount_paise": 203987,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00007OHafUozD1",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00007OHafUozD1",
+      "order": "#1007",
+      "order_total_paise": 224264,
+      "payment_amount_paise": 224264,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00008ndTdtdD5G",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00008ndTdtdD5G",
+      "order": "#1008",
+      "order_total_paise": 120579,
+      "payment_amount_paise": 120579,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00009mSoyPstUe",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00009mSoyPstUe",
+      "order": "#1009",
+      "order_total_paise": 162934,
+      "payment_amount_paise": 162934,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00010RL9OaYsP6",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00010RL9OaYsP6",
+      "order": "#1010",
+      "order_total_paise": 194867,
+      "payment_amount_paise": 194867,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_000110fAraVNqT",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000110fAraVNqT",
+      "order": "#1011",
+      "order_total_paise": 145829,
+      "payment_amount_paise": 145829,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_000123X13npgW2",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000123X13npgW2",
+      "order": "#1012",
+      "order_total_paise": 90965,
+      "payment_amount_paise": 90965,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00013RxcDm4vY2",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00013RxcDm4vY2",
+      "order": "#1013",
+      "order_total_paise": 149941,
+      "payment_amount_paise": 149941,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00001YPZTQGOAw",
+      "settlement_utr": "HDFC351396359337",
+      "bank_rows": [
+        1
+      ],
+      "bank_deposit_paise": 2222760,
+      "settled_sum_paise": 2222760,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_000148l7qgATtL",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000148l7qgATtL",
+      "order": "#1014",
+      "order_total_paise": 87235,
+      "payment_amount_paise": 87235,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00015Put0Sstzy",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00015Put0Sstzy",
+      "order": "#1015",
+      "order_total_paise": 193062,
+      "payment_amount_paise": 193062,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00016JOCBnD3Xk",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00016JOCBnD3Xk",
+      "order": "#1016",
+      "order_total_paise": 135098,
+      "payment_amount_paise": 135098,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00017VC2JSxyjQ",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00017VC2JSxyjQ",
+      "order": "#1017",
+      "order_total_paise": 204554,
+      "payment_amount_paise": 204554,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_000189K63LSFZH",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000189K63LSFZH",
+      "order": "#1018",
+      "order_total_paise": 201803,
+      "payment_amount_paise": 201803,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00019u3ejxjnzu",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00019u3ejxjnzu",
+      "order": "#1019",
+      "order_total_paise": 154901,
+      "payment_amount_paise": 154901,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_0002007zUHLnnB",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_0002007zUHLnnB",
+      "order": "#1020",
+      "order_total_paise": 158279,
+      "payment_amount_paise": 158279,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00021lquCu2r6A",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00021lquCu2r6A",
+      "order": "#1021",
+      "order_total_paise": 115572,
+      "payment_amount_paise": 115572,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00022hPInRVkLU",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00022hPInRVkLU",
+      "order": "#1022",
+      "order_total_paise": 242879,
+      "payment_amount_paise": 242879,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00023MgV0Lh8Wv",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00023MgV0Lh8Wv",
+      "order": "#1023",
+      "order_total_paise": 235214,
+      "payment_amount_paise": 235214,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00002P2MLjlQM3",
+      "settlement_utr": "HDFC937191275575",
+      "bank_rows": [
+        2
+      ],
+      "bank_deposit_paise": 1707130,
+      "settled_sum_paise": 1707130,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00024GOM5WCZKt",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00024GOM5WCZKt",
+      "order": "#1024",
+      "order_total_paise": 194160,
+      "payment_amount_paise": 194160,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00025qrK2IGloz",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00025qrK2IGloz",
+      "order": "#1025",
+      "order_total_paise": 135605,
+      "payment_amount_paise": 135605,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_000269IvCtoStU",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000269IvCtoStU",
+      "order": "#1026",
+      "order_total_paise": 219177,
+      "payment_amount_paise": 219177,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00027sRhcds6NU",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00027sRhcds6NU",
+      "order": "#1027",
+      "order_total_paise": 139633,
+      "payment_amount_paise": 139633,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00028QjY6fpIzK",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00028QjY6fpIzK",
+      "order": "#1028",
+      "order_total_paise": 99420,
+      "payment_amount_paise": 99420,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00029jkeaBKsoR",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00029jkeaBKsoR",
+      "order": "#1029",
+      "order_total_paise": 149375,
+      "payment_amount_paise": 149375,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00030ektUJrhQR",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00030ektUJrhQR",
+      "order": "#1030",
+      "order_total_paise": 149633,
+      "payment_amount_paise": 149633,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00031UDO4lKNEf",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00031UDO4lKNEf",
+      "order": "#1031",
+      "order_total_paise": 231059,
+      "payment_amount_paise": 231059,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00032u8zF9OHzl",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00032u8zF9OHzl",
+      "order": "#1032",
+      "order_total_paise": 103084,
+      "payment_amount_paise": 103084,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00033azn0h6Oj5",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00033azn0h6Oj5",
+      "order": "#1033",
+      "order_total_paise": 121517,
+      "payment_amount_paise": 121517,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00034FYrsK9EjH",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00034FYrsK9EjH",
+      "order": "#1034",
+      "order_total_paise": 169096,
+      "payment_amount_paise": 169096,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00035RYxPY8EcF",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00035RYxPY8EcF",
+      "order": "#1035",
+      "order_total_paise": 163408,
+      "payment_amount_paise": 163408,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00003w69CrxG7Y",
+      "settlement_utr": "HDFC462427453848",
+      "bank_rows": [
+        3
+      ],
+      "bank_deposit_paise": 1860462,
+      "settled_sum_paise": 1860462,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00036QO001xtSV",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00036QO001xtSV",
+      "order": "#1036",
+      "order_total_paise": 149474,
+      "payment_amount_paise": 149474,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_000374cXsxjGJX",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000374cXsxjGJX",
+      "order": "#1037",
+      "order_total_paise": 123611,
+      "payment_amount_paise": 123611,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00038BvKNAp0mx",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00038BvKNAp0mx",
+      "order": "#1038",
+      "order_total_paise": 223287,
+      "payment_amount_paise": 223287,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00039MQSOZM4Ot",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00039MQSOZM4Ot",
+      "order": "#1039",
+      "order_total_paise": 137410,
+      "payment_amount_paise": 137410,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00040ZpZDYUvh7",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00040ZpZDYUvh7",
+      "order": "#1040",
+      "order_total_paise": 211542,
+      "payment_amount_paise": 211542,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00041PPKY6gob2",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00041PPKY6gob2",
+      "order": "#1041",
+      "order_total_paise": 112398,
+      "payment_amount_paise": 112398,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00042oHyx6RHKT",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00042oHyx6RHKT",
+      "order": "#1042",
+      "order_total_paise": 209138,
+      "payment_amount_paise": 209138,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00043Ndr86ZfnN",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00043Ndr86ZfnN",
+      "order": "#1043",
+      "order_total_paise": 222728,
+      "payment_amount_paise": 222728,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_000441iipkObaW",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_000441iipkObaW",
+      "order": "#1044",
+      "order_total_paise": 236233,
+      "payment_amount_paise": 236233,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00045cW1GC7dDy",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00045cW1GC7dDy",
+      "order": "#1045",
+      "order_total_paise": 138077,
+      "payment_amount_paise": 138077,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00046LgR0OVSnB",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00046LgR0OVSnB",
+      "order": "#1046",
+      "order_total_paise": 157305,
+      "payment_amount_paise": 157305,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00004Zf4Y25zyx",
+      "settlement_utr": "HDFC804397510145",
+      "bank_rows": [
+        4
+      ],
+      "bank_deposit_paise": 1902212,
+      "settled_sum_paise": 1902212,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00047ffTYIKIuh",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00047ffTYIKIuh",
+      "order": "#1047",
+      "order_total_paise": 103914,
+      "payment_amount_paise": 103914,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00048vIhroAIVM",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00048vIhroAIVM",
+      "order": "#1048",
+      "order_total_paise": 138784,
+      "payment_amount_paise": 138784,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00049yiNbUnAvw",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00049yiNbUnAvw",
+      "order": "#1049",
+      "order_total_paise": 117552,
+      "payment_amount_paise": 117552,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00050qUhArQEPc",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00050qUhArQEPc",
+      "order": "#1050",
+      "order_total_paise": 239141,
+      "payment_amount_paise": 239141,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00051RFZXe1cb5",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00051RFZXe1cb5",
+      "order": "#1051",
+      "order_total_paise": 113865,
+      "payment_amount_paise": 113865,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00052gBye1UnWe",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00052gBye1UnWe",
+      "order": "#1052",
+      "order_total_paise": 103102,
+      "payment_amount_paise": 103102,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00053Ve6MCIJQ2",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00053Ve6MCIJQ2",
+      "order": "#1053",
+      "order_total_paise": 237915,
+      "payment_amount_paise": 237915,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00054CcwrN8fKx",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00054CcwrN8fKx",
+      "order": "#1054",
+      "order_total_paise": 212995,
+      "payment_amount_paise": 212995,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  },
+  {
+    "record_key": "pay_00055Z8fOcR9GL",
+    "layer": 1,
+    "rule": "R1.1_exact_three_way",
+    "confidence": "HIGH",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00055Z8fOcR9GL",
+      "order": "#1055",
+      "order_total_paise": 107132,
+      "payment_amount_paise": 107132,
+      "order_amount_ok": true,
+      "settlement_id": "setl_00005M4bnj6LAW",
+      "settlement_utr": "HDFC230731094874",
+      "bank_rows": [
+        5
+      ],
+      "bank_deposit_paise": 1366143,
+      "settled_sum_paise": 1366143,
+      "amount_delta_paise": 0,
+      "strategy": "sum(settled_amount) vs bank deposit"
+    }
+  }
+]
