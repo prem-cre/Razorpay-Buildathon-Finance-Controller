@@ -1,155 +1,226 @@
 import React, { useState } from 'react';
-import { X, Sparkles, Send } from 'lucide-react';
+import { X, Sparkles, Send, Bot, User, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface FinancialCopilotDrawerProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: string;
+  source_citation?: string;
+}
+
 export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDrawerProps) {
-  const [messages, setMessages] = useState<{ sender: 'user' | 'bot'; text: string; citations?: string[] }[]>([
+  const [messages, setMessages] = useState<Message[]>([
     {
-      sender: 'bot',
-      text: 'Hello, I am Ray, your Autonomous Finance Controller Copilot. I have audited batch_2026_08 across Shopify, Razorpay and HDFC statements. How can I assist you with variance analysis or journal entries?',
-    }
+      role: 'assistant',
+      content: 'Hello! I am Ray, your Autonomous Financial Copilot. I have full read-access to the 3-Way Reconciliation Ledger, HDFC MT940 bank statements, and Razorpay settlement feeds. How can I assist with your financial close today?',
+      timestamp: '10:15 AM',
+    },
+    {
+      role: 'user',
+      content: 'Why is there a ₹18.4L variance in our current settlement batch?',
+      timestamp: '10:16 AM',
+    },
+    {
+      role: 'assistant',
+      content: 'Analysis of the August 24 settlement batch shows:\n\n1. ₹9.42L (8 records) is standard T+2 banking lag on payments captured yesterday after 8 PM.\n2. ₹7.28L (3 records) is held by Razorpay Risk Engine for active dispute arbitration (DISP_2026_8819).\n3. ₹1.70L (1 record) is a true unidentified bank reference requiring Senior Ops review.\n\nZero unauthorized fund leakage or fraudulent chargebacks were detected.',
+      timestamp: '10:16 AM',
+      source_citation: 'Rule Engine Audit Hash: 0x8F92...A71D (Verified)',
+    },
   ]);
-  const [input, setInput] = useState('');
+  const [inputPrompt, setInputPrompt] = useState('');
 
   if (!isOpen) return null;
 
   const handleSend = () => {
-    if (!input.trim()) return;
-    const userMsg = input;
-    setMessages((prev) => [...prev, { sender: 'user', text: userMsg }]);
-    setInput('');
+    if (!inputPrompt.trim()) return;
+    const userMsg: Message = {
+      role: 'user',
+      content: inputPrompt,
+      timestamp: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+    };
+    setMessages((prev) => [...prev, userMsg]);
+    setInputPrompt('');
 
     setTimeout(() => {
-      if (userMsg.toLowerCase().includes('unknown') || userMsg.toLowerCase().includes('residual')) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            sender: 'bot',
-            text: 'I detected 1 true unknown residual: Record pay_00052 has an unexplained delta of -₹17,000.00 against the bank statement narration. Neither fee schedule drift nor timing rules explain this variance. I recommend escalating ticket FIN-8921 to Senior Ops.',
-            citations: ['pay_00052', 'Rule: R3.1_llm_triage_diagnosis', 'Bank Statement Row #52'],
-          }
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            sender: 'bot',
-            text: 'Based on the deterministic audit trail, 94.2% (471/500) of transactions are 100% matched with zero variance. 3 records are timing lag (T+2) and 2 are chargeback reserve withholdings.',
-            citations: ['Audit Trail Hash: 0x8f21a4', 'Precision Score: 98.1%'],
-          }
-        ]);
-      }
+      const botMsg: Message = {
+        role: 'assistant',
+        content: 'I have verified that against the HDFC Bank MT940 statement. All 471 exact-matched payments (₹4.82 Cr) have verified 16-digit UTR credits in account XXXX5819. Would you like me to prepare the SAP/Zoho ERP journal entry export?',
+        timestamp: new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+        source_citation: 'Cross-Ledger Verification Hash: 0x33B1...9C4F',
+      };
+      setMessages((prev) => [...prev, botMsg]);
     }, 600);
   };
+
+  const sampleChips = [
+    'Explain the T+2 settlement lag',
+    'Show transactions where MDR fee > 2.0%',
+    'Which records are held due to chargebacks?',
+  ];
 
   return (
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: 'rgba(0,0,0,0.6)',
-      backdropFilter: 'blur(4px)',
+      background: 'rgba(9, 13, 20, 0.4)',
+      backdropFilter: 'blur(6px)',
       zIndex: 50,
       display: 'flex',
       justifyContent: 'flex-end',
-    }} onClick={onClose}>
+    }}>
       <div style={{
-        width: '460px',
+        width: '520px',
         height: '100%',
         background: 'var(--surface-primary)',
         borderLeft: '1px solid var(--border-subtle)',
         boxShadow: 'var(--shadow-drawer)',
         display: 'flex',
         flexDirection: 'column',
-      }} onClick={(e) => e.stopPropagation()}>
-        
-        <div style={{
-          padding: '16px 20px',
-          borderBottom: '1px solid var(--border-subtle)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          background: 'var(--surface-elevated)',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={16} style={{ color: 'var(--rzp-blue)' }} />
-            <span style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>Ray Financial AI Copilot</span>
+        padding: '24px',
+      }}>
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '16px', borderBottom: '1px solid var(--border-subtle)', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: 'var(--radius-md)',
+              background: 'linear-gradient(135deg, #7c3aed 0%, #0c66e4 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff',
+            }}>
+              <Sparkles size={16} />
+            </div>
+            <div>
+              <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                Ray Financial Copilot
+              </div>
+              <div style={{ fontSize: '11px', color: 'var(--status-emerald)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--status-emerald)' }} />
+                Grounded in Ground Truth Audit Hashes
+              </div>
+            </div>
           </div>
-          <button onClick={onClose} style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}>
+
+          <button
+            onClick={onClose}
+            style={{
+              background: 'var(--surface-canvas)',
+              border: '1px solid var(--border-default)',
+              borderRadius: 'var(--radius-md)',
+              padding: '6px',
+              color: 'var(--text-secondary)',
+              cursor: 'pointer',
+            }}
+          >
             <X size={16} />
           </button>
         </div>
 
-        <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        {/* Chat Feed */}
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px', paddingRight: '4px' }}>
           {messages.map((m, idx) => (
-            <div key={idx} style={{ alignSelf: m.sender === 'user' ? 'flex-end' : 'flex-start', maxWidth: '88%' }}>
+            <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
               <div style={{
-                background: m.sender === 'user' ? 'var(--rzp-blue)' : 'var(--surface-elevated)',
-                color: '#ffffff',
-                padding: '10px 14px',
-                borderRadius: 'var(--radius-md)',
-                fontSize: '12px',
+                maxWidth: '88%',
+                padding: '12px 16px',
+                borderRadius: 'var(--radius-lg)',
+                background: m.role === 'user' ? 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)' : 'var(--surface-canvas)',
+                color: m.role === 'user' ? '#ffffff' : 'var(--text-primary)',
+                border: m.role === 'user' ? 'none' : '1px solid var(--border-subtle)',
+                fontSize: '13px',
                 lineHeight: '1.5',
-                border: m.sender === 'user' ? 'none' : '1px solid var(--border-subtle)',
+                whiteSpace: 'pre-line',
+                boxShadow: m.role === 'user' ? '0 2px 8px rgba(12, 102, 228, 0.2)' : 'none',
               }}>
-                {m.text}
+                {m.content}
               </div>
-              {m.citations && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginTop: '6px' }}>
-                  {m.citations.map((c, i) => (
-                    <span key={i} className='tabular-mono' style={{
-                      fontSize: '10px',
-                      background: 'var(--surface-interactive)',
-                      padding: '2px 6px',
-                      borderRadius: '3px',
-                      color: 'var(--rzp-blue)',
-                      border: '1px solid var(--border-accent)',
-                    }}>
-                      {c}
-                    </span>
-                  ))}
+
+              {m.source_citation && (
+                <div style={{
+                  fontSize: '10px',
+                  color: 'var(--rzp-blue)',
+                  fontFamily: 'var(--font-mono)',
+                  marginTop: '4px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontWeight: 600,
+                }}>
+                  <ShieldCheck size={11} /> {m.source_citation}
                 </div>
               )}
             </div>
           ))}
         </div>
 
-        <div style={{ padding: '16px', borderTop: '1px solid var(--border-subtle)', background: 'var(--surface-elevated)' }}>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <input
-              type='text'
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder='Ask about variances, UTR links, or journal entries...'
-              style={{
-                flex: 1,
-                background: 'var(--surface-primary)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: 'var(--radius-sm)',
-                padding: '8px 12px',
-                fontSize: '12px',
-                color: 'var(--text-primary)',
-                outline: 'none',
-              }}
-            />
+        {/* Suggestion Chips */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', margin: '14px 0 10px 0' }}>
+          {sampleChips.map((chip, idx) => (
             <button
-              onClick={handleSend}
+              key={idx}
+              onClick={() => setInputPrompt(chip)}
               style={{
-                background: 'var(--rzp-blue)',
-                border: 'none',
-                borderRadius: 'var(--radius-sm)',
-                padding: '0 14px',
-                color: '#fff',
+                fontSize: '11px',
+                fontWeight: 600,
+                background: 'var(--surface-canvas)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '999px',
+                padding: '4px 10px',
+                color: 'var(--text-secondary)',
                 cursor: 'pointer',
               }}
             >
-              <Send size={14} />
+              {chip}
             </button>
-          </div>
+          ))}
+        </div>
+
+        {/* Input Form */}
+        <div style={{ display: 'flex', gap: '8px', position: 'relative' }}>
+          <input
+            type='text'
+            placeholder='Ask about missing UTRs, fee calculations, or suspense accounts...'
+            value={inputPrompt}
+            onChange={(e) => setInputPrompt(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+            style={{
+              flex: 1,
+              height: '42px',
+              background: 'var(--surface-canvas)',
+              border: '1px solid var(--border-default)',
+              borderRadius: 'var(--radius-md)',
+              padding: '0 14px',
+              fontSize: '13px',
+              color: 'var(--text-primary)',
+              outline: 'none',
+            }}
+          />
+          <button
+            onClick={handleSend}
+            style={{
+              width: '42px',
+              height: '42px',
+              background: 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)',
+              border: '1px solid rgba(12, 102, 228, 0.4)',
+              borderRadius: 'var(--radius-md)',
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              boxShadow: '0 2px 8px rgba(12, 102, 228, 0.25)',
+            }}
+          >
+            <Send size={15} />
+          </button>
         </div>
       </div>
     </div>

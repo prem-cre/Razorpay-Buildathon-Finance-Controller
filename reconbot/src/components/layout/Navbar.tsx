@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Sparkles, Terminal, Activity } from 'lucide-react';
+import { Search, Sparkles, RefreshCw, Layers, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   currentDataset: 'adversarial' | 'clean';
@@ -22,30 +22,31 @@ export function Navbar({
 }: NavbarProps) {
   return (
     <header style={{
-      height: '60px',
-      padding: '0 24px',
+      height: '64px',
       borderBottom: '1px solid var(--border-subtle)',
-      background: 'var(--surface-primary)',
+      background: 'var(--glass-nav)',
+      backdropFilter: 'blur(16px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
+      padding: '0 24px',
       position: 'sticky',
       top: 0,
       zIndex: 30,
-      backdropFilter: 'blur(8px)',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      {/* Left: Active Batch Context & Dataset Selector */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          background: 'var(--surface-elevated)',
-          border: '1px solid var(--border-default)',
-          borderRadius: 'var(--radius-sm)',
-          padding: '4px 10px',
-          fontSize: '12px',
+          padding: '6px 12px',
+          background: 'var(--surface-canvas)',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: 'var(--radius-md)',
         }}>
-          <span style={{ color: 'var(--text-muted)', fontWeight: 500 }}>Active Batch:</span>
+          <Layers size={14} style={{ color: 'var(--rzp-blue)' }} />
+          <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)' }}>Batch:</span>
           <select
             value={currentDataset}
             onChange={(e) => onDatasetChange(e.target.value as any)}
@@ -53,58 +54,117 @@ export function Navbar({
               background: 'transparent',
               border: 'none',
               color: 'var(--text-primary)',
-              fontWeight: 600,
               fontSize: '12px',
-              outline: 'none',
+              fontWeight: 700,
               cursor: 'pointer',
+              outline: 'none',
             }}
           >
-            <option value='adversarial' style={{ background: '#0d111a', color: '#fff' }}>Batch_2026_08 - Adversarial Stress Test (500 records)</option>
-            <option value='clean' style={{ background: '#0d111a', color: '#fff' }}>Batch_2026_08_Clean - Baseline (50 records)</option>
+            <option value='adversarial' style={{ background: '#fff', color: '#090d14' }}>
+              August 24 · Multi-Source Stress (500 txns)
+            </option>
+            <option value='clean' style={{ background: '#fff', color: '#090d14' }}>
+              August 23 · Baseline Production (50 txns)
+            </option>
           </select>
         </div>
 
-        <div style={{ position: 'relative', width: '320px' }}>
-          <Search size={14} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-          <input
-            type='text'
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder='Search by Payment ID, UTR, Order, Amount...'
-            style={{
-              width: '100%',
-              background: 'var(--surface-elevated)',
-              border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-sm)',
-              padding: '6px 30px 6px 32px',
-              fontSize: '12px',
-              color: 'var(--text-primary)',
-              outline: 'none',
-            }}
-          />
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          padding: '4px 10px',
+          background: 'var(--status-emerald-bg)',
+          border: '1px solid var(--status-emerald-border)',
+          borderRadius: '999px',
+          fontSize: '11px',
+          fontWeight: 600,
+          color: 'var(--status-emerald)',
+        }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--status-emerald)' }} />
+          <span>Layer 1-3 Live Engine Active</span>
         </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      {/* Center: Quick Search */}
+      <div style={{
+        position: 'relative',
+        width: '340px',
+      }}>
+        <Search size={14} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+        <input
+          type='text'
+          placeholder='Search payments, UTRs, orders, merchants (Press / to focus)'
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
+          style={{
+            width: '100%',
+            height: '36px',
+            background: 'var(--surface-canvas)',
+            border: '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-md)',
+            padding: '0 36px 0 34px',
+            fontSize: '12px',
+            color: 'var(--text-primary)',
+            outline: 'none',
+            transition: 'all 0.15s ease',
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = 'var(--rzp-blue)';
+            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(12, 102, 228, 0.08)';
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        />
+        <span style={{
+          position: 'absolute',
+          right: '10px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          fontSize: '10px',
+          padding: '1px 5px',
+          borderRadius: '4px',
+          background: 'var(--surface-interactive)',
+          color: 'var(--text-muted)',
+          fontFamily: 'var(--font-mono)',
+          fontWeight: 600,
+          border: '1px solid var(--border-subtle)',
+        }}>
+          /
+        </span>
+      </div>
+
+      {/* Right: Actions */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <button
           onClick={onOpenCopilot}
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            background: 'var(--rzp-blue-subtle)',
-            border: '1px solid var(--border-accent)',
-            color: 'var(--rzp-blue)',
-            padding: '6px 14px',
-            borderRadius: 'var(--radius-sm)',
+            padding: '7px 14px',
+            background: 'var(--surface-primary)',
+            border: '1px solid var(--border-default)',
+            borderRadius: 'var(--radius-md)',
+            color: 'var(--text-primary)',
             fontSize: '12px',
             fontWeight: 600,
             cursor: 'pointer',
-            transition: 'all 0.15s ease',
+            boxShadow: 'var(--shadow-subtle)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--rzp-blue)';
+            e.currentTarget.style.color = 'var(--rzp-blue)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--border-default)';
+            e.currentTarget.style.color = 'var(--text-primary)';
           }}
         >
-          <Sparkles size={13} />
-          Ray AI Copilot
+          <Sparkles size={14} style={{ color: 'var(--status-violet)' }} />
+          <span>Ray AI Copilot</span>
         </button>
 
         <button
@@ -113,30 +173,20 @@ export function Navbar({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
-            background: 'var(--rzp-blue)',
+            gap: '8px',
+            padding: '8px 16px',
+            background: isReconciling ? 'var(--text-muted)' : 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)',
+            border: '1px solid rgba(12, 102, 228, 0.4)',
+            borderRadius: 'var(--radius-md)',
             color: '#ffffff',
-            border: 'none',
-            padding: '7px 16px',
-            borderRadius: 'var(--radius-sm)',
             fontSize: '12px',
-            fontWeight: 600,
+            fontWeight: 700,
             cursor: isReconciling ? 'not-allowed' : 'pointer',
-            opacity: isReconciling ? 0.8 : 1,
-            boxShadow: '0 2px 8px rgba(12, 102, 228, 0.35)',
+            boxShadow: '0 2px 8px rgba(12, 102, 228, 0.25)',
           }}
         >
-          {isReconciling ? (
-            <>
-              <Activity size={13} style={{ animation: 'spin 1s linear infinite' }} />
-              Reconciling Engine...
-            </>
-          ) : (
-            <>
-              <Terminal size={13} />
-              Run 3-Way Reconcile
-            </>
-          )}
+          <RefreshCw size={13} style={{ animation: isReconciling ? 'spin 1s linear infinite' : 'none' }} />
+          <span>{isReconciling ? 'Reconciling Stream...' : 'Run 3-Way Reconcile'}</span>
         </button>
       </div>
     </header>

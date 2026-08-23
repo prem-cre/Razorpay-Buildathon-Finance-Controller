@@ -1,54 +1,161 @@
-import React from 'react';
-import { FileSpreadsheet, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { UploadCloud, CheckCircle2, FileText, Database, ShieldAlert, ArrowRight } from 'lucide-react';
+
+interface DataSourceCard {
+  id: string;
+  title: string;
+  sourceType: string;
+  format: string;
+  status: 'READY' | 'PARSED' | 'SYNCED';
+  recordCount: number;
+  description: string;
+}
 
 export function MultiSourceDropzone() {
-  const sources = [
-    { title: 'Razorpay Settlements & Payments', ext: 'CSV / JSON', status: 'Ready (500 records loaded)', verified: true },
-    { title: 'HDFC / ICICI Bank Statement', ext: 'MT940 / CAMT.053 / CSV', status: 'Ready (492 bank deposits matched)', verified: true },
-    { title: 'Shopify / ERP Orders Export', ext: 'CSV / REST Webhook', status: 'Ready (500 orders ingested)', verified: true },
+  const sources: DataSourceCard[] = [
+    {
+      id: 'shopify',
+      title: 'Shopify E-Commerce Orders',
+      sourceType: 'Order Line Items (Gross)',
+      format: 'CSV / REST API webhook',
+      status: 'SYNCED',
+      recordCount: 500,
+      description: 'Captured customer checkouts with gross order value, taxes, and customer identifiers.',
+    },
+    {
+      id: 'razorpay',
+      title: 'Razorpay PG Settlement Export',
+      sourceType: 'Payment Gateway Captures',
+      format: 'Settlement CSV / Webhook',
+      status: 'SYNCED',
+      recordCount: 500,
+      description: 'Transaction IDs, gross paise, MDR commission rates, GST, and expected net amounts.',
+    },
+    {
+      id: 'hdfc_bank',
+      title: 'HDFC Corporate Bank Statement',
+      sourceType: 'Bank MT940 / CAMT.053',
+      format: 'MT940 / CSV',
+      status: 'SYNCED',
+      recordCount: 485,
+      description: 'Official bank ledger credits with 16-character UTR numbers and clearing timestamps.',
+    },
   ];
 
   return (
-    <div style={{
-      background: 'var(--surface-elevated)',
-      border: '1px solid var(--border-subtle)',
-      borderRadius: 'var(--radius-lg)',
-      padding: '24px',
-    }}>
-      <div style={{ marginBottom: '20px' }}>
-        <div style={{ fontSize: '15px', fontWeight: 700 }}>Multi-Source File Ingestion & Parsing Engine</div>
-        <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-          Drop raw bank statements, gateway settlement exports, and e-commerce ledger files for deterministic 3-way reconciliation
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '20px' }}>
-        {sources.map((src, i) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+        {sources.map((src) => (
           <div
-            key={i}
+            key={src.id}
             style={{
               background: 'var(--surface-primary)',
-              border: '1px dashed var(--border-strong)',
-              borderRadius: 'var(--radius-md)',
-              padding: '20px 16px',
-              textAlign: 'center',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-xl)',
+              padding: '24px',
+              boxShadow: 'var(--shadow-card)',
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
-              gap: '10px',
+              justifyContent: 'space-between',
             }}
           >
-            <FileSpreadsheet size={28} style={{ color: 'var(--rzp-blue)' }} />
             <div>
-              <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)' }}>{src.title}</div>
-              <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '2px' }}>Supported: {src.ext}</div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                <div style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: 'var(--radius-md)',
+                  background: 'var(--rzp-blue-subtle)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--rzp-blue)',
+                }}>
+                  <Database size={18} />
+                </div>
+                <span
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: 700,
+                    padding: '3px 8px',
+                    borderRadius: '999px',
+                    background: 'var(--status-emerald-bg)',
+                    color: 'var(--status-emerald)',
+                    border: '1px solid var(--status-emerald-border)',
+                  }}
+                >
+                  SCHEMA VERIFIED
+                </span>
+              </div>
+
+              <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px' }}>
+                {src.title}
+              </div>
+              <div style={{ fontSize: '12px', color: 'var(--rzp-blue)', fontWeight: 600, marginBottom: '8px' }}>
+                {src.sourceType}
+              </div>
+              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: '1.5', margin: 0 }}>
+                {src.description}
+              </p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: 'var(--status-emerald)' }}>
-              <CheckCircle2 size={13} />
-              <span>{src.status}</span>
+
+            <div style={{ marginTop: '20px', paddingTop: '14px', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <span className='tabular-mono' style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                {src.recordCount} records loaded
+              </span>
+              <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{src.format}</span>
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Dropzone Area */}
+      <div style={{
+        background: 'var(--surface-primary)',
+        border: '2px dashed var(--border-default)',
+        borderRadius: 'var(--radius-xl)',
+        padding: '40px 24px',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '12px',
+        cursor: 'pointer',
+      }}>
+        <div style={{
+          width: '48px',
+          height: '48px',
+          borderRadius: '50%',
+          background: 'var(--rzp-blue-subtle)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: 'var(--rzp-blue)',
+        }}>
+          <UploadCloud size={24} />
+        </div>
+        <div>
+          <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>
+            Drag and drop custom settlement files or MT940 statements
+          </div>
+          <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
+            Supported formats: CSV, XLSX, ISO 20022 CAMT.053, MT940 banking batches
+          </div>
+        </div>
+        <button style={{
+          marginTop: '6px',
+          padding: '8px 18px',
+          background: 'var(--surface-canvas)',
+          border: '1px solid var(--border-default)',
+          borderRadius: 'var(--radius-md)',
+          fontSize: '12px',
+          fontWeight: 700,
+          color: 'var(--text-primary)',
+          cursor: 'pointer',
+        }}>
+          Select File from Disk
+        </button>
       </div>
     </div>
   );

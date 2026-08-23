@@ -67,7 +67,7 @@ export function getMockReconciliationRecords(): ReconciledRecordView[] {
     const merchant = merchants[i % merchants.length];
     const method = methods[i % methods.length];
     
-    const gross_paise = (Math.floor(Math.random() * 4000) + 120) * 10000;
+    const gross_paise = (((i * 97) % 3500) + 150) * 10000;
     const fee_paise = Math.round(gross_paise * (method === 'upi' ? 0 : 0.02));
     const tax_paise = Math.round(fee_paise * 0.18);
     const net_paise = gross_paise - fee_paise - tax_paise;

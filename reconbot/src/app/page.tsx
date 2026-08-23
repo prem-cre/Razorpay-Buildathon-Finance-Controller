@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar, NavTab } from '@/components/layout/Sidebar';
 import { MatchRateHero } from '@/features/dashboard/MatchRateHero';
@@ -12,6 +12,7 @@ import { ExceptionCategoryCard } from '@/features/exceptions/ExceptionCategoryCa
 import { EvaluationSummary } from '@/features/evaluation/EvaluationSummary';
 import { MultiSourceDropzone } from '@/features/ingestion/MultiSourceDropzone';
 import { FinancialCopilotDrawer } from '@/features/copilot/FinancialCopilotDrawer';
+import { ProcessingModal } from '@/features/dashboard/ProcessingModal';
 import {
   getMockReconciliationRecords,
   getMockExceptionGroups,
@@ -26,7 +27,8 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRecord, setSelectedRecord] = useState<ReconciledRecordView | null>(null);
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
-  const [isReconciling, setIsReconciling] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const rawRecords = useMemo(() => getMockReconciliationRecords(), []);
   const currentSummary = currentDataset === 'adversarial' ? mockAdversarialBatchSummary : mockCleanBatchSummary;
@@ -48,15 +50,32 @@ export default function Home() {
 
   const exceptionGroups = useMemo(() => getMockExceptionGroups(rawRecords), [rawRecords]);
 
+  // Global Keyboard Shortcuts (/, Esc)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedRecord(null);
+        setIsCopilotOpen(false);
+        setIsProcessing(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleTriggerRun = () => {
-    setIsReconciling(true);
-    setTimeout(() => {
-      setIsReconciling(false);
-    }, 1200);
+    setIsProcessing(true);
+  };
+
+  const handleProcessingComplete = () => {
+    setIsProcessing(false);
+    setToastMessage('Reconciliation complete · 471 / 500 records auto-resolved (94.2%)');
+    setTimeout(() => setToastMessage(null), 4000);
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--surface-canvas)' }}>
+      {/* Sidebar Navigation */}
       <Sidebar
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -64,6 +83,7 @@ export default function Home() {
         totalRecordsCount={currentSummary.total_records}
       />
 
+      {/* Main Content Workspace */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
         <Navbar
           currentDataset={currentDataset}
@@ -72,22 +92,53 @@ export default function Home() {
           onSearchChange={setSearchQuery}
           onOpenCopilot={() => setIsCopilotOpen(true)}
           onTriggerRun={handleTriggerRun}
-          isReconciling={isReconciling}
+          isReconciling={isProcessing}
         />
 
-        <main style={{ flex: 1, padding: '24px', overflowY: 'auto' }}>
+        {/* Floating Toast Feedback */}
+        {toastMessage && (
+          <div style={{
+            position: 'fixed',
+            top: '76px',
+            right: '24px',
+            background: 'var(--surface-primary)',
+            border: '1px solid var(--status-emerald-border)',
+            borderRadius: 'var(--radius-md)',
+            padding: '12px 18px',
+            fontSize: '13px',
+            fontWeight: 700,
+            color: 'var(--status-emerald)',
+            boxShadow: 'var(--shadow-elevated)',
+            zIndex: 40,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--status-emerald)' }} />
+            {toastMessage}
+          </div>
+        )}
+
+        <main style={{ flex: 1, padding: '28px 32px', overflowY: 'auto' }}>
           {activeTab === 'dashboard' && (
             <div>
               <MatchRateHero summary={currentSummary} onViewExceptions={() => setActiveTab('exceptions')} />
               <FlowWaterfall summary={currentSummary} />
-              <div style={{ marginBottom: '24px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 700 }}>Live Reconciled Feed (Recent Transactions)</div>
+              <div style={{ marginBottom: '28px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                  <div>
+                    <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>
+                      Live Multi-Source Reconciled Feed
+                    </div>
+                    <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                      Click any row to open the 3-Way Forensic Audit Drawer
+                    </div>
+                  </div>
                   <button
                     onClick={() => setActiveTab('reconciliation')}
-                    style={{ background: 'transparent', border: 'none', color: 'var(--rzp-blue)', fontSize: '12px', cursor: 'pointer', fontWeight: 600 }}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--rzp-blue)', fontSize: '13px', cursor: 'pointer', fontWeight: 700 }}
                   >
-                    View All {currentSummary.total_records} Records
+                    View All {currentSummary.total_records} Records →
                   </button>
                 </div>
                 <ReconciliationTable
@@ -102,12 +153,12 @@ export default function Home() {
 
           {activeTab === 'reconciliation' && (
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                <div>
-                  <div style={{ fontSize: '16px', fontWeight: 700 }}>3-Way Multi-Source Reconciliation Grid</div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-                    Cross-ledger line-item comparison: Shopify Orders vs Razorpay PG vs Bank Statement UTRs
-                  </div>
+              <div style={{ marginBottom: '20px' }}>
+                <h1 style={{ fontSize: '26px', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+                  3-Way Multi-Source Reconciliation Grid
+                </h1>
+                <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
+                  Cross-ledger line-item verification: Shopify Order Gross vs Razorpay PG Net vs Bank MT940 Credit
                 </div>
               </div>
               <ReconciliationTable
@@ -121,8 +172,10 @@ export default function Home() {
           {activeTab === 'exceptions' && (
             <div>
               <div style={{ marginBottom: '20px' }}>
-                <div style={{ fontSize: '16px', fontWeight: 700 }}>Clustered Exception Triage Queue</div>
-                <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                <h1 style={{ fontSize: '26px', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+                  Clustered Exception Triage Queue
+                </h1>
+                <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
                   Root-cause clustered exceptions sorted by financial impact with progressive disclosure
                 </div>
               </div>
@@ -135,8 +188,10 @@ export default function Home() {
           {activeTab === 'evaluation' && (
             <div>
               <div style={{ marginBottom: '20px' }}>
-                <div style={{ fontSize: '16px', fontWeight: 700 }}>Engine Performance & Adversarial Benchmarks</div>
-                <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                <h1 style={{ fontSize: '26px', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+                  Model Integrity & Adversarial Stress Benchmarks
+                </h1>
+                <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
                   Rigorous evaluation metrics against 50 injected anomalies across clean, messy, and adversarial datasets
                 </div>
               </div>
@@ -147,8 +202,10 @@ export default function Home() {
           {activeTab === 'ingest' && (
             <div>
               <div style={{ marginBottom: '20px' }}>
-                <div style={{ fontSize: '16px', fontWeight: 700 }}>Multi-Source File Ingestion</div>
-                <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+                <h1 style={{ fontSize: '26px', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
+                  Multi-Source File Ingestion Pipeline
+                </h1>
+                <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
                   Upload raw settlement exports, bank MT940 files, and Shopify CSV batches
                 </div>
               </div>
@@ -158,8 +215,14 @@ export default function Home() {
         </main>
       </div>
 
+      {/* Forensic Audit Drawer */}
       <AuditDrawer record={selectedRecord} onClose={() => setSelectedRecord(null)} />
+
+      {/* Financial Copilot Drawer */}
       <FinancialCopilotDrawer isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} />
+
+      {/* Live Processing Pipeline Modal */}
+      <ProcessingModal isOpen={isProcessing} onComplete={handleProcessingComplete} />
     </div>
   );
 }

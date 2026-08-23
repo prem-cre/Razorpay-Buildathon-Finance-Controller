@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatCompactPaise } from '@/lib/money';
 import { ReconciliationBatchSummary } from '@/types/reconciliation';
+import { ArrowRight } from 'lucide-react';
 
 interface FlowWaterfallProps {
   summary: ReconciliationBatchSummary;
@@ -8,56 +9,67 @@ interface FlowWaterfallProps {
 
 export function FlowWaterfall({ summary }: FlowWaterfallProps) {
   const steps = [
-    { label: 'Shopify Gross Orders', amount: summary.total_gross_paise, color: 'var(--text-primary)', desc: 'Total captured e-commerce checkouts' },
-    { label: 'Less: MDR Gateway Fee', amount: -summary.total_fees_paise, color: 'var(--status-rose)', desc: 'Calculated merchant gateway commission' },
-    { label: 'Less: 18% GST on Fee', amount: -summary.total_tax_paise, color: 'var(--status-rose)', desc: 'Statutory GST deduction on processing fee' },
-    { label: 'Net Expected Settlement', amount: summary.total_net_expected_paise, color: 'var(--rzp-blue)', desc: 'Expected bank credit ledger total' },
-    { label: 'Bank Statement Settled', amount: summary.total_bank_settled_paise, color: 'var(--status-emerald)', desc: 'MT940 verified bank deposits' },
+    { label: '1. Shopify Gross Orders', amount: summary.total_gross_paise, color: 'var(--text-primary)', desc: 'Total captured e-commerce checkouts' },
+    { label: '2. Less: MDR Gateway Fee', amount: -summary.total_fees_paise, color: 'var(--status-rose)', desc: 'Calculated merchant gateway commission' },
+    { label: '3. Less: 18% GST on Fee', amount: -summary.total_tax_paise, color: 'var(--status-rose)', desc: 'Statutory GST deduction on processing fee' },
+    { label: '4. Expected Settlement Net', amount: summary.total_net_expected_paise, color: 'var(--rzp-blue)', desc: 'Expected bank credit ledger total' },
+    { label: '5. Bank MT940 Settled', amount: summary.total_bank_settled_paise, color: 'var(--status-emerald)', desc: 'HDFC verified bank deposits' },
   ];
 
   return (
     <div style={{
-      background: 'var(--surface-elevated)',
+      background: 'var(--surface-primary)',
       border: '1px solid var(--border-subtle)',
-      borderRadius: 'var(--radius-lg)',
-      padding: '20px',
-      marginBottom: '24px',
+      borderRadius: 'var(--radius-xl)',
+      padding: '24px',
+      boxShadow: 'var(--shadow-card)',
+      marginBottom: '28px',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
         <div>
-          <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
-            Reconciliation Waterfall & Fee Netting
+          <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+            Multi-Source Financial Flow & Fee Netting Waterfall
           </div>
-          <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-            Mathematical reconciliation flow across Order Gross, Gateway Deductions, and Bank Credits
+          <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+            Mathematical reconciliation balance from Gross Order Checkouts to Verified Bank Deposits
           </div>
         </div>
-        <span style={{ fontSize: '11px', color: 'var(--rzp-blue)', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+        <span style={{
+          fontSize: '11px',
+          color: 'var(--rzp-blue)',
+          fontFamily: 'var(--font-mono)',
+          fontWeight: 700,
+          background: 'var(--rzp-blue-subtle)',
+          padding: '4px 10px',
+          borderRadius: '999px',
+          border: '1px solid var(--rzp-blue-border)',
+        }}>
           3-WAY HASH VERIFIED
         </span>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '12px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '14px' }}>
         {steps.map((step, idx) => (
           <div
             key={idx}
             style={{
-              background: 'var(--surface-primary)',
+              background: 'var(--surface-canvas)',
               border: '1px solid var(--border-subtle)',
-              borderRadius: 'var(--radius-md)',
-              padding: '14px 12px',
+              borderRadius: 'var(--radius-lg)',
+              padding: '16px 14px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
+              position: 'relative',
             }}
           >
-            <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontWeight: 500, minHeight: '32px' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 600, minHeight: '34px' }}>
               {step.label}
             </div>
-            <div className='tabular-mono' style={{ fontSize: '18px', fontWeight: 700, color: step.color, margin: '8px 0 4px 0' }}>
+            <div className='tabular-mono' style={{ fontSize: '20px', fontWeight: 800, color: step.color, margin: '10px 0 4px 0', letterSpacing: '-0.02em' }}>
               {step.amount < 0 ? ('- ' + formatCompactPaise(Math.abs(step.amount))) : formatCompactPaise(step.amount)}
             </div>
-            <div style={{ fontSize: '10px', color: 'var(--text-muted)', lineHeight: '1.3' }}>
+            <div style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4' }}>
               {step.desc}
             </div>
           </div>

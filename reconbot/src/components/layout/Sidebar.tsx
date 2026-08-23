@@ -1,5 +1,13 @@
 import React from 'react';
-import { LayoutDashboard, TableProperties, AlertOctagon, Award, UploadCloud } from 'lucide-react';
+import {
+  LayoutDashboard,
+  TableProperties,
+  AlertCircle,
+  BarChart3,
+  UploadCloud,
+  ShieldCheck,
+  Zap,
+} from 'lucide-react';
 
 export type NavTab = 'dashboard' | 'reconciliation' | 'exceptions' | 'evaluation' | 'ingest';
 
@@ -11,65 +19,59 @@ interface SidebarProps {
 }
 
 export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCount }: SidebarProps) {
-  const navItems: { id: NavTab; label: string; icon: React.ReactNode; badge?: number | string; alert?: boolean }[] = [
-    { id: 'dashboard', label: 'Executive Radar', icon: <LayoutDashboard size={15} /> },
-    { id: 'reconciliation', label: '3-Way Recon Grid', icon: <TableProperties size={15} />, badge: totalRecordsCount },
-    { id: 'exceptions', label: 'Exception Queue', icon: <AlertOctagon size={15} />, badge: exceptionCount, alert: exceptionCount > 0 },
-    { id: 'evaluation', label: 'Precision & Metrics', icon: <Award size={15} />, badge: '98.1%' },
-    { id: 'ingest', label: 'Ingestion Pipeline', icon: <UploadCloud size={15} /> },
+  const navItems = [
+    { id: 'dashboard' as NavTab, label: 'Executive Radar', icon: LayoutDashboard, badge: null },
+    { id: 'reconciliation' as NavTab, label: '3-Way Recon Grid', icon: TableProperties, badge: totalRecordsCount.toString() },
+    { id: 'exceptions' as NavTab, label: 'Exception Queue', icon: AlertCircle, badge: exceptionCount > 0 ? exceptionCount.toString() : null, isAlert: true },
+    { id: 'evaluation' as NavTab, label: 'Model Benchmarks', icon: BarChart3, badge: '98.1%' },
+    { id: 'ingest' as NavTab, label: 'Data Ingestion', icon: UploadCloud, badge: '3/3' },
   ];
 
   return (
     <aside style={{
       width: '240px',
+      height: '100vh',
       background: 'var(--surface-primary)',
       borderRight: '1px solid var(--border-subtle)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
+      padding: '20px 16px',
+      userSelect: 'none',
       flexShrink: 0,
-      zIndex: 20,
     }}>
+      {/* Brand Identity */}
       <div>
-        <div style={{
-          padding: '18px 16px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          borderBottom: '1px solid var(--border-subtle)',
-        }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0 8px 24px 8px' }}>
           <div style={{
-            width: '28px',
-            height: '28px',
-            background: 'linear-gradient(135deg, #0c66e4, #3b82f6)',
-            borderRadius: '6px',
+            width: '32px',
+            height: '32px',
+            borderRadius: 'var(--radius-md)',
+            background: 'linear-gradient(135deg, #0c66e4 0%, #0052cc 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: '#fff',
-            fontWeight: 700,
-            fontSize: '14px',
-            boxShadow: '0 2px 6px rgba(12, 102, 228, 0.4)',
+            boxShadow: '0 4px 12px rgba(12, 102, 228, 0.3)',
           }}>
-            R
+            <Zap size={18} />
           </div>
           <div>
-            <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '-0.01em', color: 'var(--text-primary)' }}>
-              RazorpayX Controller
+            <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+              RazorpayX
             </div>
-            <div style={{ fontSize: '10px', fontWeight: 600, color: 'var(--rzp-blue)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              LedgerLens Engine
+            <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--rzp-blue)' }}>
+              Finance Controller AI
             </div>
           </div>
         </div>
 
-        <nav style={{ padding: '16px 8px', display: 'flex', flexDirection: 'column', gap: '3px' }}>
-          <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-muted)', padding: '6px 10px', fontWeight: 600 }}>
-            Reconciliation Engine
-          </div>
-
+        {/* Navigation Items */}
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
           {navItems.map((item) => {
+            const Icon = item.icon;
             const isActive = activeTab === item.id;
+
             return (
               <button
                 key={item.id}
@@ -77,34 +79,47 @@ export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCo
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '10px',
-                  padding: '8px 10px',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: '12px',
-                  fontWeight: isActive ? 600 : 500,
-                  color: isActive ? 'var(--rzp-blue)' : 'var(--text-secondary)',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  padding: '9px 12px',
+                  borderRadius: 'var(--radius-md)',
                   background: isActive ? 'var(--rzp-blue-subtle)' : 'transparent',
-                  border: 'none',
+                  border: isActive ? '1px solid var(--rzp-blue-border)' : '1px solid transparent',
+                  color: isActive ? 'var(--rzp-blue)' : 'var(--text-secondary)',
+                  fontSize: '13px',
+                  fontWeight: isActive ? 700 : 500,
                   cursor: 'pointer',
                   textAlign: 'left',
-                  transition: 'all 0.15s ease',
-                  width: '100%',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'var(--surface-interactive)';
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                  }
                 }}
               >
-                <span style={{ color: isActive ? 'var(--rzp-blue)' : 'var(--text-muted)' }}>{item.icon}</span>
-                <span>{item.label}</span>
-                {item.badge !== undefined && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Icon size={16} style={{ color: isActive ? 'var(--rzp-blue)' : 'var(--text-muted)' }} />
+                  <span>{item.label}</span>
+                </div>
+
+                {item.badge && (
                   <span
                     className='tabular-mono'
                     style={{
-                      marginLeft: 'auto',
-                      fontSize: '10px',
-                      padding: '1px 6px',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      padding: '2px 7px',
                       borderRadius: '999px',
-                      fontWeight: 600,
-                      background: item.alert ? 'var(--status-rose-bg)' : 'var(--surface-elevated)',
-                      color: item.alert ? 'var(--status-rose)' : 'var(--text-muted)',
-                      border: item.alert ? '1px solid var(--status-rose-border)' : '1px solid var(--border-subtle)',
+                      background: item.isAlert ? 'var(--status-rose-bg)' : 'var(--surface-interactive)',
+                      color: item.isAlert ? 'var(--status-rose)' : 'var(--text-muted)',
+                      border: item.isAlert ? '1px solid var(--status-rose-border)' : '1px solid var(--border-subtle)',
                     }}
                   >
                     {item.badge}
@@ -116,27 +131,19 @@ export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCo
         </nav>
       </div>
 
-      <div style={{ padding: '14px', borderTop: '1px solid var(--border-subtle)' }}>
-        <div style={{
-          background: 'var(--surface-elevated)',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-md)',
-          padding: '10px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '6px',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11px', fontWeight: 600 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--status-emerald)' }} />
-              <span>Engine Status</span>
-            </div>
-            <span style={{ color: 'var(--status-emerald)' }} className='tabular-mono'>Layer 1-3 Active</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: 'var(--text-muted)' }}>
-            <span>Precision Gate</span>
-            <span className='tabular-mono' style={{ color: 'var(--text-primary)' }}>&gt; 95.0% Pass</span>
-          </div>
+      {/* Engine Status Footer */}
+      <div style={{
+        padding: '14px',
+        borderRadius: 'var(--radius-lg)',
+        background: 'var(--surface-canvas)',
+        border: '1px solid var(--border-subtle)',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+          <ShieldCheck size={16} style={{ color: 'var(--status-emerald)' }} />
+          <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>Engine Integrity</span>
+        </div>
+        <div style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4' }}>
+          Deterministic layer: <strong>100% precision</strong>. Zero-hallucination boundary.
         </div>
       </div>
     </aside>
