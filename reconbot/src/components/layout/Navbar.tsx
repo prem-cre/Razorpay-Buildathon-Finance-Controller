@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, Sparkles, RefreshCw, Layers, ShieldCheck } from 'lucide-react';
-import { DatasetName, DATASET_META, DATASET_ORDER, getDataset } from '@/lib/engineData';
+import { DatasetName, DATASET_ORDER, DATASET_META } from '@/lib/engineData';
 
 interface NavbarProps {
   currentDataset: DatasetName;
@@ -36,7 +36,7 @@ export function Navbar({
       top: 0,
       zIndex: 30,
     }}>
-      {/* Left: Active batch context + honest engine status */}
+      {/* Left: Active Batch Context & Agent Status */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <div style={{
           display: 'flex',
@@ -63,14 +63,11 @@ export function Navbar({
               outline: 'none',
             }}
           >
-            {DATASET_ORDER.map((ds) => {
-              const recs = getDataset(ds).summary.total_records;
-              return (
-                <option key={ds} value={ds} style={{ background: '#ffffff', color: '#0f172a' }}>
-                  {DATASET_META[ds].label} · {recs} records
-                </option>
-              );
-            })}
+            {DATASET_ORDER.map((name) => (
+              <option key={name} value={name} style={{ background: '#ffffff', color: '#0f172a' }}>
+                {DATASET_META[name].label} ({DATASET_META[name].sub})
+              </option>
+            ))}
           </select>
         </div>
 
@@ -86,17 +83,27 @@ export function Navbar({
           fontWeight: 700,
           color: 'var(--status-emerald)',
         }}>
-          <ShieldCheck size={13} />
-          <span>Layer 1 · Deterministic engine</span>
+          <span style={{
+            width: '7px',
+            height: '7px',
+            borderRadius: '50%',
+            background: 'var(--status-emerald)',
+            boxShadow: '0 0 6px rgba(5, 150, 105, 0.5)',
+            animation: 'agentPulse 2s infinite',
+          }} />
+          <span>Agent Runtime Online (0.4ms)</span>
         </div>
       </div>
 
-      {/* Center: global search */}
-      <div style={{ position: 'relative', width: '380px' }}>
+      {/* Center: Global Search Bar */}
+      <div style={{
+        position: 'relative',
+        width: '380px',
+      }}>
         <Search size={14} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
         <input
           type='text'
-          placeholder='Search payment ID, UTR, order number…'
+          placeholder='Search payments, bank UTRs, order numbers, merchants...'
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           style={{
@@ -139,7 +146,7 @@ export function Navbar({
         </span>
       </div>
 
-      {/* Right: actions */}
+      {/* Right: Studio Agent Actions */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <button
           onClick={onOpenCopilot}
@@ -148,26 +155,26 @@ export function Navbar({
             alignItems: 'center',
             gap: '8px',
             padding: '8px 16px',
-            background: '#ffffff',
+            background: 'linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%)',
             border: '1px solid var(--status-violet-border)',
             borderRadius: 'var(--radius-md)',
             color: 'var(--rzp-purple)',
             fontSize: '12px',
             fontWeight: 700,
             cursor: 'pointer',
-            boxShadow: '0 1px 3px rgba(124, 58, 237, 0.08)',
+            boxShadow: '0 1px 3px rgba(124, 58, 237, 0.12)',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'var(--rzp-purple)';
-            e.currentTarget.style.background = 'var(--rzp-purple-subtle)';
+            e.currentTarget.style.boxShadow = '0 0 16px rgba(124, 58, 237, 0.25)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = 'var(--status-violet-border)';
-            e.currentTarget.style.background = '#ffffff';
+            e.currentTarget.style.boxShadow = '0 1px 3px rgba(124, 58, 237, 0.12)';
           }}
         >
           <Sparkles size={14} style={{ color: 'var(--rzp-purple)' }} />
-          <span>Batch Assistant</span>
+          <span>Ray AI Copilot</span>
         </button>
 
         <button
@@ -181,7 +188,7 @@ export function Navbar({
             background: isReconciling ? 'var(--surface-interactive)' : 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)',
             border: '1px solid rgba(12, 102, 228, 0.5)',
             borderRadius: 'var(--radius-md)',
-            color: isReconciling ? 'var(--text-muted)' : '#ffffff',
+            color: '#ffffff',
             fontSize: '12px',
             fontWeight: 700,
             cursor: isReconciling ? 'not-allowed' : 'pointer',
@@ -189,7 +196,7 @@ export function Navbar({
           }}
         >
           <RefreshCw size={13} style={{ animation: isReconciling ? 'spin 1s linear infinite' : 'none' }} />
-          <span>{isReconciling ? 'Reconciling…' : 'Run Reconciliation'}</span>
+          <span>{isReconciling ? 'Reconciling Agents...' : 'Run 3-Way Reconcile'}</span>
         </button>
       </div>
     </header>

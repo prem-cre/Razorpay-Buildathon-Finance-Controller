@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Razorpay Agent Studio | Autonomous Multi-Source Financial Reconciliation Engine',
-  description: 'Deploy AI agents that monitor payments, match multi-source ledgers, triage fee drifts, and automate financial operations.',
+  title: 'ReconBot — Multi-Source Reconciliation',
+  description: 'A deterministic finance-controller agent that reconciles payment gateway, bank, and order records with a measured, honest match rate.',
 };
 
 export default function RootLayout({

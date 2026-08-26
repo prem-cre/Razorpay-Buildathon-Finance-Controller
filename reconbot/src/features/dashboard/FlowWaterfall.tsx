@@ -13,7 +13,7 @@ export function FlowWaterfall({ summary }: FlowWaterfallProps) {
     { label: '2. Less: MDR Gateway Fee', amount: -summary.total_fees_paise, color: 'var(--status-rose)', desc: 'Calculated merchant gateway commission' },
     { label: '3. Less: 18% GST on Fee', amount: -summary.total_tax_paise, color: 'var(--status-rose)', desc: 'Statutory GST deduction on processing fee' },
     { label: '4. Expected Settlement Net', amount: summary.total_net_expected_paise, color: 'var(--rzp-blue)', desc: 'Expected bank credit ledger total' },
-    { label: '5. Bank MT940 Settled', amount: summary.total_bank_settled_paise, color: 'var(--status-emerald)', desc: 'HDFC verified bank deposits' },
+    { label: '5. Bank Settled Credit', amount: summary.total_bank_settled_paise, color: 'var(--status-emerald)', desc: 'HDFC statement deposits matched by UTR' },
   ];
 
   return (
@@ -47,7 +47,7 @@ export function FlowWaterfall({ summary }: FlowWaterfallProps) {
           borderRadius: '999px',
           border: '1px solid var(--rzp-blue-border)',
         }}>
-          3-WAY HASH SEALED
+          UTR-VERIFIED
         </span>
       </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatPaiseToINR, formatPaiseDelta } from '@/lib/money';
-import { formatTruncatedId } from '@/lib/formatters';
+import { formatTruncatedId, formatDate } from '@/lib/formatters';
 import { ReconciledRecordView } from '@/types/reconciliation';
 import { CheckCircle2, Clock, AlertTriangle, XCircle, ChevronRight } from 'lucide-react';
 
@@ -157,7 +157,7 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
                     <div className='tabular-mono' style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 600 }}>
                       {formatTruncatedId(r.bank_utr, 6, 6)}
                     </div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{r.clearing_date}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{formatDate(r.clearing_date)}</div>
                   </td>
 
                   <td style={{ padding: '16px 20px', textAlign: 'center' }}>

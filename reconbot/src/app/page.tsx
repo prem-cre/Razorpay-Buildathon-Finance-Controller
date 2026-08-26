@@ -14,42 +14,34 @@ import { EvaluationSummary } from '@/features/evaluation/EvaluationSummary';
 import { MultiSourceDropzone } from '@/features/ingestion/MultiSourceDropzone';
 import { FinancialCopilotDrawer } from '@/features/copilot/FinancialCopilotDrawer';
 import { ProcessingModal } from '@/features/dashboard/ProcessingModal';
-import {
-  getMockReconciliationRecords,
-  getMockExceptionGroups,
-  mockAdversarialBatchSummary,
-  mockCleanBatchSummary
-} from '@/lib/mockEngine';
-import { ReconciledRecordView } from '@/types/reconciliation';
+import { DatasetName, getDataset } from '@/lib/engineData';
+import { ReconciledRecordView, ExceptionGroupSummary } from '@/types/reconciliation';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
-  const [currentDataset, setCurrentDataset] = useState<'adversarial' | 'clean'>('adversarial');
+  const [currentDataset, setCurrentDataset] = useState<DatasetName>('adversarial');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRecord, setSelectedRecord] = useState<ReconciledRecordView | null>(null);
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  const rawRecords = useMemo(() => getMockReconciliationRecords(), []);
-  const currentSummary = currentDataset === 'adversarial' ? mockAdversarialBatchSummary : mockCleanBatchSummary;
+  const datasetPayload = useMemo(() => getDataset(currentDataset), [currentDataset]);
+  const currentSummary = datasetPayload.summary;
+  const rawRecords = datasetPayload.records;
+  const exceptionGroups = datasetPayload.exception_groups;
 
   const filteredRecords = useMemo(() => {
-    if (currentDataset === 'clean') {
-      return rawRecords.filter((r) => r.match_status === 'matched').slice(0, 50);
-    }
     if (!searchQuery) return rawRecords;
     const q = searchQuery.toLowerCase();
     return rawRecords.filter(
-      (r) =>
+      (r: ReconciledRecordView) =>
         r.payment_id.toLowerCase().includes(q) ||
         r.bank_utr.toLowerCase().includes(q) ||
         r.order_name.toLowerCase().includes(q) ||
         r.merchant_customer.toLowerCase().includes(q)
     );
-  }, [rawRecords, currentDataset, searchQuery]);
-
-  const exceptionGroups = useMemo(() => getMockExceptionGroups(rawRecords), [rawRecords]);
+  }, [rawRecords, searchQuery]);
 
   // Global Keyboard Shortcuts (/, Esc)
   useEffect(() => {
@@ -70,7 +62,8 @@ export default function Home() {
 
   const handleProcessingComplete = () => {
     setIsProcessing(false);
-    setToastMessage('Agent Execution Complete · 471 / 500 records auto-resolved (94.2%)');
+    const resolved = currentSummary.auto_matched_count + currentSummary.fuzzy_matched_count;
+    setToastMessage('Agent Execution Complete · ' + resolved + ' / ' + currentSummary.total_records + ' records resolved (' + currentSummary.match_rate_percentage + '%)');
     setTimeout(() => setToastMessage(null), 4000);
   };
 
@@ -80,6 +73,7 @@ export default function Home() {
       <Sidebar
         activeTab={activeTab}
         onTabChange={setActiveTab}
+        summary={currentSummary}
         exceptionCount={currentSummary.exceptions_count}
         totalRecordsCount={currentSummary.total_records}
       />
@@ -123,7 +117,12 @@ export default function Home() {
         <main style={{ flex: 1, padding: '28px 32px', overflowY: 'auto' }}>
           {activeTab === 'dashboard' && (
             <div>
-              <MatchRateHero summary={currentSummary} onViewExceptions={() => setActiveTab('exceptions')} />
+              <MatchRateHero
+                summary={currentSummary}
+                onViewExceptions={() => setActiveTab('exceptions')}
+                onTriggerRun={handleTriggerRun}
+                isReconciling={isProcessing}
+              />
               <AgentPipelineCanvas summary={currentSummary} />
               <FlowWaterfall summary={currentSummary} />
               
@@ -151,7 +150,7 @@ export default function Home() {
                 />
               </div>
 
-              <TelemetryStream />
+              <TelemetryStream records={rawRecords} />
             </div>
           )}
 
@@ -183,7 +182,7 @@ export default function Home() {
                   Root-cause clustered exceptions sorted by financial impact with progressive disclosure
                 </div>
               </div>
-              {exceptionGroups.map((group, idx) => (
+              {exceptionGroups.map((group: ExceptionGroupSummary, idx: number) => (
                 <ExceptionCategoryCard key={idx} group={group} onSelectRecord={setSelectedRecord} />
               ))}
             </div>
@@ -223,10 +222,19 @@ export default function Home() {
       <AuditDrawer record={selectedRecord} onClose={() => setSelectedRecord(null)} />
 
       {/* Financial Copilot Drawer */}
-      <FinancialCopilotDrawer isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} />
+      <FinancialCopilotDrawer
+        isOpen={isCopilotOpen}
+        onClose={() => setIsCopilotOpen(false)}
+        summary={currentSummary}
+        records={rawRecords}
+      />
 
       {/* Live Processing Pipeline Modal */}
-      <ProcessingModal isOpen={isProcessing} onComplete={handleProcessingComplete} />
+      <ProcessingModal
+        isOpen={isProcessing}
+        onComplete={handleProcessingComplete}
+        summary={currentSummary}
+      />
     </div>
   );
 }

@@ -64,7 +64,7 @@ export function AuditDrawer({ record, onClose }: AuditDrawerProps) {
               {record.payment_id}
             </h2>
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px' }}>
-              Merchant: <strong style={{ color: 'var(--text-primary)' }}>{record.merchant_customer}</strong> · Order {record.order_name}
+              Customer: <strong style={{ color: 'var(--text-primary)' }}>{record.merchant_customer}</strong> · Order {record.order_name} · {record.payment_method.toUpperCase()}
             </div>
           </div>
 
@@ -137,7 +137,7 @@ export function AuditDrawer({ record, onClose }: AuditDrawerProps) {
               boxShadow: record.variance_paise !== 0 ? '0 1px 3px rgba(217, 119, 6, 0.1)' : 'var(--shadow-subtle)',
             }}>
               <div style={{ fontSize: '11px', color: record.variance_paise !== 0 ? 'var(--status-amber)' : 'var(--status-emerald)', fontWeight: 700, textTransform: 'uppercase' }}>
-                3. Bank MT940 Credit
+                3. Bank Credit
               </div>
               <div className='tabular-mono' style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)', margin: '8px 0 2px 0' }}>
                 {record.bank_credit_paise === 0 ? 'Pending' : formatPaiseToINR(record.bank_credit_paise)}
@@ -160,14 +160,14 @@ export function AuditDrawer({ record, onClose }: AuditDrawerProps) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
             <Cpu size={16} style={{ color: 'var(--rzp-blue)' }} />
             <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Deterministic Machine Evidence (Layer 1-2)
+              Deterministic Evidence (Layer 1)
             </span>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '12px' }}>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>Applied Engine Rule: </span>
-              <strong className='tabular-mono' style={{ color: 'var(--text-primary)' }}>{record.rule_applied || 'None (Fallback to L3)'}</strong>
+              <strong className='tabular-mono' style={{ color: 'var(--text-primary)' }}>{record.rule_applied || 'None — deferred to Layer 2/3'}</strong>
             </div>
             <div>
               <span style={{ color: 'var(--text-muted)' }}>Bank UTR Link: </span>
@@ -184,24 +184,36 @@ export function AuditDrawer({ record, onClose }: AuditDrawerProps) {
           </div>
         </div>
 
-        {/* AI Forensic Diagnosis (Layer 3) */}
+        {/* Engine reasoning (deterministic) + ground-truth note */}
         <div style={{
-          background: 'var(--rzp-purple-subtle)',
-          border: '1px solid var(--status-violet-border)',
+          background: '#f8fafc',
+          border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-lg)',
           padding: '18px',
           marginBottom: '24px',
-          boxShadow: '0 1px 3px rgba(124, 58, 237, 0.08)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-            <Bot size={16} style={{ color: 'var(--rzp-purple)' }} />
-            <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--rzp-purple)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Ray AI Forensic Diagnosis & Recommendation
+            <ShieldCheck size={16} style={{ color: 'var(--rzp-blue)' }} />
+            <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Engine reasoning
             </span>
           </div>
           <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.6', margin: 0 }}>
             {record.reasoning}
           </p>
+          {record.ground_truth_category && (
+            <div style={{
+              marginTop: '12px', paddingTop: '12px', borderTop: '1px dashed var(--border-default)',
+              fontSize: '12px', color: 'var(--text-muted)',
+            }}>
+              <strong style={{ color: 'var(--rzp-purple)' }}>Ground-truth category:</strong>{' '}
+              <span className='tabular-mono'>{record.ground_truth_category}</span>
+              {' '}· a Layer 2/3 target, not something Layer 1 claims to have resolved.
+              {record.injected_defect && (
+                <div style={{ marginTop: '4px', fontStyle: 'italic' }}>{record.injected_defect}</div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Studio Actions */}
@@ -242,7 +254,7 @@ export function AuditDrawer({ record, onClose }: AuditDrawerProps) {
             }}
           >
             <Download size={14} />
-            <span>{isMatched ? 'Export Audit Hash' : 'Auto-Post Journal Adjustment'}</span>
+            <span>{isMatched ? 'Export audit record' : 'Send to review queue'}</span>
           </button>
         </div>
       </div>
