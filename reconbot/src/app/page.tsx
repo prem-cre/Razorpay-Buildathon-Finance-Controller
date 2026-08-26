@@ -25,7 +25,7 @@ export default function Home() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const datasetData = useMemo(() => getDataset(currentDataset), [currentDataset]);
-  const { summary, records, exceptionGroups } = datasetData;
+  const { summary, records, exception_groups } = datasetData;
 
   const filteredRecords = useMemo(() => {
     if (!searchQuery) return records;
@@ -39,7 +39,6 @@ export default function Home() {
     );
   }, [records, searchQuery]);
 
-  // Global Keyboard Shortcuts (/, Esc)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -58,20 +57,18 @@ export default function Home() {
 
   const handleProcessingComplete = () => {
     setIsProcessing(false);
-    setToastMessage(\Reconciliation Run Complete · \ / \ records matched (\%)\);
+    setToastMessage('Reconciliation Run Complete · ' + (summary.auto_matched_count + summary.fuzzy_matched_count) + ' / ' + summary.total_records + ' records matched (' + summary.match_rate_percentage + '%)');
     setTimeout(() => setToastMessage(null), 4000);
   };
 
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--surface-canvas)' }}>
-      {/* Sidebar Navigation */}
       <Sidebar
         activeTab={activeTab}
         onTabChange={setActiveTab}
         summary={summary}
       />
 
-      {/* Main Workspace */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
         <Navbar
           currentDataset={currentDataset}
@@ -83,7 +80,6 @@ export default function Home() {
           isReconciling={isProcessing}
         />
 
-        {/* Floating Toast Notification */}
         {toastMessage && (
           <div style={{
             position: 'fixed',
@@ -171,7 +167,7 @@ export default function Home() {
                   Root-cause clustered exceptions sorted by financial impact with progressive disclosure
                 </div>
               </div>
-              {exceptionGroups.map((group: ExceptionGroupSummary, idx: number) => (
+              {exception_groups.map((group: ExceptionGroupSummary, idx: number) => (
                 <ExceptionCategoryCard key={idx} group={group} onSelectRecord={setSelectedRecord} />
               ))}
             </div>
@@ -207,13 +203,8 @@ export default function Home() {
         </main>
       </div>
 
-      {/* Forensic Audit Drawer */}
       <AuditDrawer record={selectedRecord} onClose={() => setSelectedRecord(null)} />
-
-      {/* Financial Copilot Drawer */}
       <FinancialCopilotDrawer isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} summary={summary} records={records} />
-
-      {/* Live Processing Pipeline Modal */}
       <ProcessingModal isOpen={isProcessing} onComplete={handleProcessingComplete} summary={summary} />
     </div>
   );
