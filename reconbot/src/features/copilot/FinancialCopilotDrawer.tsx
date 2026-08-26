@@ -133,7 +133,7 @@ export function FinancialCopilotDrawer({ isOpen, onClose, summary, records }: Fi
             </div>
             <div>
               <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
-                Batch Assistant
+                AI Financial Copilot
               </div>
               <div style={{ fontSize: '11px', color: 'var(--status-emerald)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--status-emerald)' }} />

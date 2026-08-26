@@ -5,8 +5,6 @@ import {
   AlertCircle,
   BarChart3,
   UploadCloud,
-  Cpu,
-  Bot,
 } from 'lucide-react';
 import { ReconciliationBatchSummary } from '@/types/reconciliation';
 
@@ -21,14 +19,14 @@ export interface SidebarProps {
 }
 
 export function Sidebar({ activeTab, onTabChange, summary, exceptionCount: expCountProp, totalRecordsCount: totalRecProp }: SidebarProps) {
-  const exceptionCount = summary?.exceptions_count ?? expCountProp ?? 8;
-  const totalRecords = summary?.total_records ?? totalRecProp ?? 500;
+  const exceptionCount = summary?.exceptions_count ?? expCountProp ?? 0;
+  const totalRecords = summary?.total_records ?? totalRecProp ?? 0;
 
   const navItems = [
     { id: 'dashboard' as NavTab, label: 'Executive Radar', icon: LayoutDashboard, badge: null, isAlert: false },
     { id: 'reconciliation' as NavTab, label: '3-Way Recon Grid', icon: TableProperties, badge: totalRecords > 0 ? totalRecords.toString() : null, isAlert: false },
     { id: 'exceptions' as NavTab, label: 'Exception Triage', icon: AlertCircle, badge: exceptionCount > 0 ? exceptionCount.toString() : null, isAlert: true },
-    { id: 'evaluation' as NavTab, label: 'Agent Benchmarks', icon: BarChart3, badge: summary?.evaluation ? summary.evaluation.precision_pct + '%' : '98.1%', isAlert: false },
+    { id: 'evaluation' as NavTab, label: 'Agent Benchmarks', icon: BarChart3, badge: summary?.evaluation ? summary.evaluation.precision_pct + '%' : '100%', isAlert: false },
     { id: 'ingest' as NavTab, label: 'Data Ingestion', icon: UploadCloud, badge: '3/3', isAlert: false },
   ];
 
@@ -46,36 +44,38 @@ export function Sidebar({ activeTab, onTabChange, summary, exceptionCount: expCo
       flexShrink: 0,
       boxShadow: 'var(--shadow-subtle)',
     }}>
-      {/* Brand Identity */}
+      {/* Brand Identity with Modern Geometric Fintech Logo */}
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px 28px 8px' }}>
           <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: 'var(--radius-md)',
+            width: '38px',
+            height: '38px',
+            borderRadius: '10px',
             background: 'linear-gradient(135deg, #0c66e4 0%, #7c3aed 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#ffffff',
-            boxShadow: '0 2px 8px rgba(12, 102, 228, 0.3)',
+            boxShadow: '0 2px 10px rgba(12, 102, 228, 0.25)',
           }}>
-            <Bot size={20} />
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <path d='M12 2L2 7L12 12L22 7L12 2Z' stroke='#ffffff' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'/>
+              <path d='M2 17L12 22L22 17' stroke='#ffffff' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' opacity='0.85'/>
+              <path d='M2 12L12 17L22 12' stroke='#ffffff' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round' opacity='0.6'/>
+            </svg>
           </div>
           <div>
-            <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span>Razorpay</span>
-              <span style={{ fontSize: '10px', padding: '1px 5px', borderRadius: '4px', background: 'var(--rzp-blue-subtle)', color: 'var(--rzp-blue)', border: '1px solid var(--rzp-blue-border)', fontWeight: 800 }}>STUDIO</span>
+            <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', lineHeight: '1.2' }}>
+              Finance Controller
             </div>
-            <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--rzp-purple)' }}>
-              Agentic Finance Controller
+            <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-muted)', marginTop: '2px' }}>
+              Autonomous 3-Way Engine
             </div>
           </div>
         </div>
 
         {/* Navigation Section */}
         <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', padding: '0 12px 10px 12px' }}>
-          Agent Workspaces
+          Workspaces
         </div>
 
         <nav style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
@@ -143,40 +143,23 @@ export function Sidebar({ activeTab, onTabChange, summary, exceptionCount: expCo
         </nav>
       </div>
 
-      {/* Agent Runtime Health Panel */}
+      {/* Bottom Minimal Status */}
       <div style={{
-        padding: '16px',
-        borderRadius: 'var(--radius-lg)',
-        background: 'var(--surface-canvas)',
+        padding: '10px 12px',
+        borderRadius: 'var(--radius-md)',
+        background: 'var(--surface-interactive)',
         border: '1px solid var(--border-subtle)',
-        boxShadow: 'var(--shadow-subtle)',
+        fontSize: '11px',
+        color: 'var(--text-muted)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Cpu size={14} style={{ color: 'var(--rzp-blue)' }} />
-            <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Agent Architecture
-            </span>
-          </div>
-          <span style={{ fontSize: '10px', color: 'var(--status-emerald)', fontWeight: 700 }}>
-            {summary?.evaluation?.precision_pct ?? 98.1}% F1
-          </span>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '11px', color: 'var(--text-secondary)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span>L1 Deterministic:</span>
-            <strong style={{ color: 'var(--text-primary)' }}>{summary?.auto_matched_count ?? 471} matched</strong>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span>L2 Fuzzy Heuristic:</span>
-            <strong style={{ color: 'var(--status-amber)' }}>{summary?.fuzzy_matched_count ?? 21} resolved</strong>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span>L3 Ray AI Triage:</span>
-            <strong style={{ color: 'var(--rzp-purple)' }}>{summary?.exceptions_count ?? 8} exceptions</strong>
-          </div>
-        </div>
+        <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--status-emerald)' }} />
+          Status: <strong style={{ color: 'var(--status-emerald)' }}>Active</strong>
+        </span>
+        <span className='tabular-mono' style={{ fontWeight: 700 }}>v3.2</span>
       </div>
     </aside>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Sparkles, RefreshCw, Layers } from 'lucide-react';
+import { Search, RefreshCw, Layers } from 'lucide-react';
 import { DatasetName, DATASET_META, DATASET_ORDER } from '@/lib/engineData';
 
 interface NavbarProps {
@@ -123,8 +123,9 @@ export function Navbar({
         </span>
       </div>
 
-      {/* Right: Actions */}
+      {/* Right: Modern Actions */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Modern AI Copilot Trigger */}
         <button
           onClick={onOpenCopilot}
           style={{
@@ -135,23 +136,39 @@ export function Navbar({
             background: '#ffffff',
             border: '1px solid var(--status-violet-border)',
             borderRadius: 'var(--radius-md)',
-            color: 'var(--rzp-purple)',
+            color: 'var(--text-primary)',
             fontSize: '12px',
             fontWeight: 700,
             cursor: 'pointer',
-            boxShadow: '0 1px 3px rgba(124, 58, 237, 0.08)',
+            boxShadow: '0 1px 4px rgba(124, 58, 237, 0.08)',
+            transition: 'all 0.15s ease',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'var(--rzp-purple)';
             e.currentTarget.style.background = 'var(--rzp-purple-subtle)';
+            e.currentTarget.style.transform = 'translateY(-1px)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = 'var(--status-violet-border)';
             e.currentTarget.style.background = '#ffffff';
+            e.currentTarget.style.transform = 'translateY(0)';
           }}
         >
-          <Sparkles size={14} style={{ color: 'var(--rzp-purple)' }} />
-          <span>Ray AI Copilot</span>
+          {/* Modern AI Sparkles Prism SVG */}
+          <div style={{
+            width: '18px',
+            height: '18px',
+            borderRadius: '5px',
+            background: 'linear-gradient(135deg, #7c3aed 0%, #0c66e4 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <svg width='11' height='11' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+              <path d='M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z' fill='#ffffff'/>
+            </svg>
+          </div>
+          <span style={{ fontWeight: 700 }}>AI Copilot</span>
         </button>
 
         <button
