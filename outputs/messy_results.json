@@ -1,255 +1,211 @@
 [
   {
     "record_key": "pay_00001XByB7vlQw",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00001XByB7vlQw",
       "order": "#2001",
-      "order_total_paise": 167012,
-      "payment_amount_paise": 167012,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00002kBBT4MANX",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00002kBBT4MANX",
       "order": "#2002",
-      "order_total_paise": 237973,
-      "payment_amount_paise": 237973,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00003Ow6cjBwBe",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00003Ow6cjBwBe",
       "order": "#2003",
-      "order_total_paise": 97624,
-      "payment_amount_paise": 97624,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00004LR9miekS9",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00004LR9miekS9",
       "order": "#2004",
-      "order_total_paise": 196987,
-      "payment_amount_paise": 196987,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00005XoEwJC8i2",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00005XoEwJC8i2",
       "order": "#2005",
-      "order_total_paise": 111814,
-      "payment_amount_paise": 111814,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_000062WNl7A4dh",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_000062WNl7A4dh",
       "order": "#2006",
-      "order_total_paise": 215622,
-      "payment_amount_paise": 215622,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00007HFk6jOSL0",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00007HFk6jOSL0",
       "order": "#2007",
-      "order_total_paise": 243845,
-      "payment_amount_paise": 243845,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00008NspYzCQjz",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00008NspYzCQjz",
       "order": "#2008",
-      "order_total_paise": 244407,
-      "payment_amount_paise": 244407,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00009hBid61z73",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00009hBid61z73",
       "order": "#2009",
-      "order_total_paise": 163654,
-      "payment_amount_paise": 163654,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00010vdE2ODH0A",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00010vdE2ODH0A",
       "order": "#2010",
-      "order_total_paise": 143105,
-      "payment_amount_paise": 143105,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00011MLhfx9Iwi",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00011MLhfx9Iwi",
       "order": "#2011",
-      "order_total_paise": 153327,
-      "payment_amount_paise": 153327,
-      "order_amount_ok": true,
-      "settlement_id": "setl_000019PObQzxHD",
       "settlement_utr": "HDFC2717513608250",
-      "bank_rows": [
-        1
-      ],
       "bank_deposit_paise": 2048887,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 2105375,
+      "refund_bank_reduction_paise": 56488,
+      "refunded_siblings": [
+        "pay_00074B4zEGxdXe"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
@@ -576,439 +532,363 @@
   },
   {
     "record_key": "pay_00026RX4I8Iipm",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00026RX4I8Iipm",
       "order": "#2026",
-      "order_total_paise": 139072,
-      "payment_amount_paise": 139072,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00027ID1u7a67h",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00027ID1u7a67h",
       "order": "#2027",
-      "order_total_paise": 234031,
-      "payment_amount_paise": 234031,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00028Eg8D04wzI",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00028Eg8D04wzI",
       "order": "#2028",
-      "order_total_paise": 174278,
-      "payment_amount_paise": 174278,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00029QpY7NEkXk",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00029QpY7NEkXk",
       "order": "#2029",
-      "order_total_paise": 224347,
-      "payment_amount_paise": 224347,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00030NejnCdN54",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00030NejnCdN54",
       "order": "#2030",
-      "order_total_paise": 188106,
-      "payment_amount_paise": 188106,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00031lGYqyxzJ9",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00031lGYqyxzJ9",
       "order": "#2031",
-      "order_total_paise": 217464,
-      "payment_amount_paise": 217464,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00032u8834o3QJ",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00032u8834o3QJ",
       "order": "#2032",
-      "order_total_paise": 193746,
-      "payment_amount_paise": 193746,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00033oZy3uUi9S",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00033oZy3uUi9S",
       "order": "#2033",
-      "order_total_paise": 158453,
-      "payment_amount_paise": 158453,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_000349Ew6AQOfM",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_000349Ew6AQOfM",
       "order": "#2034",
-      "order_total_paise": 246231,
-      "payment_amount_paise": 246231,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00035fAIFgfILW",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00035fAIFgfILW",
       "order": "#2035",
-      "order_total_paise": 150717,
-      "payment_amount_paise": 150717,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00036qjkrsWw6S",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00036qjkrsWw6S",
       "order": "#2036",
-      "order_total_paise": 116396,
-      "payment_amount_paise": 116396,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00037t6mt78sRE",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00037t6mt78sRE",
       "order": "#2037",
-      "order_total_paise": 235816,
-      "payment_amount_paise": 235816,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00038sQYXzENpO",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00038sQYXzENpO",
       "order": "#2038",
-      "order_total_paise": 134958,
-      "payment_amount_paise": 134958,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_000394gpPkLINO",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_000394gpPkLINO",
       "order": "#2039",
-      "order_total_paise": 220746,
-      "payment_amount_paise": 220746,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00040QQj9Ds5fZ",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00040QQj9Ds5fZ",
       "order": "#2040",
-      "order_total_paise": 182533,
-      "payment_amount_paise": 182533,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00041vgX5TFIuA",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00041vgX5TFIuA",
       "order": "#2041",
-      "order_total_paise": 110168,
-      "payment_amount_paise": 110168,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00042UYdg2luCq",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00042UYdg2luCq",
       "order": "#2042",
-      "order_total_paise": 136307,
-      "payment_amount_paise": 136307,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_00043lQFzixlNQ",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00043lQFzixlNQ",
       "order": "#2043",
-      "order_total_paise": 142540,
-      "payment_amount_paise": 142540,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
     "record_key": "pay_000447FEQz0Efb",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.4_refund_netted_solver",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_000447FEQz0Efb",
       "order": "#2044",
-      "order_total_paise": 131151,
-      "payment_amount_paise": 131151,
-      "order_amount_ok": true,
-      "settlement_id": "setl_00004ZQDA2kiT8",
       "settlement_utr": "HDFC0163892733144",
-      "bank_rows": [
-        8
-      ],
       "bank_deposit_paise": 3600987,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "batch_settled_paise": 3656944,
+      "refund_bank_reduction_paise": 55958,
+      "refunded_siblings": [
+        "pay_000757DIvZqZfb"
+      ],
+      "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"
     }
   },
   {
@@ -1756,25 +1636,21 @@
   },
   {
     "record_key": "pay_000786wskOIsDT",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.3_split_payment_reconstruction",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_000786wskOIsDT",
       "order": "#2077",
-      "order_total_paise": 301783,
-      "payment_amount_paise": 181070,
-      "order_amount_ok": false,
-      "settlement_id": "setl_000038qdY20wPA",
-      "settlement_utr": "HDFC2001549707964",
-      "bank_rows": [
-        6
+      "order_id": "order_00077TK9YvSQND",
+      "siblings": [
+        "pay_000786wskOIsDT",
+        "pay_00079SI463Onn2"
       ],
-      "bank_deposit_paise": 1442983,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "reconstructed_gross_paise": 301783,
+      "order_total_paise": 301783,
+      "reason": "2 payments reconstruct order #2077 total"
     }
   },
   {
@@ -1800,25 +1676,21 @@
   },
   {
     "record_key": "pay_00080QGz1j9v93",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.3_split_payment_reconstruction",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00080QGz1j9v93",
       "order": "#2078",
-      "order_total_paise": 277083,
-      "payment_amount_paise": 166250,
-      "order_amount_ok": false,
-      "settlement_id": "setl_00002mqGmRscEm",
-      "settlement_utr": "HDFC3662618171111",
-      "bank_rows": [
-        3
+      "order_id": "order_00078ChdNJMDmh",
+      "siblings": [
+        "pay_00080QGz1j9v93",
+        "pay_000819i1lfu9td"
       ],
-      "bank_deposit_paise": 2135494,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "reconstructed_gross_paise": 277083,
+      "order_total_paise": 277083,
+      "reason": "2 payments reconstruct order #2078 total"
     }
   },
   {

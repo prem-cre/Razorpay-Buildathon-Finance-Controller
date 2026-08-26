@@ -22,7 +22,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00002KF7aTIAK5",
@@ -47,7 +47,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00003Vq78CizRU",
@@ -72,7 +72,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00004NSVIK6SP3",
@@ -97,7 +97,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00005dWmHwCMPI",
@@ -122,7 +122,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00006pMW1Z4ROU",
@@ -147,7 +147,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00007IiKpuSjju",
@@ -172,7 +172,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00008Hzv2Pus6M",
@@ -197,7 +197,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00009Hr4YxXBc3",
@@ -222,7 +222,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00010Z2TAYeQbS",
@@ -247,7 +247,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00011haSdUc0wF",
@@ -272,7 +272,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00012Ns271O7a2",
@@ -297,7 +297,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00013nZmlX0059",
@@ -322,7 +322,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000143tBMsKJwt",
@@ -345,7 +345,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00015sIkL01iHq",
@@ -368,7 +368,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000169DWwnVTsC",
@@ -391,7 +391,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00017O7TDwnEdw",
@@ -414,7 +414,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00018kOwOZGx4G",
@@ -437,7 +437,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00019wShoYSDDn",
@@ -460,7 +460,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00020z8N2TY6nL",
@@ -483,7 +483,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00021oxgm1FAjf",
@@ -506,7 +506,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000222RA6DVvX4",
@@ -531,7 +531,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00023haOQtwjOp",
@@ -556,7 +556,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00024tvRT1OUBR",
@@ -581,7 +581,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00025necx9MGSL",
@@ -606,7 +606,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00026PwO8fryPz",
@@ -631,7 +631,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00027CzakFIFvh",
@@ -656,7 +656,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00028DpxWnRXzv",
@@ -681,7 +681,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000296Q4EmT2mm",
@@ -706,7 +706,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000302JrlVFyUh",
@@ -731,7 +731,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00031nKuLqIoDM",
@@ -756,7 +756,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00032XTDaAi3NH",
@@ -781,7 +781,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00033I5pbh17mJ",
@@ -806,7 +806,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000345ALz4evtO",
@@ -831,7 +831,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00035P6Rekgd2I",
@@ -856,7 +856,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.030115+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00036kcw41C15I",
@@ -881,7 +881,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00037XBwqsaY0v",
@@ -906,7 +906,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00038IykTyxqAo",
@@ -931,7 +931,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00039MqMlbdHlg",
@@ -956,7 +956,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_0004007dWeDl0Y",
@@ -981,7 +981,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00041QtuNc6GpN",
@@ -1006,7 +1006,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00042KQQjVpEQu",
@@ -1031,7 +1031,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00043wi3EBsRll",
@@ -1056,7 +1056,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00044Nxlb1WoSO",
@@ -1081,7 +1081,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00045mEgJZOGRp",
@@ -1106,7 +1106,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00046XdMGTZenG",
@@ -1131,7 +1131,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00047AgXIFOHL5",
@@ -1156,7 +1156,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00048p7ByT8KG9",
@@ -1181,7 +1181,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00049q3ppsJJne",
@@ -1204,7 +1204,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00050A5hVU05NN",
@@ -1227,7 +1227,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00051AWjuDUHqy",
@@ -1252,7 +1252,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00052bs9M9BjcY",
@@ -1277,7 +1277,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00053mxU0gd651",
@@ -1300,7 +1300,7 @@
       "reason": "settlement UTR present in bank, but no Shopify order carries this payment_id"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00054YaRgBbmHm",
@@ -1323,7 +1323,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000556eOP4wgs2",
@@ -1348,7 +1348,7 @@
       "strategy": "sum(settled_amount) vs bank deposit"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00056x8FS4ELfm",
@@ -1371,7 +1371,7 @@
       "reason": "settlement UTR present in bank, but no Shopify order carries this payment_id"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_000575sEUbQws9",
@@ -1394,7 +1394,7 @@
       "reason": "settlement UTR present in bank, but no Shopify order carries this payment_id"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00058Ofx7LMooj",
@@ -1417,7 +1417,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00059tRGi98i54",
@@ -1440,7 +1440,7 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
   },
   {
     "record_key": "pay_00060glVLqJooQ",
@@ -1463,6 +1463,50 @@
       "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
     },
     "llm_reasoning": null,
-    "timestamp": "2026-08-23T18:11:15.031116+00:00"
+    "timestamp": "2026-08-26T20:33:28.810317+00:00"
+  },
+  {
+    "record_key": "pay_00052bs9M9BjcY",
+    "layer": 2,
+    "rule": "R2.3_split_payment_reconstruction",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00052bs9M9BjcY",
+      "order": "#3052",
+      "order_id": "order_00052Wu5fPAvtK",
+      "siblings": [
+        "pay_00052bs9M9BjcY",
+        "pay_00053mxU0gd651",
+        "pay_00054YaRgBbmHm"
+      ],
+      "reconstructed_gross_paise": 369797,
+      "order_total_paise": 369797,
+      "reason": "3 payments reconstruct order #3052 total"
+    },
+    "llm_reasoning": null,
+    "timestamp": "2026-08-26T20:33:28.814331+00:00"
+  },
+  {
+    "record_key": "pay_00054YaRgBbmHm",
+    "layer": 2,
+    "rule": "R2.3_split_payment_reconstruction",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
+    "evidence": {
+      "payment_id": "pay_00054YaRgBbmHm",
+      "order": "#3052",
+      "order_id": "order_00052Wu5fPAvtK",
+      "siblings": [
+        "pay_00052bs9M9BjcY",
+        "pay_00053mxU0gd651",
+        "pay_00054YaRgBbmHm"
+      ],
+      "reconstructed_gross_paise": 369797,
+      "order_total_paise": 369797,
+      "reason": "3 payments reconstruct order #3052 total"
+    },
+    "llm_reasoning": null,
+    "timestamp": "2026-08-26T20:33:28.814331+00:00"
   }
 ]

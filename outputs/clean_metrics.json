@@ -1,537 +1,553 @@
 {
-  "totals": {
-    "records_processed": 55,
-    "manifest_entries": 55,
-    "covered": 55,
-    "only_in_engine": [],
-    "only_in_manifest": []
+  "strict_layer1_view": {
+    "totals": {
+      "records_processed": 55,
+      "manifest_entries": 55,
+      "covered": 55,
+      "only_in_engine": [],
+      "only_in_manifest": []
+    },
+    "headline": {
+      "match_rate": 1.0,
+      "auto_matched": 55,
+      "awaiting_settlement": 0,
+      "orphan_payment": 0,
+      "unresolved_deferred": 0
+    },
+    "matched_class_vs_manifest": {
+      "true_positive": 55,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_records": []
+    },
+    "deferral": {
+      "correct_deferrals": 0,
+      "wrong_deferrals": 0
+    },
+    "rule_counts": {
+      "R1.1_exact_three_way": 55
+    },
+    "confidence_distribution": {
+      "HIGH": 55
+    },
+    "status_distribution": {
+      "matched": 55
+    },
+    "manifest_status_distribution": {
+      "matched": 55
+    },
+    "per_record_diff": [
+      {
+        "record_key": "pay_000015QnuVdYXy",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00002K3yn9Ffcg",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00003vsjaSS8VF",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_0000452Ztd26fE",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00005BpdbIKaRd",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00006lgAACTP9g",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00007OHafUozD1",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00008ndTdtdD5G",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00009mSoyPstUe",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00010RL9OaYsP6",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_000110fAraVNqT",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_000123X13npgW2",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00013RxcDm4vY2",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_000148l7qgATtL",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00015Put0Sstzy",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00016JOCBnD3Xk",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00017VC2JSxyjQ",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_000189K63LSFZH",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00019u3ejxjnzu",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_0002007zUHLnnB",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00021lquCu2r6A",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00022hPInRVkLU",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00023MgV0Lh8Wv",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00024GOM5WCZKt",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00025qrK2IGloz",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_000269IvCtoStU",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00027sRhcds6NU",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00028QjY6fpIzK",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00029jkeaBKsoR",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00030ektUJrhQR",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00031UDO4lKNEf",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00032u8zF9OHzl",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00033azn0h6Oj5",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00034FYrsK9EjH",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00035RYxPY8EcF",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00036QO001xtSV",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_000374cXsxjGJX",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00038BvKNAp0mx",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00039MQSOZM4Ot",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00040ZpZDYUvh7",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00041PPKY6gob2",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00042oHyx6RHKT",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00043Ndr86ZfnN",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_000441iipkObaW",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00045cW1GC7dDy",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00046LgR0OVSnB",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00047ffTYIKIuh",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00048vIhroAIVM",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00049yiNbUnAvw",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00050qUhArQEPc",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00051RFZXe1cb5",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00052gBye1UnWe",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00053Ve6MCIJQ2",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00054CcwrN8fKx",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      },
+      {
+        "record_key": "pay_00055Z8fOcR9GL",
+        "engine_status": "matched",
+        "engine_rule": "R1.1_exact_three_way",
+        "engine_confidence": "HIGH",
+        "manifest_status": "matched",
+        "manifest_confidence": "HIGH",
+        "agreement": "MATCH_OK"
+      }
+    ]
   },
-  "headline": {
-    "match_rate": 1.0,
-    "auto_matched": 55,
-    "awaiting_settlement": 0,
-    "orphan_payment": 0,
-    "unresolved_deferred": 0
-  },
-  "matched_class_vs_manifest": {
+  "layered": {
+    "resolved_total": 55,
+    "total": 55,
+    "resolution_rate": 1.0,
+    "layer1_matched": 55,
+    "layer2_recovered": 0,
+    "safety_precision": 1.0,
+    "resolvable_recall": 1.0,
+    "dangerous_false_positives": 0,
+    "dangerous_records": [],
+    "exceptions_flagged_correct": 0,
     "true_positive": 55,
-    "false_positive": 0,
-    "false_negative": 0,
-    "precision": 1.0,
-    "recall": 1.0,
-    "false_positive_records": []
-  },
-  "deferral": {
-    "correct_deferrals": 0,
-    "wrong_deferrals": 0
-  },
-  "rule_counts": {
-    "R1.1_exact_three_way": 55
-  },
-  "confidence_distribution": {
-    "HIGH": 55
-  },
-  "status_distribution": {
-    "matched": 55
-  },
-  "manifest_status_distribution": {
-    "matched": 55
-  },
-  "per_record_diff": [
-    {
-      "record_key": "pay_000015QnuVdYXy",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00002K3yn9Ffcg",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00003vsjaSS8VF",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_0000452Ztd26fE",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00005BpdbIKaRd",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00006lgAACTP9g",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00007OHafUozD1",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00008ndTdtdD5G",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00009mSoyPstUe",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00010RL9OaYsP6",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_000110fAraVNqT",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_000123X13npgW2",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00013RxcDm4vY2",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_000148l7qgATtL",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00015Put0Sstzy",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00016JOCBnD3Xk",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00017VC2JSxyjQ",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_000189K63LSFZH",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00019u3ejxjnzu",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_0002007zUHLnnB",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00021lquCu2r6A",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00022hPInRVkLU",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00023MgV0Lh8Wv",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00024GOM5WCZKt",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00025qrK2IGloz",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_000269IvCtoStU",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00027sRhcds6NU",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00028QjY6fpIzK",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00029jkeaBKsoR",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00030ektUJrhQR",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00031UDO4lKNEf",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00032u8zF9OHzl",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00033azn0h6Oj5",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00034FYrsK9EjH",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00035RYxPY8EcF",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00036QO001xtSV",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_000374cXsxjGJX",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00038BvKNAp0mx",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00039MQSOZM4Ot",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00040ZpZDYUvh7",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00041PPKY6gob2",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00042oHyx6RHKT",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00043Ndr86ZfnN",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_000441iipkObaW",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00045cW1GC7dDy",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00046LgR0OVSnB",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00047ffTYIKIuh",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00048vIhroAIVM",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00049yiNbUnAvw",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00050qUhArQEPc",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00051RFZXe1cb5",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00052gBye1UnWe",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00053Ve6MCIJQ2",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00054CcwrN8fKx",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    },
-    {
-      "record_key": "pay_00055Z8fOcR9GL",
-      "engine_status": "matched",
-      "engine_rule": "R1.1_exact_three_way",
-      "engine_confidence": "HIGH",
-      "manifest_status": "matched",
-      "manifest_confidence": "HIGH",
-      "agreement": "MATCH_OK"
-    }
-  ]
+    "false_negative": 0
+  }
 }

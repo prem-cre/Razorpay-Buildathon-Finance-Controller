@@ -1154,25 +1154,22 @@
   },
   {
     "record_key": "pay_00052bs9M9BjcY",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.3_split_payment_reconstruction",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00052bs9M9BjcY",
       "order": "#3052",
-      "order_total_paise": 369797,
-      "payment_amount_paise": 123266,
-      "order_amount_ok": false,
-      "settlement_id": "setl_00001UKG2WGBZc",
-      "settlement_utr": "HDFC9984342407336",
-      "bank_rows": [
-        4
+      "order_id": "order_00052Wu5fPAvtK",
+      "siblings": [
+        "pay_00052bs9M9BjcY",
+        "pay_00053mxU0gd651",
+        "pay_00054YaRgBbmHm"
       ],
-      "bank_deposit_paise": 2589721,
-      "has_order": true,
-      "utr_in_bank": true,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "reconstructed_gross_paise": 369797,
+      "order_total_paise": 369797,
+      "reason": "3 payments reconstruct order #3052 total"
     }
   },
   {
@@ -1198,23 +1195,22 @@
   },
   {
     "record_key": "pay_00054YaRgBbmHm",
-    "layer": 1,
-    "rule": null,
-    "confidence": "NONE",
-    "match_status": "unresolved",
+    "layer": 2,
+    "rule": "R2.3_split_payment_reconstruction",
+    "confidence": "MEDIUM",
+    "match_status": "matched",
     "evidence": {
       "payment_id": "pay_00054YaRgBbmHm",
-      "order": null,
-      "order_total_paise": null,
-      "payment_amount_paise": 123265,
-      "order_amount_ok": false,
-      "settlement_id": "setl_00002Q4COfFlK3",
-      "settlement_utr": "HDFC9037914872129",
-      "bank_rows": [],
-      "bank_deposit_paise": null,
-      "has_order": false,
-      "utr_in_bank": false,
-      "reason": "no Layer-1 rule matched; deferred to Layer 2/3"
+      "order": "#3052",
+      "order_id": "order_00052Wu5fPAvtK",
+      "siblings": [
+        "pay_00052bs9M9BjcY",
+        "pay_00053mxU0gd651",
+        "pay_00054YaRgBbmHm"
+      ],
+      "reconstructed_gross_paise": 369797,
+      "order_total_paise": 369797,
+      "reason": "3 payments reconstruct order #3052 total"
     }
   },
   {

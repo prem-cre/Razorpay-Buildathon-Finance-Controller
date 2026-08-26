@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Sparkles, RefreshCw, Layers, ShieldCheck, Activity, Bot } from 'lucide-react';
+import { Search, Sparkles, RefreshCw, Layers } from 'lucide-react';
 import { DatasetName, DATASET_META, DATASET_ORDER } from '@/lib/engineData';
 
 interface NavbarProps {
@@ -36,7 +36,7 @@ export function Navbar({
       top: 0,
       zIndex: 30,
     }}>
-      {/* Left: Active Batch Context & Agent Status */}
+      {/* Left: Active Batch Context */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <div style={{
           display: 'flex',
@@ -69,29 +69,6 @@ export function Navbar({
               </option>
             ))}
           </select>
-        </div>
-
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '5px 12px',
-          background: 'var(--status-emerald-bg)',
-          border: '1px solid var(--status-emerald-border)',
-          borderRadius: '999px',
-          fontSize: '11px',
-          fontWeight: 700,
-          color: 'var(--status-emerald)',
-        }}>
-          <span style={{
-            width: '7px',
-            height: '7px',
-            borderRadius: '50%',
-            background: 'var(--status-emerald)',
-            boxShadow: '0 0 6px rgba(5, 150, 105, 0.5)',
-            animation: 'pulseGlow 2s infinite',
-          }} />
-          <span>Agent Engine Online (0.4ms)</span>
         </div>
       </div>
 
