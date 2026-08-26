@@ -5,73 +5,77 @@ import {
   AlertCircle,
   BarChart3,
   UploadCloud,
-  ShieldCheck,
-  Zap,
+  Cpu,
+  Bot,
 } from 'lucide-react';
+import { ReconciliationBatchSummary } from '@/types/reconciliation';
 
 export type NavTab = 'dashboard' | 'reconciliation' | 'exceptions' | 'evaluation' | 'ingest';
 
 interface SidebarProps {
   activeTab: NavTab;
   onTabChange: (tab: NavTab) => void;
-  exceptionCount: number;
-  totalRecordsCount: number;
+  summary: ReconciliationBatchSummary;
 }
 
-export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCount }: SidebarProps) {
+export function Sidebar({ activeTab, onTabChange, summary }: SidebarProps) {
+  const exceptionCount = summary.exceptions_count;
   const navItems = [
-    { id: 'dashboard' as NavTab, label: 'Executive Radar', icon: LayoutDashboard, badge: null },
-    { id: 'reconciliation' as NavTab, label: '3-Way Recon Grid', icon: TableProperties, badge: totalRecordsCount.toString() },
-    { id: 'exceptions' as NavTab, label: 'Exception Queue', icon: AlertCircle, badge: exceptionCount > 0 ? exceptionCount.toString() : null, isAlert: true },
-    { id: 'evaluation' as NavTab, label: 'Model Benchmarks', icon: BarChart3, badge: '98.1%' },
-    { id: 'ingest' as NavTab, label: 'Data Ingestion', icon: UploadCloud, badge: '3/3' },
+    { id: 'dashboard' as NavTab, label: 'Overview', icon: LayoutDashboard, badge: null as string | null, isAlert: false },
+    { id: 'reconciliation' as NavTab, label: 'Reconciliation', icon: TableProperties, badge: summary.total_records.toString(), isAlert: false },
+    { id: 'exceptions' as NavTab, label: 'Exceptions', icon: AlertCircle, badge: exceptionCount > 0 ? exceptionCount.toString() : null, isAlert: true },
+    { id: 'evaluation' as NavTab, label: 'Evaluation', icon: BarChart3, badge: `${summary.evaluation.precision_pct}%`, isAlert: false },
+    { id: 'ingest' as NavTab, label: 'Data Sources', icon: UploadCloud, badge: '3/3', isAlert: false },
   ];
 
   return (
     <aside style={{
-      width: '240px',
+      width: '260px',
       height: '100vh',
-      background: 'var(--surface-primary)',
+      background: '#ffffff',
       borderRight: '1px solid var(--border-subtle)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      padding: '20px 16px',
+      padding: '24px 18px',
       userSelect: 'none',
       flexShrink: 0,
+      boxShadow: 'var(--shadow-subtle)',
     }}>
-      {/* Brand Identity */}
       <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '0 8px 24px 8px' }}>
+        {/* Brand */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '0 8px 28px 8px' }}>
           <div style={{
-            width: '32px',
-            height: '32px',
+            width: '36px',
+            height: '36px',
             borderRadius: 'var(--radius-md)',
-            background: 'linear-gradient(135deg, #0c66e4 0%, #0052cc 100%)',
+            background: 'linear-gradient(135deg, #0c66e4 0%, #7c3aed 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#fff',
-            boxShadow: '0 4px 12px rgba(12, 102, 228, 0.3)',
+            color: '#ffffff',
+            boxShadow: '0 2px 8px rgba(12, 102, 228, 0.3)',
           }}>
-            <Zap size={18} />
+            <Bot size={20} />
           </div>
           <div>
-            <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
-              RazorpayX
+            <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
+              ReconBot
             </div>
-            <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--rzp-blue)' }}>
-              Finance Controller AI
+            <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--rzp-purple)' }}>
+              Finance Controller Agent
             </div>
           </div>
         </div>
 
-        {/* Navigation Items */}
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', padding: '0 12px 10px 12px' }}>
+          Workspace
+        </div>
+
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
-
             return (
               <button
                 key={item.id}
@@ -81,7 +85,7 @@ export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCo
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   width: '100%',
-                  padding: '9px 12px',
+                  padding: '10px 14px',
                   borderRadius: 'var(--radius-md)',
                   background: isActive ? 'var(--rzp-blue-subtle)' : 'transparent',
                   border: isActive ? '1px solid var(--rzp-blue-border)' : '1px solid transparent',
@@ -90,6 +94,7 @@ export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCo
                   fontWeight: isActive ? 700 : 500,
                   cursor: 'pointer',
                   textAlign: 'left',
+                  boxShadow: isActive ? '0 1px 3px rgba(12, 102, 228, 0.08)' : 'none',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
@@ -108,7 +113,6 @@ export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCo
                   <Icon size={16} style={{ color: isActive ? 'var(--rzp-blue)' : 'var(--text-muted)' }} />
                   <span>{item.label}</span>
                 </div>
-
                 {item.badge && (
                   <span
                     className='tabular-mono'
@@ -131,19 +135,39 @@ export function Sidebar({ activeTab, onTabChange, exceptionCount, totalRecordsCo
         </nav>
       </div>
 
-      {/* Engine Status Footer */}
+      {/* Engine architecture — honest layer status */}
       <div style={{
-        padding: '14px',
+        padding: '16px',
         borderRadius: 'var(--radius-lg)',
         background: 'var(--surface-canvas)',
         border: '1px solid var(--border-subtle)',
+        boxShadow: 'var(--shadow-subtle)',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-          <ShieldCheck size={16} style={{ color: 'var(--status-emerald)' }} />
-          <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)' }}>Engine Integrity</span>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Cpu size={14} style={{ color: 'var(--rzp-blue)' }} />
+            <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Engine Layers
+            </span>
+          </div>
+          <span className='tabular-mono' style={{ fontSize: '10px', color: 'var(--status-emerald)', fontWeight: 700 }}>
+            {summary.evaluation.precision_pct}% precision
+          </span>
         </div>
-        <div style={{ fontSize: '11px', color: 'var(--text-muted)', lineHeight: '1.4' }}>
-          Deterministic layer: <strong>100% precision</strong>. Zero-hallucination boundary.
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '11px', color: 'var(--text-secondary)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>L1 Deterministic</span>
+            <strong className='tabular-mono' style={{ color: 'var(--text-primary)' }}>{summary.auto_matched_count} matched</strong>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>L2 Fuzzy</span>
+            <strong style={{ color: 'var(--text-muted)', fontWeight: 600 }}>planned</strong>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>L3 LLM triage</span>
+            <strong style={{ color: 'var(--text-muted)', fontWeight: 600 }}>planned</strong>
+          </div>
         </div>
       </div>
     </aside>

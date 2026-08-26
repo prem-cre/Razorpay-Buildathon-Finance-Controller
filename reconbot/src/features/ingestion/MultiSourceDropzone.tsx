@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { UploadCloud, CheckCircle2, FileText, Database, ShieldAlert, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { UploadCloud, CheckCircle2, FileText, Database, ShieldAlert, ArrowRight, Bot, Cpu } from 'lucide-react';
 
 interface DataSourceCard {
   id: string;
@@ -49,7 +49,7 @@ export function MultiSourceDropzone() {
           <div
             key={src.id}
             style={{
-              background: 'var(--surface-primary)',
+              background: '#ffffff',
               border: '1px solid var(--border-subtle)',
               borderRadius: 'var(--radius-xl)',
               padding: '24px',
@@ -60,16 +60,17 @@ export function MultiSourceDropzone() {
             }}
           >
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
                 <div style={{
-                  width: '36px',
-                  height: '36px',
+                  width: '38px',
+                  height: '38px',
                   borderRadius: 'var(--radius-md)',
                   background: 'var(--rzp-blue-subtle)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: 'var(--rzp-blue)',
+                  border: '1px solid var(--rzp-blue-border)',
                 }}>
                   <Database size={18} />
                 </div>
@@ -77,7 +78,7 @@ export function MultiSourceDropzone() {
                   style={{
                     fontSize: '11px',
                     fontWeight: 700,
-                    padding: '3px 8px',
+                    padding: '3px 9px',
                     borderRadius: '999px',
                     background: 'var(--status-emerald-bg)',
                     color: 'var(--status-emerald)',
@@ -99,7 +100,7 @@ export function MultiSourceDropzone() {
               </p>
             </div>
 
-            <div style={{ marginTop: '20px', paddingTop: '14px', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ marginTop: '22px', paddingTop: '14px', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <span className='tabular-mono' style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
                 {src.recordCount} records loaded
               </span>
@@ -111,32 +112,34 @@ export function MultiSourceDropzone() {
 
       {/* Dropzone Area */}
       <div style={{
-        background: 'var(--surface-primary)',
+        background: '#ffffff',
         border: '2px dashed var(--border-default)',
         borderRadius: 'var(--radius-xl)',
-        padding: '40px 24px',
+        padding: '44px 24px',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '12px',
+        gap: '14px',
         cursor: 'pointer',
+        boxShadow: 'var(--shadow-card)',
       }}>
         <div style={{
-          width: '48px',
-          height: '48px',
+          width: '52px',
+          height: '52px',
           borderRadius: '50%',
           background: 'var(--rzp-blue-subtle)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           color: 'var(--rzp-blue)',
+          border: '1px solid var(--rzp-blue-border)',
         }}>
           <UploadCloud size={24} />
         </div>
         <div>
-          <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>
+          <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
             Drag and drop custom settlement files or MT940 statements
           </div>
           <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
@@ -145,9 +148,9 @@ export function MultiSourceDropzone() {
         </div>
         <button style={{
           marginTop: '6px',
-          padding: '8px 18px',
-          background: 'var(--surface-canvas)',
-          border: '1px solid var(--border-default)',
+          padding: '10px 20px',
+          background: 'var(--surface-interactive)',
+          border: '1px solid var(--border-strong)',
           borderRadius: 'var(--radius-md)',
           fontSize: '12px',
           fontWeight: 700,

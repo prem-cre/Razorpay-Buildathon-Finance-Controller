@@ -1,0 +1,20 @@
+{
+  "clean": {
+    "dataset_name": "Clean Production Baseline",
+    "match_rate": 100.0,
+    "precision": 100.0,
+    "records": 55
+  },
+  "messy": {
+    "dataset_name": "Messy Realistic Batch",
+    "match_rate": 20.5,
+    "precision": 100.0,
+    "records": 83
+  },
+  "adversarial": {
+    "dataset_name": "Adversarial Held-Out Stress Batch",
+    "match_rate": 68.3,
+    "precision": 100.0,
+    "records": 60
+  }
+}

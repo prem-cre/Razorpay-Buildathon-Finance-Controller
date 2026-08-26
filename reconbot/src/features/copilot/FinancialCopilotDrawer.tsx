@@ -67,39 +67,42 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
     <div style={{
       position: 'fixed',
       inset: 0,
-      background: 'rgba(9, 13, 20, 0.4)',
-      backdropFilter: 'blur(6px)',
+      background: 'rgba(15, 23, 42, 0.35)',
+      backdropFilter: 'blur(8px)',
+      WebkitBackdropFilter: 'blur(8px)',
       zIndex: 50,
       display: 'flex',
       justifyContent: 'flex-end',
     }}>
       <div style={{
-        width: '520px',
+        width: '540px',
         height: '100%',
-        background: 'var(--surface-primary)',
+        background: '#ffffff',
         borderLeft: '1px solid var(--border-subtle)',
         boxShadow: 'var(--shadow-drawer)',
         display: 'flex',
         flexDirection: 'column',
-        padding: '24px',
+        padding: '28px',
+        animation: 'slideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
       }}>
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '16px', borderBottom: '1px solid var(--border-subtle)', marginBottom: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '18px', borderBottom: '1px solid var(--border-subtle)', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{
-              width: '32px',
-              height: '32px',
+              width: '36px',
+              height: '36px',
               borderRadius: 'var(--radius-md)',
               background: 'linear-gradient(135deg, #7c3aed 0%, #0c66e4 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#ffffff',
+              boxShadow: '0 2px 8px rgba(124, 58, 237, 0.3)',
             }}>
-              <Sparkles size={16} />
+              <Sparkles size={18} />
             </div>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>
+              <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
                 Ray Financial Copilot
               </div>
               <div style={{ fontSize: '11px', color: 'var(--status-emerald)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -112,7 +115,7 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
           <button
             onClick={onClose}
             style={{
-              background: 'var(--surface-canvas)',
+              background: 'var(--surface-interactive)',
               border: '1px solid var(--border-default)',
               borderRadius: 'var(--radius-md)',
               padding: '6px',
@@ -130,15 +133,15 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
             <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: m.role === 'user' ? 'flex-end' : 'flex-start' }}>
               <div style={{
                 maxWidth: '88%',
-                padding: '12px 16px',
+                padding: '14px 18px',
                 borderRadius: 'var(--radius-lg)',
-                background: m.role === 'user' ? 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)' : 'var(--surface-canvas)',
+                background: m.role === 'user' ? 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)' : '#f8fafc',
                 color: m.role === 'user' ? '#ffffff' : 'var(--text-primary)',
-                border: m.role === 'user' ? 'none' : '1px solid var(--border-subtle)',
+                border: m.role === 'user' ? '1px solid rgba(12, 102, 228, 0.4)' : '1px solid var(--border-subtle)',
                 fontSize: '13px',
-                lineHeight: '1.5',
+                lineHeight: '1.6',
                 whiteSpace: 'pre-line',
-                boxShadow: m.role === 'user' ? '0 2px 8px rgba(12, 102, 228, 0.2)' : 'none',
+                boxShadow: m.role === 'user' ? '0 2px 8px rgba(12, 102, 228, 0.25)' : 'var(--shadow-subtle)',
               }}>
                 {m.content}
               </div>
@@ -152,9 +155,9 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
                   display: 'flex',
                   alignItems: 'center',
                   gap: '4px',
-                  fontWeight: 600,
+                  fontWeight: 700,
                 }}>
-                  <ShieldCheck size={11} /> {m.source_citation}
+                  <ShieldCheck size={12} /> {m.source_citation}
                 </div>
               )}
             </div>
@@ -162,7 +165,7 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
         </div>
 
         {/* Suggestion Chips */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', margin: '14px 0 10px 0' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', margin: '16px 0 12px 0' }}>
           {sampleChips.map((chip, idx) => (
             <button
               key={idx}
@@ -170,12 +173,21 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
               style={{
                 fontSize: '11px',
                 fontWeight: 600,
-                background: 'var(--surface-canvas)',
+                background: '#ffffff',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: '999px',
-                padding: '4px 10px',
+                padding: '5px 12px',
                 color: 'var(--text-secondary)',
                 cursor: 'pointer',
+                boxShadow: 'var(--shadow-subtle)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--rzp-purple)';
+                e.currentTarget.style.color = 'var(--rzp-purple)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                e.currentTarget.style.color = 'var(--text-secondary)';
               }}
             >
               {chip}
@@ -184,7 +196,7 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
         </div>
 
         {/* Input Form */}
-        <div style={{ display: 'flex', gap: '8px', position: 'relative' }}>
+        <div style={{ display: 'flex', gap: '10px', position: 'relative' }}>
           <input
             type='text'
             placeholder='Ask about missing UTRs, fee calculations, or suspense accounts...'
@@ -193,33 +205,42 @@ export function FinancialCopilotDrawer({ isOpen, onClose }: FinancialCopilotDraw
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             style={{
               flex: 1,
-              height: '42px',
-              background: 'var(--surface-canvas)',
+              height: '44px',
+              background: '#ffffff',
               border: '1px solid var(--border-default)',
               borderRadius: 'var(--radius-md)',
-              padding: '0 14px',
+              padding: '0 16px',
               fontSize: '13px',
               color: 'var(--text-primary)',
               outline: 'none',
+              boxShadow: 'var(--shadow-subtle)',
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = 'var(--rzp-purple)';
+              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(139, 92, 246, 0.15)';
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = 'var(--border-default)';
+              e.currentTarget.style.boxShadow = 'var(--shadow-subtle)';
             }}
           />
           <button
             onClick={handleSend}
             style={{
-              width: '42px',
-              height: '42px',
-              background: 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)',
-              border: '1px solid rgba(12, 102, 228, 0.4)',
+              width: '44px',
+              height: '44px',
+              background: 'linear-gradient(180deg, #7c3aed 0%, #0c66e4 100%)',
+              border: '1px solid rgba(139, 92, 246, 0.4)',
               borderRadius: 'var(--radius-md)',
               color: '#ffffff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(12, 102, 228, 0.25)',
+              boxShadow: '0 2px 8px rgba(124, 58, 237, 0.25)',
             }}
           >
-            <Send size={15} />
+            <Send size={16} />
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, ArrowUpRight, TrendingUp, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight, TrendingUp, AlertTriangle, CheckCircle2, Bot, Sparkles } from 'lucide-react';
 import { formatCompactPaise, formatPaiseToINR } from '@/lib/money';
 import { ReconciliationBatchSummary } from '@/types/reconciliation';
 
@@ -15,53 +15,67 @@ export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps)
 
   return (
     <div style={{ marginBottom: '28px' }}>
-      {/* Editorial Section Headline */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
+      {/* Studio Header */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '20px' }}>
         <div>
-          <div style={{ fontSize: '11px', fontWeight: 800, color: 'var(--rzp-blue)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            Autonomous Multi-Source Reconciliation
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--rzp-blue)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+              Razorpay Agent Studio · Revenue Operations
+            </span>
+            <span style={{
+              fontSize: '10px',
+              padding: '2px 8px',
+              borderRadius: '999px',
+              background: 'var(--rzp-purple-subtle)',
+              color: 'var(--rzp-purple)',
+              border: '1px solid var(--status-violet-border)',
+              fontWeight: 700,
+            }}>
+              AGENT ENGINE V3
+            </span>
           </div>
-          <h1 style={{ fontSize: '28px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', margin: '4px 0 0 0' }}>
-            Executive Reconciliation Radar
+          <h1 style={{ fontSize: '32px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', margin: 0 }}>
+            Autonomous <span className='serif-accent' style={{ color: 'var(--rzp-blue)' }}>Multi-Source</span> Reconciliation
           </h1>
         </div>
+
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: '8px',
-          padding: '6px 12px',
-          background: 'var(--surface-primary)',
-          border: '1px solid var(--border-default)',
+          padding: '8px 16px',
+          background: '#ffffff',
+          border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
           boxShadow: 'var(--shadow-subtle)',
         }}>
-          <CheckCircle2 size={14} style={{ color: 'var(--status-emerald)' }} />
+          <Bot size={16} style={{ color: 'var(--rzp-blue)' }} />
           <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-            Batch evaluated: <strong style={{ color: 'var(--text-primary)' }}>{summary.total_records} records</strong>
+            Batch Evaluated: <strong style={{ color: 'var(--text-primary)' }}>{summary.total_records} transactions</strong>
           </span>
         </div>
       </div>
 
-      {/* Asymmetric Metric Grid */}
+      {/* Asymmetrical 4-Card Hero Grid */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1.5fr 1fr 1fr 1fr',
         gap: '16px',
       }}>
-        {/* Main 64px Hero Anchor Card */}
+        {/* 64px Match Rate Hero Anchor */}
         <div style={{
-          background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 246, 255, 0.75) 100%)',
-          border: '1px solid var(--border-accent)',
+          background: 'linear-gradient(145deg, #eff6ff 0%, #f5f3ff 50%, #ffffff 100%)',
+          border: '1px solid var(--rzp-blue-border)',
           borderRadius: 'var(--radius-xl)',
-          padding: '24px',
-          boxShadow: 'var(--shadow-card)',
+          padding: '24px 26px',
+          boxShadow: 'var(--shadow-card), var(--shadow-glow-blue)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           position: 'relative',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 700, color: 'var(--rzp-blue)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 800, color: 'var(--rzp-blue)' }}>
               <ShieldCheck size={18} />
               <span>Autonomous Match Rate</span>
             </div>
@@ -74,13 +88,13 @@ export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps)
               borderRadius: '999px',
               fontWeight: 700,
             }} className='tabular-mono'>
-              L1 Exact + L2 Fuzzy
+              Layer 1 Exact + Layer 2 Fuzzy
             </span>
           </div>
 
           <div style={{ margin: '18px 0 14px 0' }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
-              <div className='tabular-mono' style={{ fontSize: '56px', fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--text-primary)', lineHeight: 1 }}>
+              <div className='tabular-mono' style={{ fontSize: '64px', fontWeight: 900, letterSpacing: '-0.04em', color: 'var(--text-primary)', lineHeight: 1 }}>
                 {autoRate}%
               </div>
               <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500 }}>
@@ -88,8 +102,8 @@ export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps)
               </div>
             </div>
 
-            {/* Restrained Precision Track */}
-            <div style={{ height: '7px', background: 'var(--surface-interactive)', borderRadius: '999px', overflow: 'hidden', display: 'flex', marginTop: '16px' }}>
+            {/* Glowing Segmented Precision Track */}
+            <div style={{ height: '8px', background: '#e2e8f0', borderRadius: '999px', overflow: 'hidden', display: 'flex', marginTop: '16px' }}>
               <div style={{ width: autoRate + '%', background: 'var(--status-emerald)' }} title={'Deterministic Exact: ' + autoRate + '%'} />
               <div style={{ width: fuzzyRate + '%', background: 'var(--status-amber)' }} title={'Fuzzy Heuristics: ' + fuzzyRate + '%'} />
               <div style={{ width: exceptionRate + '%', background: 'var(--status-rose)' }} title={'Exceptions: ' + exceptionRate + '%'} />
@@ -105,13 +119,13 @@ export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps)
                 <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--status-amber)' }} /> Fuzzy: {summary.fuzzy_matched_count}
               </span>
             </div>
-            <span className='tabular-mono' style={{ color: 'var(--status-emerald)', fontWeight: 700 }}>+2.4% vs last cycle</span>
+            <span className='tabular-mono' style={{ color: 'var(--status-emerald)', fontWeight: 700 }}>+2.4% vs benchmark</span>
           </div>
         </div>
 
         {/* Metric 2: Reconciled Volume */}
         <div style={{
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-xl)',
           padding: '24px',
@@ -137,9 +151,9 @@ export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps)
           </div>
         </div>
 
-        {/* Metric 3: Value at Risk / Suspense */}
+        {/* Metric 3: Value at Risk (Suspense) */}
         <div style={{
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: summary.value_at_risk_paise > 0 ? '1px solid var(--status-amber-border)' : '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-xl)',
           padding: '24px',
@@ -180,9 +194,9 @@ export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps)
           </button>
         </div>
 
-        {/* Metric 4: Precision Guarantee */}
+        {/* Metric 4: Precision Target */}
         <div style={{
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-xl)',
           padding: '24px',
@@ -195,12 +209,13 @@ export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps)
             <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)' }}>Model Precision</span>
             <span style={{
               fontSize: '11px',
-              background: 'var(--surface-interactive)',
+              background: 'var(--rzp-purple-subtle)',
               padding: '2px 8px',
               borderRadius: '6px',
-              color: 'var(--text-secondary)',
+              color: 'var(--rzp-purple)',
               fontFamily: 'var(--font-mono)',
-              fontWeight: 600,
+              fontWeight: 700,
+              border: '1px solid var(--status-violet-border)',
             }}>
               F1: {summary.evaluation.f1_score}
             </span>

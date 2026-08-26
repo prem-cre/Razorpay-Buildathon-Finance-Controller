@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'RazorpayX Finance Controller | Multi-Source Autonomous Reconciliation',
-  description: 'AI-Powered Multi-Source Financial Reconciliation Engine',
+  title: 'Razorpay Agent Studio | Autonomous Multi-Source Financial Reconciliation Engine',
+  description: 'Deploy AI agents that monitor payments, match multi-source ledgers, triage fee drifts, and automate financial operations.',
 };
 
 export default function RootLayout({
@@ -16,8 +16,7 @@ export default function RootLayout({
       <head>
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
-        <link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700' rel='stylesheet' />
-        <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800' rel='stylesheet' />
+        <link href='https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap' rel='stylesheet' />
       </head>
       <body>
         {children}

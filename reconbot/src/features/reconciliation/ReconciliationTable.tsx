@@ -13,7 +13,7 @@ interface ReconciliationTableProps {
 export function ReconciliationTable({ records, selectedRecordId, onSelectRecord }: ReconciliationTableProps) {
   return (
     <div style={{
-      background: 'var(--surface-primary)',
+      background: '#ffffff',
       border: '1px solid var(--border-subtle)',
       borderRadius: 'var(--radius-xl)',
       boxShadow: 'var(--shadow-card)',
@@ -23,7 +23,7 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
           <thead>
             <tr style={{
-              background: 'var(--surface-canvas)',
+              background: '#f8fafc',
               borderBottom: '1px solid var(--border-subtle)',
               color: 'var(--text-muted)',
               fontSize: '11px',
@@ -34,16 +34,16 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
               top: 0,
               zIndex: 10,
             }}>
-              <th style={{ padding: '14px 18px' }}>Status & Match Rule</th>
-              <th style={{ padding: '14px 18px' }}>Payment ID / Order</th>
-              <th style={{ padding: '14px 18px' }}>Merchant / Method</th>
-              <th style={{ padding: '14px 18px', textAlign: 'right' }}>Order Gross</th>
-              <th style={{ padding: '14px 18px', textAlign: 'right' }}>Fee + GST</th>
-              <th style={{ padding: '14px 18px', textAlign: 'right' }}>Expected Net</th>
-              <th style={{ padding: '14px 18px', textAlign: 'right' }}>Bank Deposit</th>
-              <th style={{ padding: '14px 18px', textAlign: 'right' }}>Variance (Delta)</th>
-              <th style={{ padding: '14px 18px' }}>Bank UTR Link</th>
-              <th style={{ padding: '14px 18px', textAlign: 'center' }}>Inspect</th>
+              <th style={{ padding: '16px 20px' }}>Status & Match Rule</th>
+              <th style={{ padding: '16px 20px' }}>Payment ID / Order</th>
+              <th style={{ padding: '16px 20px' }}>Merchant / Method</th>
+              <th style={{ padding: '16px 20px', textAlign: 'right' }}>Order Gross</th>
+              <th style={{ padding: '16px 20px', textAlign: 'right' }}>Fee + GST</th>
+              <th style={{ padding: '16px 20px', textAlign: 'right' }}>Expected Net</th>
+              <th style={{ padding: '16px 20px', textAlign: 'right' }}>Bank Deposit</th>
+              <th style={{ padding: '16px 20px', textAlign: 'right' }}>Variance (Delta)</th>
+              <th style={{ padding: '16px 20px' }}>Bank UTR Link</th>
+              <th style={{ padding: '16px 20px', textAlign: 'center' }}>Inspect</th>
             </tr>
           </thead>
           <tbody>
@@ -69,18 +69,18 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
                   onClick={() => onSelectRecord(r)}
                   style={{
                     borderBottom: '1px solid var(--border-subtle)',
-                    background: isSelected ? 'rgba(12, 102, 228, 0.05)' : 'transparent',
+                    background: isSelected ? 'var(--rzp-blue-subtle)' : 'transparent',
                     cursor: 'pointer',
-                    transition: 'background 0.12s ease',
+                    transition: 'all 0.12s ease',
                   }}
                   onMouseEnter={(e) => {
-                    if (!isSelected) e.currentTarget.style.background = 'rgba(0, 0, 0, 0.015)';
+                    if (!isSelected) e.currentTarget.style.background = '#f8fafc';
                   }}
                   onMouseLeave={(e) => {
                     if (!isSelected) e.currentTarget.style.background = 'transparent';
                   }}
                 >
-                  <td style={{ padding: '14px 18px' }}>
+                  <td style={{ padding: '16px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {isMatched && <CheckCircle2 size={14} style={{ color: 'var(--status-emerald)' }} />}
                       {isTiming && <Clock size={14} style={{ color: 'var(--status-violet)' }} />}
@@ -93,7 +93,7 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
                         style={{
                           fontSize: '11px',
                           fontWeight: 700,
-                          padding: '3px 8px',
+                          padding: '3px 9px',
                           borderRadius: '999px',
                           background: isMatched
                             ? 'var(--status-emerald-bg)'
@@ -117,7 +117,7 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
                     </div>
                   </td>
 
-                  <td style={{ padding: '14px 18px' }}>
+                  <td style={{ padding: '16px 20px' }}>
                     <div className='tabular-mono' style={{ fontWeight: 700, color: 'var(--text-primary)' }}>
                       {formatTruncatedId(r.payment_id, 8, 4)}
                     </div>
@@ -126,53 +126,53 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
                     </div>
                   </td>
 
-                  <td style={{ padding: '14px 18px' }}>
+                  <td style={{ padding: '16px 20px' }}>
                     <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{r.merchant_customer}</div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 500 }}>
                       {r.payment_method}
                     </div>
                   </td>
 
-                  <td className='tabular-mono' style={{ padding: '14px 18px', textAlign: 'right', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  <td className='tabular-mono' style={{ padding: '16px 20px', textAlign: 'right', fontWeight: 700, color: 'var(--text-primary)' }}>
                     {formatPaiseToINR(r.gross_paise)}
                   </td>
 
-                  <td className='tabular-mono' style={{ padding: '14px 18px', textAlign: 'right', color: 'var(--text-muted)' }}>
+                  <td className='tabular-mono' style={{ padding: '16px 20px', textAlign: 'right', color: 'var(--text-muted)' }}>
                     {formatPaiseToINR(r.fee_paise + r.tax_paise)}
                   </td>
 
-                  <td className='tabular-mono' style={{ padding: '14px 18px', textAlign: 'right', color: 'var(--rzp-blue)', fontWeight: 700 }}>
+                  <td className='tabular-mono' style={{ padding: '16px 20px', textAlign: 'right', color: 'var(--rzp-blue)', fontWeight: 700 }}>
                     {formatPaiseToINR(r.net_paise)}
                   </td>
 
-                  <td className='tabular-mono' style={{ padding: '14px 18px', textAlign: 'right', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  <td className='tabular-mono' style={{ padding: '16px 20px', textAlign: 'right', fontWeight: 700, color: 'var(--text-primary)' }}>
                     {r.bank_credit_paise === 0 ? '—' : formatPaiseToINR(r.bank_credit_paise)}
                   </td>
 
-                  <td className='tabular-mono' style={{ padding: '14px 18px', textAlign: 'right', fontWeight: 800, color: r.variance_paise === 0 ? 'var(--status-emerald)' : 'var(--status-amber)' }}>
+                  <td className='tabular-mono' style={{ padding: '16px 20px', textAlign: 'right', fontWeight: 800, color: r.variance_paise === 0 ? 'var(--status-emerald)' : 'var(--status-amber)' }}>
                     {formatPaiseDelta(r.variance_paise)}
                   </td>
 
-                  <td style={{ padding: '14px 18px' }}>
+                  <td style={{ padding: '16px 20px' }}>
                     <div className='tabular-mono' style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 600 }}>
                       {formatTruncatedId(r.bank_utr, 6, 6)}
                     </div>
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{r.clearing_date}</div>
                   </td>
 
-                  <td style={{ padding: '14px 18px', textAlign: 'center' }}>
+                  <td style={{ padding: '16px 20px', textAlign: 'center' }}>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         onSelectRecord(r);
                       }}
                       style={{
-                        background: 'var(--surface-canvas)',
+                        background: '#ffffff',
                         border: '1px solid var(--border-default)',
                         borderRadius: 'var(--radius-sm)',
-                        padding: '5px 10px',
+                        padding: '5px 12px',
                         fontSize: '11px',
-                        fontWeight: 600,
+                        fontWeight: 700,
                         color: 'var(--text-primary)',
                         cursor: 'pointer',
                         display: 'inline-flex',
@@ -183,10 +183,12 @@ export function ReconciliationTable({ records, selectedRecordId, onSelectRecord 
                       onMouseEnter={(e) => {
                         e.currentTarget.style.borderColor = 'var(--rzp-blue)';
                         e.currentTarget.style.color = 'var(--rzp-blue)';
+                        e.currentTarget.style.boxShadow = '0 0 10px rgba(12, 102, 228, 0.2)';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.borderColor = 'var(--border-default)';
                         e.currentTarget.style.color = 'var(--text-primary)';
+                        e.currentTarget.style.boxShadow = 'var(--shadow-subtle)';
                       }}
                     >
                       Audit <ChevronRight size={12} />

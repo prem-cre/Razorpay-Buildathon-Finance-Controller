@@ -49,6 +49,9 @@ export interface AuditRecord {
   };
   llm_reasoning: string | null;
   timestamp: string;
+  /** Manifest ground-truth category — a Layer 2/3 target, NOT something Layer 1 diagnosed. */
+  ground_truth_category?: ExceptionCategory | 'matched' | null;
+  injected_defect?: string | null;
 }
 
 export interface ReconciledRecordView {
@@ -71,6 +74,9 @@ export interface ReconciledRecordView {
   confidence_score: number;
   match_status: MatchStatus;
   exception_category: ExceptionCategory | null;
+  /** Manifest ground-truth category (null when truly matched). Clearly a Layer 2/3 target. */
+  ground_truth_category?: ExceptionCategory | null;
+  injected_defect?: string | null;
   reasoning: string;
   audit_record: AuditRecord;
 }

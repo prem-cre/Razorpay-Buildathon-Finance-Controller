@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Award, AlertOctagon, CheckCircle2, TrendingUp, Cpu, Lock } from 'lucide-react';
+import { ShieldCheck, Award, AlertOctagon, CheckCircle2, TrendingUp, Cpu, Lock, Bot } from 'lucide-react';
 import { ReconciliationBatchSummary } from '@/types/reconciliation';
 import { formatPaiseToINR } from '@/lib/money';
 
@@ -22,7 +22,7 @@ export function EvaluationSummary({ summary }: EvaluationSummaryProps) {
       {/* 4-Card Benchmark Hero */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
         <div style={{
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-xl)',
           padding: '24px',
@@ -41,7 +41,7 @@ export function EvaluationSummary({ summary }: EvaluationSummaryProps) {
         </div>
 
         <div style={{
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-xl)',
           padding: '24px',
@@ -60,7 +60,7 @@ export function EvaluationSummary({ summary }: EvaluationSummaryProps) {
         </div>
 
         <div style={{
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-xl)',
           padding: '24px',
@@ -79,7 +79,7 @@ export function EvaluationSummary({ summary }: EvaluationSummaryProps) {
         </div>
 
         <div style={{
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-xl)',
           padding: '24px',
@@ -100,14 +100,14 @@ export function EvaluationSummary({ summary }: EvaluationSummaryProps) {
 
       {/* Adversarial Defect Benchmark Table */}
       <div style={{
-        background: 'var(--surface-primary)',
+        background: '#ffffff',
         border: '1px solid var(--border-subtle)',
         borderRadius: 'var(--radius-xl)',
         boxShadow: 'var(--shadow-card)',
         overflow: 'hidden',
       }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border-subtle)' }}>
-          <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>
+        <div style={{ padding: '22px 28px', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
             Adversarial Anomaly Stress Matrix (50 Injected Defects)
           </div>
           <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
@@ -117,28 +117,28 @@ export function EvaluationSummary({ summary }: EvaluationSummaryProps) {
 
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
           <thead>
-            <tr style={{ background: 'var(--surface-canvas)', borderBottom: '1px solid var(--border-subtle)', color: 'var(--text-muted)', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase' }}>
-              <th style={{ padding: '12px 24px' }}>Defect Category</th>
-              <th style={{ padding: '12px 24px' }}>Target Rule</th>
-              <th style={{ padding: '12px 24px', textAlign: 'center' }}>Injected</th>
-              <th style={{ padding: '12px 24px', textAlign: 'center' }}>Detected</th>
-              <th style={{ padding: '12px 24px', textAlign: 'right' }}>Precision</th>
-              <th style={{ padding: '12px 24px', textAlign: 'center' }}>Benchmark Gate</th>
+            <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-subtle)', color: 'var(--text-muted)', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase' }}>
+              <th style={{ padding: '14px 28px' }}>Defect Category</th>
+              <th style={{ padding: '14px 28px' }}>Target Rule</th>
+              <th style={{ padding: '14px 28px', textAlign: 'center' }}>Injected</th>
+              <th style={{ padding: '14px 28px', textAlign: 'center' }}>Detected</th>
+              <th style={{ padding: '14px 28px', textAlign: 'right' }}>Precision</th>
+              <th style={{ padding: '14px 28px', textAlign: 'center' }}>Benchmark Gate</th>
             </tr>
           </thead>
           <tbody>
             {defectCategories.map((cat, idx) => (
               <tr key={idx} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                <td style={{ padding: '14px 24px', fontWeight: 600, color: 'var(--text-primary)' }}>{cat.name}</td>
-                <td style={{ padding: '14px 24px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--rzp-blue)' }}>{cat.rule}</td>
-                <td className='tabular-mono' style={{ padding: '14px 24px', textAlign: 'center' }}>{cat.injected}</td>
-                <td className='tabular-mono' style={{ padding: '14px 24px', textAlign: 'center', fontWeight: 700, color: 'var(--status-emerald)' }}>{cat.detected}</td>
-                <td className='tabular-mono' style={{ padding: '14px 24px', textAlign: 'right', fontWeight: 700 }}>{cat.precision}</td>
-                <td style={{ padding: '14px 24px', textAlign: 'center' }}>
+                <td style={{ padding: '16px 28px', fontWeight: 600, color: 'var(--text-primary)' }}>{cat.name}</td>
+                <td style={{ padding: '16px 28px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--rzp-blue)' }}>{cat.rule}</td>
+                <td className='tabular-mono' style={{ padding: '16px 28px', textAlign: 'center', color: 'var(--text-secondary)' }}>{cat.injected}</td>
+                <td className='tabular-mono' style={{ padding: '16px 28px', textAlign: 'center', fontWeight: 700, color: 'var(--status-emerald)' }}>{cat.detected}</td>
+                <td className='tabular-mono' style={{ padding: '16px 28px', textAlign: 'right', fontWeight: 700, color: 'var(--text-primary)' }}>{cat.precision}</td>
+                <td style={{ padding: '16px 28px', textAlign: 'center' }}>
                   <span style={{
                     fontSize: '11px',
                     fontWeight: 700,
-                    padding: '3px 8px',
+                    padding: '3px 10px',
                     borderRadius: '999px',
                     background: 'var(--status-emerald-bg)',
                     color: 'var(--status-emerald)',
@@ -153,15 +153,15 @@ export function EvaluationSummary({ summary }: EvaluationSummaryProps) {
         </table>
       </div>
 
-      {/* Engineering Limits & Honesty Disclosure */}
+      {/* Zero False-Positive Protocol */}
       <div style={{
-        background: 'var(--surface-canvas)',
+        background: '#f8fafc',
         border: '1px solid var(--border-subtle)',
         borderRadius: 'var(--radius-lg)',
-        padding: '16px 20px',
+        padding: '18px 24px',
         display: 'flex',
         alignItems: 'flex-start',
-        gap: '12px',
+        gap: '14px',
       }}>
         <Lock size={18} style={{ color: 'var(--rzp-blue)', marginTop: '2px' }} />
         <div>

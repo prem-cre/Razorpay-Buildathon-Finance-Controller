@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatCompactPaise } from '@/lib/money';
 import { ReconciliationBatchSummary } from '@/types/reconciliation';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Workflow } from 'lucide-react';
 
 interface FlowWaterfallProps {
   summary: ReconciliationBatchSummary;
@@ -18,19 +18,22 @@ export function FlowWaterfall({ summary }: FlowWaterfallProps) {
 
   return (
     <div style={{
-      background: 'var(--surface-primary)',
+      background: '#ffffff',
       border: '1px solid var(--border-subtle)',
       borderRadius: 'var(--radius-xl)',
-      padding: '24px',
+      padding: '24px 28px',
       boxShadow: 'var(--shadow-card)',
       marginBottom: '28px',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
         <div>
-          <div style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
-            Multi-Source Financial Flow & Fee Netting Waterfall
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Workflow size={16} style={{ color: 'var(--rzp-blue)' }} />
+            <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+              Multi-Source Financial Flow & Fee Netting Waterfall
+            </span>
           </div>
-          <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+          <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
             Mathematical reconciliation balance from Gross Order Checkouts to Verified Bank Deposits
           </div>
         </div>
@@ -40,11 +43,11 @@ export function FlowWaterfall({ summary }: FlowWaterfallProps) {
           fontFamily: 'var(--font-mono)',
           fontWeight: 700,
           background: 'var(--rzp-blue-subtle)',
-          padding: '4px 10px',
+          padding: '4px 12px',
           borderRadius: '999px',
           border: '1px solid var(--rzp-blue-border)',
         }}>
-          3-WAY HASH VERIFIED
+          3-WAY HASH SEALED
         </span>
       </div>
 
@@ -53,14 +56,15 @@ export function FlowWaterfall({ summary }: FlowWaterfallProps) {
           <div
             key={idx}
             style={{
-              background: 'var(--surface-canvas)',
+              background: '#f8fafc',
               border: '1px solid var(--border-subtle)',
               borderRadius: 'var(--radius-lg)',
-              padding: '16px 14px',
+              padding: '18px 14px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               position: 'relative',
+              boxShadow: 'var(--shadow-subtle)',
             }}
           >
             <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 600, minHeight: '34px' }}>

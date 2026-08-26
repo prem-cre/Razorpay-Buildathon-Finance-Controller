@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Shield, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Terminal, Shield, CheckCircle2, AlertTriangle, ArrowRight, Bot, Cpu } from 'lucide-react';
 
 interface TelemetryEvent {
   id: string;
@@ -40,10 +40,10 @@ export function TelemetryStream() {
 
   return (
     <div style={{
-      background: 'var(--surface-primary)',
+      background: '#ffffff',
       border: '1px solid var(--border-subtle)',
       borderRadius: 'var(--radius-xl)',
-      padding: '24px',
+      padding: '24px 28px',
       boxShadow: 'var(--shadow-card)',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
@@ -54,8 +54,8 @@ export function TelemetryStream() {
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--status-emerald)', fontWeight: 700 }}>
-          <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--status-emerald)' }} />
-          <span>Listening to WebSocket Engine (0.4ms latency)</span>
+          <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--status-emerald)', boxShadow: '0 0 6px rgba(5, 150, 105, 0.4)' }} />
+          <span>WebSocket Stream Connected (0.4ms latency)</span>
         </div>
       </div>
 
@@ -67,14 +67,14 @@ export function TelemetryStream() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '10px 14px',
+              padding: '12px 16px',
               borderRadius: 'var(--radius-md)',
-              background: 'var(--surface-canvas)',
+              background: '#f8fafc',
               border: '1px solid var(--border-subtle)',
               fontSize: '12px',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1 }}>
               <span className='tabular-mono' style={{ color: 'var(--text-muted)', fontSize: '11px', fontWeight: 600 }}>
                 {evt.timestamp}
               </span>
@@ -82,12 +82,12 @@ export function TelemetryStream() {
                 style={{
                   fontSize: '11px',
                   fontWeight: 700,
-                  padding: '2px 7px',
+                  padding: '2px 8px',
                   borderRadius: '4px',
-                  background: 'var(--surface-interactive)',
+                  background: 'var(--rzp-blue-subtle)',
                   color: 'var(--rzp-blue)',
                   fontFamily: 'var(--font-mono)',
-                  border: '1px solid var(--border-subtle)',
+                  border: '1px solid var(--rzp-blue-border)',
                 }}
               >
                 {evt.layer}
