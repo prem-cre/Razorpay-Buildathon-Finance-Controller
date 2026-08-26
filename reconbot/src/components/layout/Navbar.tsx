@@ -1,6 +1,6 @@
 import React from 'react';
-import { Search, Sparkles, RefreshCw, Layers, ShieldCheck } from 'lucide-react';
-import { DatasetName, DATASET_ORDER, DATASET_META } from '@/lib/engineData';
+import { Search, Sparkles, RefreshCw, Layers, ShieldCheck, Activity, Cpu, Bot, Zap } from 'lucide-react';
+import { DatasetName, DATASET_META, DATASET_ORDER } from '@/lib/engineData';
 
 interface NavbarProps {
   currentDataset: DatasetName;
@@ -43,12 +43,12 @@ export function Navbar({
           alignItems: 'center',
           gap: '8px',
           padding: '6px 14px',
-          background: 'var(--surface-primary)',
+          background: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
           boxShadow: 'var(--shadow-subtle)',
         }}>
-          <Layers size={14} style={{ color: 'var(--rzp-blue)' }} />
+          <Layers size={14} style={{ color: 'var(--rzp-purple)' }} />
           <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)' }}>Batch:</span>
           <select
             value={currentDataset}
@@ -64,8 +64,8 @@ export function Navbar({
             }}
           >
             {DATASET_ORDER.map((name) => (
-              <option key={name} value={name} style={{ background: '#ffffff', color: '#0f172a' }}>
-                {DATASET_META[name].label} ({DATASET_META[name].sub})
+              <option key={name} value={name} style={{ background: '#ffffff', color: '#090d14' }}>
+                {DATASET_META[name].label}
               </option>
             ))}
           </select>
@@ -89,9 +89,9 @@ export function Navbar({
             borderRadius: '50%',
             background: 'var(--status-emerald)',
             boxShadow: '0 0 6px rgba(5, 150, 105, 0.5)',
-            animation: 'agentPulse 2s infinite',
+            animation: 'pulseGlow 2s infinite',
           }} />
-          <span>Agent Runtime Online (0.4ms)</span>
+          <span>Agent Studio Engine Online (0.4ms)</span>
         </div>
       </div>
 
@@ -120,8 +120,8 @@ export function Navbar({
             transition: 'all 0.15s ease',
           }}
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = 'var(--rzp-blue)';
-            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(12, 102, 228, 0.12)';
+            e.currentTarget.style.borderColor = 'var(--rzp-purple)';
+            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(124, 58, 237, 0.12)';
           }}
           onBlur={(e) => {
             e.currentTarget.style.borderColor = 'var(--border-subtle)';
@@ -155,22 +155,24 @@ export function Navbar({
             alignItems: 'center',
             gap: '8px',
             padding: '8px 16px',
-            background: 'linear-gradient(135deg, #ffffff 0%, #f5f3ff 100%)',
+            background: '#ffffff',
             border: '1px solid var(--status-violet-border)',
             borderRadius: 'var(--radius-md)',
             color: 'var(--rzp-purple)',
             fontSize: '12px',
             fontWeight: 700,
             cursor: 'pointer',
-            boxShadow: '0 1px 3px rgba(124, 58, 237, 0.12)',
+            boxShadow: '0 1px 3px rgba(124, 58, 237, 0.08)',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'var(--rzp-purple)';
-            e.currentTarget.style.boxShadow = '0 0 16px rgba(124, 58, 237, 0.25)';
+            e.currentTarget.style.background = 'var(--rzp-purple-subtle)';
+            e.currentTarget.style.boxShadow = '0 0 16px rgba(124, 58, 237, 0.18)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.borderColor = 'var(--status-violet-border)';
-            e.currentTarget.style.boxShadow = '0 1px 3px rgba(124, 58, 237, 0.12)';
+            e.currentTarget.style.background = '#ffffff';
+            e.currentTarget.style.boxShadow = '0 1px 3px rgba(124, 58, 237, 0.08)';
           }}
         >
           <Sparkles size={14} style={{ color: 'var(--rzp-purple)' }} />
@@ -185,14 +187,14 @@ export function Navbar({
             alignItems: 'center',
             gap: '8px',
             padding: '8px 18px',
-            background: isReconciling ? 'var(--surface-interactive)' : 'linear-gradient(180deg, #0c66e4 0%, #0052cc 100%)',
-            border: '1px solid rgba(12, 102, 228, 0.5)',
+            background: isReconciling ? 'var(--surface-interactive)' : 'linear-gradient(135deg, #7c3aed 0%, #0c66e4 100%)',
+            border: '1px solid rgba(124, 58, 237, 0.4)',
             borderRadius: 'var(--radius-md)',
             color: '#ffffff',
             fontSize: '12px',
             fontWeight: 700,
             cursor: isReconciling ? 'not-allowed' : 'pointer',
-            boxShadow: '0 2px 8px rgba(12, 102, 228, 0.25)',
+            boxShadow: '0 2px 10px rgba(124, 58, 237, 0.3)',
           }}
         >
           <RefreshCw size={13} style={{ animation: isReconciling ? 'spin 1s linear infinite' : 'none' }} />

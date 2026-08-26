@@ -1,49 +1,43 @@
 :root {
-  /* 75% Light Environment Foundation */
-  --surface-canvas: #f8fafc;
+  /* 70-80% Bright Luminous Studio Canvas */
+  --surface-canvas: #fafbfc;
   --surface-canvas-subtle: #f1f5f9;
   --surface-primary: #ffffff;
   --surface-elevated: #ffffff;
-  --surface-interactive: #f1f5f9;
-  --surface-focused: #e2e8f0;
+  --surface-interactive: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --surface-subtle: #f8fafc;
   
-  /* 25% Dark Contrast Workspace / Terminal Environment */
-  --surface-dark-canvas: #090d16;
-  --surface-dark-card: #0f172a;
-  --surface-dark-elevated: #1e293b;
-  --surface-dark-interactive: #334155;
-  --text-dark-primary: #f8fafc;
-  --text-dark-secondary: #94a3b8;
-  --text-dark-muted: #64748b;
-  --border-dark: rgba(255, 255, 255, 0.10);
-  --border-dark-strong: rgba(255, 255, 255, 0.20);
+  /* 20-30% Dark AI Workspace Contrast Surfaces */
+  --dark-workspace: #0a0d14;
+  --dark-surface: #111622;
+  --dark-elevated: #182032;
+  --dark-interactive: #212b42;
+  --dark-border: rgba(255, 255, 255, 0.10);
+  --dark-border-strong: rgba(255, 255, 255, 0.20);
+  --dark-text-primary: #f8fafc;
+  --dark-text-secondary: #94a3b8;
+  --dark-text-muted: #64748b;
   
-  /* Light Glass & Translucency */
-  --glass-nav: rgba(255, 255, 255, 0.90);
+  /* Light Glass & Translucency Tokens */
+  --glass-nav: rgba(255, 255, 255, 0.86);
   --glass-card: rgba(255, 255, 255, 0.94);
-  --glass-card-hover: #ffffff;
   --glass-border: rgba(0, 0, 0, 0.07);
-  --glass-border-strong: rgba(0, 0, 0, 0.14);
-  --glass-border-glow: rgba(12, 102, 228, 0.25);
+  --glass-border-strong: rgba(0, 0, 0, 0.12);
   
   /* Precision 1px Light Borders */
   --border-subtle: #e2e8f0;
   --border-default: #cbd5e1;
   --border-strong: #94a3b8;
-  --border-accent: rgba(12, 102, 228, 0.35);
+  --border-accent: rgba(124, 58, 237, 0.35);
   
-  /* Deep Charcoal High-Contrast Typography */
-  --text-primary: #0f172a;
+  /* Typography - Deep Charcoal High Contrast */
+  --text-primary: #090d14;
   --text-secondary: #334155;
   --text-muted: #64748b;
   --text-disabled: #94a3b8;
   
-  /* Razorpay Dynamic Energy Palette */
-  --rzp-blue: #0c66e4;
-  --rzp-blue-hover: #0052cc;
-  --rzp-blue-subtle: #eff6ff;
-  --rzp-blue-border: #bfdbfe;
-  
+  /* Razorpay Agent Studio Energetic Accents */
   --rzp-purple: #7c3aed;
   --rzp-purple-hover: #6d28d9;
   --rzp-purple-subtle: #f5f3ff;
@@ -53,8 +47,16 @@
   --rzp-pink-subtle: #fdf2f8;
   --rzp-pink-border: #fbcfe8;
   
+  --rzp-blue: #0c66e4;
+  --rzp-blue-hover: #0052cc;
+  --rzp-blue-subtle: #eff6ff;
+  --rzp-blue-border: #bfdbfe;
+  
   --rzp-cyan: #06b6d4;
   --rzp-cyan-subtle: #ecfeff;
+  
+  --rzp-coral: #f97316;
+  --rzp-coral-subtle: #fff7ed;
   
   /* Status Colors */
   --status-emerald: #059669;
@@ -68,26 +70,22 @@
   --status-rose: #e11d48;
   --status-rose-bg: #fff1f2;
   --status-rose-border: #fecdd3;
-  
-  --status-violet: #7c3aed;
-  --status-violet-bg: #f5f3ff;
-  --status-violet-border: #ddd6fe;
 
   /* Radius System */
   --radius-sm: 6px;
   --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
-  --radius-2xl: 28px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
   
-  /* Soft Ambient & Cinematic Shadows */
+  /* Atmospheric Soft Shadows */
   --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 12px 30px -8px rgba(15, 23, 42, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 1);
-  --shadow-elevated: 0 20px 40px -12px rgba(15, 23, 42, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-  --shadow-dark-workspace: 0 24px 60px -12px rgba(0, 0, 0, 0.45), 0 0 40px rgba(124, 58, 237, 0.15);
-  --shadow-glow-blue: 0 0 24px rgba(12, 102, 228, 0.15);
-  --shadow-glow-purple: 0 0 24px rgba(124, 58, 237, 0.15);
-  --shadow-drawer: -16px 0 48px rgba(15, 23, 42, 0.15);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 10px 30px -5px rgba(0, 0, 0, 0.03), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  --shadow-elevated: 0 20px 45px -12px rgba(15, 23, 42, 0.09), 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --shadow-dark-card: 0 20px 50px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --shadow-glow-purple: 0 0 30px rgba(124, 58, 237, 0.18);
+  --shadow-glow-pink: 0 0 30px rgba(236, 72, 153, 0.16);
+  --shadow-glow-blue: 0 0 30px rgba(12, 102, 228, 0.18);
+  --shadow-drawer: -16px 0 50px rgba(15, 23, 42, 0.12);
   
   /* Fonts */
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -98,9 +96,9 @@
 html, body {
   background-color: var(--surface-canvas);
   background-image: 
-    radial-gradient(circle at 15% 0%, rgba(12, 102, 228, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 85% 5%, rgba(124, 58, 237, 0.06) 0%, transparent 45%),
-    radial-gradient(circle at 50% 60%, rgba(236, 72, 153, 0.02) 0%, transparent 50%);
+    radial-gradient(circle at 12% 2%, rgba(124, 58, 237, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 88% 8%, rgba(236, 72, 153, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(12, 102, 228, 0.03) 0%, transparent 55%);
   color: var(--text-primary);
   min-height: 100vh;
   margin: 0;
@@ -127,34 +125,14 @@ html, body {
   font-weight: 400;
 }
 
-/* Living Pulse Animations */
-@keyframes agentPulse {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.06); filter: drop-shadow(0 0 8px rgba(12, 102, 228, 0.5)); }
+/* Living UI Animations */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.5)); }
 }
 
 .agent-pulse {
-  animation: agentPulse 2.8s ease-in-out infinite;
-}
-
-@keyframes flowLine {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-
-.animated-gradient-border {
-  background: linear-gradient(90deg, #0c66e4, #7c3aed, #ec4899, #0c66e4);
-  background-size: 300% 300%;
-  animation: flowLine 6s ease infinite;
-}
-
-@keyframes slideInRight {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-.slide-in-right {
-  animation: slideInRight 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
 @keyframes spin {
@@ -162,22 +140,43 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.float-slow {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+@keyframes flowStream {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-border {
+  background: linear-gradient(90deg, #7c3aed, #ec4899, #0c66e4, #7c3aed);
+  background-size: 300% 300%;
+  animation: flowStream 6s ease infinite;
+}
+
 /* Tactile Micro-Interactions */
 button, select, tr, a {
-  transition: all 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 button:active {
   transform: translateY(1px) scale(0.99);
 }
 
-/* Sleek Minimal Scrollbars */
+/* Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--surface-canvas);
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;

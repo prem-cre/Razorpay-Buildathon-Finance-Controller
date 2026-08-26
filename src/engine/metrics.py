@@ -32,6 +32,71 @@ from .matcher import MatchResult
 # Engine statuses that represent an auto-resolved / confidently-classified record.
 _ENGINE_MATCHED = {"matched"}
 
+# Disposition of each ground-truth category for the LAYERED engine (L1+L2).
+# RESOLVABLE: a correct engine may auto-resolve these (the money genuinely landed
+# once the pattern is understood). ESCALATE: must be surfaced, never auto-matched
+# (money is withheld / ambiguous / unknown) — auto-resolving one is the only
+# truly dangerous error.
+RESOLVABLE_CATEGORIES = {
+    "matched", "split_payment", "refund_netted", "partial_refund",
+    "timing_gap", "fee_discrepancy",
+}
+ESCALATE_CATEGORIES = {
+    "chargeback_withheld", "duplicate_capture", "orphan_payment",
+    "fx_delta", "amount_unknown",
+}
+
+
+def evaluate_layered(results, manifest_path):
+    """Disposition-based evaluation for the layered engine (brief-aligned).
+
+    The brief asks for the match rate and "the exceptions it could not resolve".
+    So a split payment the engine reconstructs is a correct RESOLUTION, not a
+    false positive. Precision here measures the only dangerous error: resolving
+    something that should have been escalated.
+    """
+    manifest = _load_manifest(Path(manifest_path))
+    by_key = {r.record_key: r for r in results}
+
+    tp = fp = fn = flagged_ok = flagged_missed = 0
+    dangerous: list[dict] = []
+    for key in sorted(set(by_key) & set(manifest)):
+        r = by_key[key]
+        truth = manifest[key].get("expected_match_status")
+        resolved = r.match_status in _ENGINE_MATCHED
+        resolvable = truth in RESOLVABLE_CATEGORIES
+        escalate = truth in ESCALATE_CATEGORIES
+        if resolved and resolvable:
+            tp += 1
+        elif resolved and escalate:
+            fp += 1
+            dangerous.append({"record_key": key, "rule": r.rule, "manifest": truth})
+        elif not resolved and resolvable:
+            fn += 1
+        elif not resolved and escalate:
+            flagged_ok += 1
+
+    resolved_total = sum(1 for r in results if r.match_status in _ENGINE_MATCHED)
+    total = len(results)
+    l1 = sum(1 for r in results if r.layer == 1 and r.match_status == "matched")
+    l2 = sum(1 for r in results if r.layer == 2 and r.match_status == "matched")
+    precision = tp / (tp + fp) if (tp + fp) else 1.0
+    recall = tp / (tp + fn) if (tp + fn) else 1.0
+    return {
+        "resolved_total": resolved_total,
+        "total": total,
+        "resolution_rate": round(resolved_total / total, 4) if total else 0.0,
+        "layer1_matched": l1,
+        "layer2_recovered": l2,
+        "safety_precision": round(precision, 4),
+        "resolvable_recall": round(recall, 4),
+        "dangerous_false_positives": fp,
+        "dangerous_records": dangerous,
+        "exceptions_flagged_correct": flagged_ok,
+        "true_positive": tp,
+        "false_negative": fn,
+    }
+
 
 def _load_manifest(path: Path) -> dict[str, dict]:
     with open(path, encoding="utf-8") as f:

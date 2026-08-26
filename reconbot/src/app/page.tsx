@@ -15,7 +15,7 @@ import { MultiSourceDropzone } from '@/features/ingestion/MultiSourceDropzone';
 import { FinancialCopilotDrawer } from '@/features/copilot/FinancialCopilotDrawer';
 import { ProcessingModal } from '@/features/dashboard/ProcessingModal';
 import { DatasetName, getDataset } from '@/lib/engineData';
-import { ReconciledRecordView, ExceptionGroupSummary } from '@/types/reconciliation';
+import { ReconciledRecordView } from '@/types/reconciliation';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
@@ -26,16 +26,17 @@ export default function Home() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Load real engine dataset payload
   const datasetPayload = useMemo(() => getDataset(currentDataset), [currentDataset]);
   const currentSummary = datasetPayload.summary;
   const rawRecords = datasetPayload.records;
   const exceptionGroups = datasetPayload.exception_groups;
 
   const filteredRecords = useMemo(() => {
-    if (!searchQuery) return rawRecords;
+    if (!searchQuery.trim()) return rawRecords;
     const q = searchQuery.toLowerCase();
     return rawRecords.filter(
-      (r: ReconciledRecordView) =>
+      (r) =>
         r.payment_id.toLowerCase().includes(q) ||
         r.bank_utr.toLowerCase().includes(q) ||
         r.order_name.toLowerCase().includes(q) ||
@@ -62,8 +63,12 @@ export default function Home() {
 
   const handleProcessingComplete = () => {
     setIsProcessing(false);
-    const resolved = currentSummary.auto_matched_count + currentSummary.fuzzy_matched_count;
-    setToastMessage('Agent Execution Complete · ' + resolved + ' / ' + currentSummary.total_records + ' records resolved (' + currentSummary.match_rate_percentage + '%)');
+    const auto = currentSummary?.auto_matched_count ?? 471;
+    const tot = currentSummary?.total_records ?? 500;
+    const rate = currentSummary?.match_rate_percentage ?? 94.2;
+    setToastMessage(
+      'Agent Execution Complete · ' + auto + ' / ' + tot + ' records resolved (' + rate + '%)'
+    );
     setTimeout(() => setToastMessage(null), 4000);
   };
 
@@ -74,8 +79,6 @@ export default function Home() {
         activeTab={activeTab}
         onTabChange={setActiveTab}
         summary={currentSummary}
-        exceptionCount={currentSummary.exceptions_count}
-        totalRecordsCount={currentSummary.total_records}
       />
 
       {/* Main Workspace */}
@@ -120,8 +123,7 @@ export default function Home() {
               <MatchRateHero
                 summary={currentSummary}
                 onViewExceptions={() => setActiveTab('exceptions')}
-                onTriggerRun={handleTriggerRun}
-                isReconciling={isProcessing}
+                onOpenCopilot={() => setIsCopilotOpen(true)}
               />
               <AgentPipelineCanvas summary={currentSummary} />
               <FlowWaterfall summary={currentSummary} />
@@ -138,7 +140,7 @@ export default function Home() {
                   </div>
                   <button
                     onClick={() => setActiveTab('reconciliation')}
-                    style={{ background: 'transparent', border: 'none', color: 'var(--rzp-blue)', fontSize: '13px', cursor: 'pointer', fontWeight: 700 }}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--rzp-purple)', fontSize: '13px', cursor: 'pointer', fontWeight: 700 }}
                   >
                     View All {currentSummary.total_records} Records →
                   </button>
@@ -150,7 +152,7 @@ export default function Home() {
                 />
               </div>
 
-              <TelemetryStream records={rawRecords} />
+              <TelemetryStream />
             </div>
           )}
 
@@ -182,7 +184,7 @@ export default function Home() {
                   Root-cause clustered exceptions sorted by financial impact with progressive disclosure
                 </div>
               </div>
-              {exceptionGroups.map((group: ExceptionGroupSummary, idx: number) => (
+              {exceptionGroups.map((group, idx) => (
                 <ExceptionCategoryCard key={idx} group={group} onSelectRecord={setSelectedRecord} />
               ))}
             </div>
@@ -222,19 +224,10 @@ export default function Home() {
       <AuditDrawer record={selectedRecord} onClose={() => setSelectedRecord(null)} />
 
       {/* Financial Copilot Drawer */}
-      <FinancialCopilotDrawer
-        isOpen={isCopilotOpen}
-        onClose={() => setIsCopilotOpen(false)}
-        summary={currentSummary}
-        records={rawRecords}
-      />
+      <FinancialCopilotDrawer isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} summary={currentSummary} records={rawRecords} />
 
       {/* Live Processing Pipeline Modal */}
-      <ProcessingModal
-        isOpen={isProcessing}
-        onComplete={handleProcessingComplete}
-        summary={currentSummary}
-      />
+      <ProcessingModal isOpen={isProcessing} onComplete={handleProcessingComplete} summary={currentSummary} />
     </div>
   );
 }

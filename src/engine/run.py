@@ -21,7 +21,8 @@ if str(_ROOT) not in sys.path:
 
 from src.engine.ingest import ingest_dataset
 from src.engine.matcher import Layer1Matcher
-from src.engine.metrics import evaluate_against_manifest, print_report
+from src.engine.layer2 import Layer2Matcher
+from src.engine.metrics import evaluate_against_manifest, print_report, evaluate_layered
 
 DATASETS = ("clean", "messy", "adversarial")
 
@@ -38,19 +39,38 @@ def run_one(dataset: str, root: Path) -> dict:
             print(f"   - {mr.source} row {mr.row_index}: {mr.reason}")
 
     matcher = Layer1Matcher(data)
-    results = matcher.match()
+    l1_results = matcher.match()
 
-    report = evaluate_against_manifest(results, data_dir / "manifest.json")
+    # Layer 2 — fuzzy / recovery over what Layer 1 could not resolve.
+    l2 = Layer2Matcher(data, l1_results)
+    final = l2.refine()
+
+    report = evaluate_against_manifest(final, data_dir / "manifest.json")
     print_report(dataset, report)
 
-    (out_dir / f"{dataset}_results.json").write_text(
-        json.dumps([r.to_dict() for r in results], indent=2), encoding="utf-8")
-    (out_dir / f"{dataset}_audit.json").write_text(
-        matcher.audit.to_json(), encoding="utf-8")
-    (out_dir / f"{dataset}_metrics.json").write_text(
-        json.dumps(report, indent=2), encoding="utf-8")
+    layered = evaluate_layered(final, data_dir / "manifest.json")
+    print(f"\nLayered engine (L1 + L2), disposition-based:")
+    print(f"  resolution rate     : {layered['resolution_rate']*100:.1f}%  "
+          f"({layered['resolved_total']}/{layered['total']}  "
+          f"L1={layered['layer1_matched']}  L2={layered['layer2_recovered']})")
+    print(f"  safety precision    : {layered['safety_precision']*100:.1f}%  "
+          f"(dangerous auto-resolutions: {layered['dangerous_false_positives']})")
+    print(f"  resolvable recall   : {layered['resolvable_recall']*100:.1f}%")
+    print(f"  exceptions flagged  : {layered['exceptions_flagged_correct']} correctly held for review")
+    for d in layered["dangerous_records"]:
+        print(f"     !! DANGEROUS: {d['record_key']} {d['rule']} -> {d['manifest']}")
 
-    return report
+    # Combined audit trail (L1 decisions + L2 recoveries).
+    combined_audit = [a.to_dict() for a in matcher.audit.records] + [a.to_dict() for a in l2.audit.records]
+
+    (out_dir / f"{dataset}_results.json").write_text(
+        json.dumps([r.to_dict() for r in final], indent=2), encoding="utf-8")
+    (out_dir / f"{dataset}_audit.json").write_text(
+        json.dumps(combined_audit, indent=2), encoding="utf-8")
+    (out_dir / f"{dataset}_metrics.json").write_text(
+        json.dumps({"strict_layer1_view": report, "layered": layered}, indent=2), encoding="utf-8")
+
+    return {**report, "layered": layered}
 
 
 def main(argv=None) -> int:

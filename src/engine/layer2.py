@@ -27,7 +27,9 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Optional
 
-from .matcher import MatchResult, AMOUNT_TOLERANCE_PAISE
+from decimal import Decimal, ROUND_HALF_UP
+
+from .matcher import MatchResult, AMOUNT_TOLERANCE_PAISE, FEE_RATES, GST_RATE
 from .audit import AuditTrail
 from .models import CanonicalDataset, CanonicalPayment
 
@@ -87,6 +89,30 @@ class Layer2Matcher:
 
     def _batch_settled_sum(self, settlement_id: str) -> int:
         return sum(p.settled_amount_paise for p in self.pays_by_settlement.get(settlement_id, []))
+
+    def _config_fee_gst(self, method: str, amount_paise: int) -> tuple[int, int]:
+        """Expected fee and GST for an amount, from the MDR config."""
+        rate = FEE_RATES.get(method.lower())
+        if rate is None:
+            return -1, -1  # unknown method -> cannot verify
+        fee = int((Decimal(amount_paise) * rate).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+        gst = int((Decimal(fee) * GST_RATE).quantize(Decimal("1"), rounding=ROUND_HALF_UP))
+        return fee, gst
+
+    def _fee_clean(self, p: CanonicalPayment) -> bool:
+        """True if the payment's stored fee+GST match the config (no fee drift)."""
+        fee, gst = self._config_fee_gst(p.method, p.amount_paise)
+        if fee < 0:
+            return False
+        return abs(p.fee_paise - fee) <= 2 and abs(p.tax_paise - gst) <= 2
+
+    def _refund_bank_reduction(self, refunded_paise: int, method: str) -> int:
+        """Net reduction to the bank credit for a refund: the refunded amount
+        less the fee+GST that reverse with it."""
+        fee, gst = self._config_fee_gst(method, refunded_paise)
+        if fee < 0:
+            return refunded_paise
+        return refunded_paise - fee - gst
 
     # ---- public -----------------------------------------------------------
     def refine(self) -> list[MatchResult]:
@@ -191,26 +217,30 @@ class Layer2Matcher:
         deposit = self._deposit_for_utr(s.utr)
         if deposit is None:
             return None
+        # p itself must be a genuinely clean payment to be released: correct
+        # fee, not refunded. A fee-drift payment fails here and stays flagged.
+        if not self._fee_clean(p):
+            return None
+        p_order = self.order_by_payref.get(p.payment_id)
+        if p_order and p_order.refunded_amount_paise > 0:
+            return None  # p is the refunded record itself -> it's the exception, defer
+
         batch = self.pays_by_settlement.get(s.settlement_id, [])
-        # payments in the batch that were (partially) refunded, per the order record
-        refund_total = 0
+        reduction_total = 0
         refunded_ids = []
-        p_is_refunded = False
         for q in batch:
             oq = self.order_by_payref.get(q.payment_id)
-            refunded = bool(q.refund_ids) or q.status == "refunded" or (oq and oq.refunded_amount_paise > 0)
-            if refunded:
-                refund_total += (oq.refunded_amount_paise if oq else 0)
+            refunded_amt = oq.refunded_amount_paise if oq else 0
+            if refunded_amt > 0 or bool(q.refund_ids) or q.status == "refunded":
+                reduction_total += self._refund_bank_reduction(refunded_amt, q.method)
                 refunded_ids.append(q.payment_id)
-                if q.payment_id == p.payment_id:
-                    p_is_refunded = True
-        if refund_total <= 0 or p_is_refunded:
-            return None  # nothing to net, or p itself is the refunded one (defer)
-        expected = self._batch_settled_sum(s.settlement_id) - refund_total
-        if abs(expected - deposit) > AMOUNT_TOLERANCE_PAISE:
+        if reduction_total <= 0:
             return None
+        expected = self._batch_settled_sum(s.settlement_id) - reduction_total
+        if abs(expected - deposit) > AMOUNT_TOLERANCE_PAISE:
+            return None  # gap not fully explained by refunds (e.g. also a chargeback) -> defer
         ev = {"payment_id": p.payment_id, "order": order.name, "settlement_utr": s.utr,
               "bank_deposit_paise": deposit, "batch_settled_paise": self._batch_settled_sum(s.settlement_id),
-              "refund_netted_paise": refund_total, "refunded_siblings": refunded_ids,
-              "reason": "batch reconciles once netted refund is subtracted; this clean sibling released"}
+              "refund_bank_reduction_paise": reduction_total, "refunded_siblings": refunded_ids,
+              "reason": "settlement batch reconciles once the fee-adjusted refund is netted; this fee-clean, non-refunded sibling is released"}
         return self._decide(p.payment_id, "R2.4_refund_netted_solver", "matched", ev)

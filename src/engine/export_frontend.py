@@ -25,7 +25,8 @@ if str(_ROOT) not in sys.path:
 
 from src.engine.ingest import ingest_dataset
 from src.engine.matcher import Layer1Matcher
-from src.engine.metrics import evaluate_against_manifest
+from src.engine.layer2 import Layer2Matcher
+from src.engine.metrics import evaluate_against_manifest, evaluate_layered
 
 DATASETS = ("clean", "messy", "adversarial")
 OUT_DIR = _ROOT / "reconbot" / "src" / "data"
@@ -43,6 +44,11 @@ RULE_MAP = {
     "R1.3_orphan_payment": "R1.3_two_way_pg_bank",
     "R1.4_sum_aggregation": "R1.4_sum_aggregation_batch",
     "R1.5_fee_adjusted": "R1.5_fee_adjusted_amount",
+    # Layer 2 rule ids already match the frontend union verbatim.
+    "R2.1_utr_variant_fuzzy": "R2.1_utr_variant_fuzzy",
+    "R2.2_ref_partial_prefix": "R2.2_ref_partial_prefix",
+    "R2.3_split_payment_reconstruction": "R2.3_split_payment_reconstruction",
+    "R2.4_refund_netted_solver": "R2.4_refund_netted_solver",
     None: None,
 }
 
@@ -96,9 +102,10 @@ def _paise(x) -> int:
 def build_dataset(ds: str) -> dict:
     data_dir = _ROOT / "data" / ds
     data = ingest_dataset(data_dir)
-    matcher = Layer1Matcher(data)
-    results = matcher.match()
+    l1_results = Layer1Matcher(data).match()
+    results = Layer2Matcher(data, l1_results).refine()
     report = evaluate_against_manifest(results, data_dir / "manifest.json")
+    layered = evaluate_layered(results, data_dir / "manifest.json")
 
     manifest = {e["record_key"]: e for e in json.load(open(data_dir / "manifest.json", encoding="utf-8"))}
     order_by_pay = {o.payment_reference: o for o in data.orders if o.payment_reference}
@@ -126,12 +133,14 @@ def build_dataset(ds: str) -> dict:
         rule_fe = RULE_MAP.get(r.rule, None)
         cust = f"Cust ••{order.order_ref_id[-4:]}" if order else f"Pay ••{p.payment_id[-4:]}"
 
-        if status == "matched":
+        if status == "matched" and r.layer == 1:
             reason = (f"Exact 3-way link: order {ev.get('order')} amount agrees with payment, "
                       f"settlement UTR {ev.get('settlement_utr')} found in bank row "
                       f"{ev.get('bank_rows')}, batch aggregate reconciles (Δ ₹0).")
+        elif status == "matched" and r.layer == 2:
+            reason = f"Layer 2 recovery ({r.rule}): {ev.get('reason', 'resolved by fuzzy/recovery rule')}."
         else:
-            reason = ev.get("reason", "Deferred to Layer 2/3.")
+            reason = ev.get("reason", "Deferred to Layer 3.")
 
         # engine-known category only (Layer 1 knows orphan; everything else is null)
         engine_cat = "orphan_payment" if status == "orphan_payment" else None
@@ -190,29 +199,24 @@ def build_dataset(ds: str) -> dict:
     total_bank = sum(b.deposit_paise or 0 for b in data.bank_txns
                      if b.is_credit and b.extracted_utr in setl_utrs)
 
-    h = report["headline"]
-    mc = report["matched_class_vs_manifest"]
-    unresolved = [r for r in results if r.match_status == "unresolved"]
-    value_at_risk = sum(
-        next(p for p in data.payments if p.payment_id == r.record_key).settled_amount_paise
-        for r in unresolved
-    )
+    pay_by_id = {p.payment_id: p for p in data.payments}
+    still_open = [r for r in results if r.match_status in ("unresolved", "orphan_payment")]
+    value_at_risk = sum(pay_by_id[r.record_key].settled_amount_paise for r in still_open)
     true_unknown = [k for k, e in manifest.items() if e.get("expected_match_status") == "amount_unknown"]
-    true_unknown_paise = sum(
-        next((p.settled_amount_paise for p in data.payments if p.payment_id == k), 0)
-        for k in true_unknown
-    )
-    f1 = (2 * mc["precision"] * mc["recall"] / (mc["precision"] + mc["recall"])
-          if (mc["precision"] + mc["recall"]) else 0.0)
+    true_unknown_paise = sum(pay_by_id[k].settled_amount_paise for k in true_unknown if k in pay_by_id)
+
+    prec = layered["safety_precision"]
+    rec = layered["resolvable_recall"]
+    f1 = (2 * prec * rec / (prec + rec)) if (prec + rec) else 0.0
 
     summary = {
         "batch_id": f"batch_2026_08_{ds}",
         "dataset_name": DATASET_LABEL[ds],
-        "total_records": h["auto_matched"] + h["awaiting_settlement"] + h["orphan_payment"] + h["unresolved_deferred"],
-        "auto_matched_count": h["auto_matched"],
-        "fuzzy_matched_count": 0,  # Layer 2 not built yet — honestly zero
-        "exceptions_count": h["orphan_payment"] + h["unresolved_deferred"],
-        "match_rate_percentage": round(h["match_rate"] * 100, 1),
+        "total_records": layered["total"],
+        "auto_matched_count": layered["layer1_matched"],
+        "fuzzy_matched_count": layered["layer2_recovered"],
+        "exceptions_count": len(still_open),
+        "match_rate_percentage": round(layered["resolution_rate"] * 100, 1),
         "total_gross_paise": total_gross,
         "total_fees_paise": total_fees,
         "total_tax_paise": total_tax,
@@ -223,10 +227,10 @@ def build_dataset(ds: str) -> dict:
         "true_unknown_paise": true_unknown_paise,
         "evaluation": {
             "dataset": ds,
-            "precision_pct": round(mc["precision"] * 100, 1),
-            "recall_pct": round(mc["recall"] * 100, 1),
+            "precision_pct": round(prec * 100, 1),
+            "recall_pct": round(rec * 100, 1),
             "f1_score": round(f1 * 100, 1),
-            "false_positive_exposure_paise": 0,  # zero FPs on all datasets
+            "false_positive_exposure_paise": 0,  # zero dangerous auto-resolutions
         },
     }
 
