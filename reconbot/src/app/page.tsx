@@ -4,9 +4,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar, NavTab } from '@/components/layout/Sidebar';
 import { MatchRateHero } from '@/features/dashboard/MatchRateHero';
-import { AgentPipelineCanvas } from '@/features/dashboard/AgentPipelineCanvas';
 import { FlowWaterfall } from '@/features/dashboard/FlowWaterfall';
-import { TelemetryStream } from '@/features/dashboard/TelemetryStream';
 import { ReconciliationTable } from '@/features/reconciliation/ReconciliationTable';
 import { AuditDrawer } from '@/features/reconciliation/AuditDrawer';
 import { ExceptionCategoryCard } from '@/features/exceptions/ExceptionCategoryCard';
@@ -14,8 +12,8 @@ import { EvaluationSummary } from '@/features/evaluation/EvaluationSummary';
 import { MultiSourceDropzone } from '@/features/ingestion/MultiSourceDropzone';
 import { FinancialCopilotDrawer } from '@/features/copilot/FinancialCopilotDrawer';
 import { ProcessingModal } from '@/features/dashboard/ProcessingModal';
-import { DatasetName, getDataset } from '@/lib/engineData';
-import { ReconciledRecordView } from '@/types/reconciliation';
+import { getDataset, DatasetName } from '@/lib/engineData';
+import { ReconciledRecordView, ExceptionGroupSummary } from '@/types/reconciliation';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
@@ -26,23 +24,20 @@ export default function Home() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Load real engine dataset payload
-  const datasetPayload = useMemo(() => getDataset(currentDataset), [currentDataset]);
-  const currentSummary = datasetPayload.summary;
-  const rawRecords = datasetPayload.records;
-  const exceptionGroups = datasetPayload.exception_groups;
+  const datasetData = useMemo(() => getDataset(currentDataset), [currentDataset]);
+  const { summary, records, exceptionGroups } = datasetData;
 
   const filteredRecords = useMemo(() => {
-    if (!searchQuery.trim()) return rawRecords;
+    if (!searchQuery) return records;
     const q = searchQuery.toLowerCase();
-    return rawRecords.filter(
-      (r) =>
+    return records.filter(
+      (r: ReconciledRecordView) =>
         r.payment_id.toLowerCase().includes(q) ||
         r.bank_utr.toLowerCase().includes(q) ||
         r.order_name.toLowerCase().includes(q) ||
         r.merchant_customer.toLowerCase().includes(q)
     );
-  }, [rawRecords, searchQuery]);
+  }, [records, searchQuery]);
 
   // Global Keyboard Shortcuts (/, Esc)
   useEffect(() => {
@@ -63,22 +58,17 @@ export default function Home() {
 
   const handleProcessingComplete = () => {
     setIsProcessing(false);
-    const auto = currentSummary?.auto_matched_count ?? 471;
-    const tot = currentSummary?.total_records ?? 500;
-    const rate = currentSummary?.match_rate_percentage ?? 94.2;
-    setToastMessage(
-      'Agent Execution Complete · ' + auto + ' / ' + tot + ' records resolved (' + rate + '%)'
-    );
+    setToastMessage(\Reconciliation Run Complete · \ / \ records matched (\%)\);
     setTimeout(() => setToastMessage(null), 4000);
   };
 
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--surface-canvas)' }}>
-      {/* Studio Sidebar Navigation */}
+      {/* Sidebar Navigation */}
       <Sidebar
         activeTab={activeTab}
         onTabChange={setActiveTab}
-        summary={currentSummary}
+        summary={summary}
       />
 
       {/* Main Workspace */}
@@ -93,7 +83,7 @@ export default function Home() {
           isReconciling={isProcessing}
         />
 
-        {/* Floating Toast Feedback */}
+        {/* Floating Toast Notification */}
         {toastMessage && (
           <div style={{
             position: 'fixed',
@@ -121,12 +111,11 @@ export default function Home() {
           {activeTab === 'dashboard' && (
             <div>
               <MatchRateHero
-                summary={currentSummary}
+                summary={summary}
                 onViewExceptions={() => setActiveTab('exceptions')}
                 onOpenCopilot={() => setIsCopilotOpen(true)}
               />
-              <AgentPipelineCanvas summary={currentSummary} />
-              <FlowWaterfall summary={currentSummary} />
+              <FlowWaterfall summary={summary} />
               
               <div style={{ marginBottom: '28px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
@@ -140,9 +129,9 @@ export default function Home() {
                   </div>
                   <button
                     onClick={() => setActiveTab('reconciliation')}
-                    style={{ background: 'transparent', border: 'none', color: 'var(--rzp-purple)', fontSize: '13px', cursor: 'pointer', fontWeight: 700 }}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--rzp-blue)', fontSize: '13px', cursor: 'pointer', fontWeight: 700 }}
                   >
-                    View All {currentSummary.total_records} Records →
+                    View All {summary.total_records} Records →
                   </button>
                 </div>
                 <ReconciliationTable
@@ -151,8 +140,6 @@ export default function Home() {
                   onSelectRecord={setSelectedRecord}
                 />
               </div>
-
-              <TelemetryStream />
             </div>
           )}
 
@@ -184,7 +171,7 @@ export default function Home() {
                   Root-cause clustered exceptions sorted by financial impact with progressive disclosure
                 </div>
               </div>
-              {exceptionGroups.map((group, idx) => (
+              {exceptionGroups.map((group: ExceptionGroupSummary, idx: number) => (
                 <ExceptionCategoryCard key={idx} group={group} onSelectRecord={setSelectedRecord} />
               ))}
             </div>
@@ -200,7 +187,7 @@ export default function Home() {
                   Rigorous evaluation metrics against 50 injected anomalies across clean, messy, and adversarial datasets
                 </div>
               </div>
-              <EvaluationSummary summary={currentSummary} />
+              <EvaluationSummary summary={summary} />
             </div>
           )}
 
@@ -224,10 +211,10 @@ export default function Home() {
       <AuditDrawer record={selectedRecord} onClose={() => setSelectedRecord(null)} />
 
       {/* Financial Copilot Drawer */}
-      <FinancialCopilotDrawer isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} summary={currentSummary} records={rawRecords} />
+      <FinancialCopilotDrawer isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} summary={summary} records={records} />
 
       {/* Live Processing Pipeline Modal */}
-      <ProcessingModal isOpen={isProcessing} onComplete={handleProcessingComplete} summary={currentSummary} />
+      <ProcessingModal isOpen={isProcessing} onComplete={handleProcessingComplete} summary={summary} />
     </div>
   );
 }

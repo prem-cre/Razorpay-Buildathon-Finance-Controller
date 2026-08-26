@@ -5,23 +5,24 @@ import {
   AlertCircle,
   BarChart3,
   UploadCloud,
-  Bot,
   Cpu,
-  Zap,
+  Bot,
 } from 'lucide-react';
 import { ReconciliationBatchSummary } from '@/types/reconciliation';
 
 export type NavTab = 'dashboard' | 'reconciliation' | 'exceptions' | 'evaluation' | 'ingest';
 
-interface SidebarProps {
+export interface SidebarProps {
   activeTab: NavTab;
   onTabChange: (tab: NavTab) => void;
-  summary: ReconciliationBatchSummary;
+  summary?: ReconciliationBatchSummary;
+  exceptionCount?: number;
+  totalRecordsCount?: number;
 }
 
-export function Sidebar({ activeTab, onTabChange, summary }: SidebarProps) {
-  const exceptionCount = summary?.exceptions_count ?? 0;
-  const totalRecords = summary?.total_records ?? 0;
+export function Sidebar({ activeTab, onTabChange, summary, exceptionCount: expCountProp, totalRecordsCount: totalRecProp }: SidebarProps) {
+  const exceptionCount = summary?.exceptions_count ?? expCountProp ?? 8;
+  const totalRecords = summary?.total_records ?? totalRecProp ?? 500;
 
   const navItems = [
     { id: 'dashboard' as NavTab, label: 'Executive Radar', icon: LayoutDashboard, badge: null, isAlert: false },
@@ -52,19 +53,19 @@ export function Sidebar({ activeTab, onTabChange, summary }: SidebarProps) {
             width: '36px',
             height: '36px',
             borderRadius: 'var(--radius-md)',
-            background: 'linear-gradient(135deg, #7c3aed 0%, #0c66e4 100%)',
+            background: 'linear-gradient(135deg, #0c66e4 0%, #7c3aed 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: '#ffffff',
-            boxShadow: '0 2px 10px rgba(124, 58, 237, 0.3)',
+            boxShadow: '0 2px 8px rgba(12, 102, 228, 0.3)',
           }}>
             <Bot size={20} />
           </div>
           <div>
             <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span>Razorpay</span>
-              <span style={{ fontSize: '10px', padding: '1px 5px', borderRadius: '4px', background: 'var(--rzp-purple-subtle)', color: 'var(--rzp-purple)', border: '1px solid var(--rzp-purple-border)', fontWeight: 800 }}>STUDIO</span>
+              <span style={{ fontSize: '10px', padding: '1px 5px', borderRadius: '4px', background: 'var(--rzp-blue-subtle)', color: 'var(--rzp-blue)', border: '1px solid var(--rzp-blue-border)', fontWeight: 800 }}>STUDIO</span>
             </div>
             <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--rzp-purple)' }}>
               Agentic Finance Controller
@@ -93,14 +94,14 @@ export function Sidebar({ activeTab, onTabChange, summary }: SidebarProps) {
                   width: '100%',
                   padding: '10px 14px',
                   borderRadius: 'var(--radius-md)',
-                  background: isActive ? 'var(--rzp-purple-subtle)' : 'transparent',
-                  border: isActive ? '1px solid var(--rzp-purple-border)' : '1px solid transparent',
-                  color: isActive ? 'var(--rzp-purple)' : 'var(--text-secondary)',
+                  background: isActive ? 'var(--rzp-blue-subtle)' : 'transparent',
+                  border: isActive ? '1px solid var(--rzp-blue-border)' : '1px solid transparent',
+                  color: isActive ? 'var(--rzp-blue)' : 'var(--text-secondary)',
                   fontSize: '13px',
                   fontWeight: isActive ? 700 : 500,
                   cursor: 'pointer',
                   textAlign: 'left',
-                  boxShadow: isActive ? '0 1px 3px rgba(124, 58, 237, 0.08)' : 'none',
+                  boxShadow: isActive ? '0 1px 3px rgba(12, 102, 228, 0.08)' : 'none',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
@@ -116,7 +117,7 @@ export function Sidebar({ activeTab, onTabChange, summary }: SidebarProps) {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Icon size={16} style={{ color: isActive ? 'var(--rzp-purple)' : 'var(--text-muted)' }} />
+                  <Icon size={16} style={{ color: isActive ? 'var(--rzp-blue)' : 'var(--text-muted)' }} />
                   <span>{item.label}</span>
                 </div>
 
@@ -142,7 +143,7 @@ export function Sidebar({ activeTab, onTabChange, summary }: SidebarProps) {
         </nav>
       </div>
 
-      {/* Agent Runtime Architecture Panel */}
+      {/* Agent Runtime Health Panel */}
       <div style={{
         padding: '16px',
         borderRadius: 'var(--radius-lg)',
@@ -152,7 +153,7 @@ export function Sidebar({ activeTab, onTabChange, summary }: SidebarProps) {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Cpu size={14} style={{ color: 'var(--rzp-purple)' }} />
+            <Cpu size={14} style={{ color: 'var(--rzp-blue)' }} />
             <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Agent Architecture
             </span>
