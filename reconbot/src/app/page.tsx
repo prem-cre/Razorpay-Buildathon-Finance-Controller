@@ -23,9 +23,39 @@ export default function Home() {
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [approvedRecordIds, setApprovedRecordIds] = useState<Set<string>>(new Set());
 
   const datasetData = useMemo(() => getDataset(currentDataset), [currentDataset]);
-  const { summary, records, exception_groups } = datasetData;
+  const { summary: rawSummary, records: rawRecords, exception_groups: rawGroups } = datasetData;
+
+  // Optimistic resolution overlay for approved actions
+  const records = useMemo(() => {
+    return rawRecords.map((r: ReconciledRecordView) => {
+      const key = r.id || r.payment_id;
+      if (approvedRecordIds.has(key)) {
+        return {
+          ...r,
+          match_status: 'matched' as const,
+          resolution_status: 'approved',
+        };
+      }
+      return r;
+    });
+  }, [rawRecords, approvedRecordIds]);
+
+  const summary = useMemo(() => {
+    const additionalApproved = approvedRecordIds.size;
+    const newMatched = rawSummary.auto_matched_count + additionalApproved;
+    const newRate = Number(((newMatched / rawSummary.total_records) * 100).toFixed(1));
+    const remainingExceptions = Math.max(0, rawSummary.exceptions_count - additionalApproved);
+
+    return {
+      ...rawSummary,
+      auto_matched_count: newMatched,
+      match_rate_percentage: newRate,
+      exceptions_count: remainingExceptions,
+    };
+  }, [rawSummary, approvedRecordIds]);
 
   const filteredRecords = useMemo(() => {
     if (!searchQuery) return records;
@@ -39,6 +69,7 @@ export default function Home() {
     );
   }, [records, searchQuery]);
 
+  // Global Keyboard Shortcuts (/, Esc)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -57,22 +88,33 @@ export default function Home() {
 
   const handleProcessingComplete = () => {
     setIsProcessing(false);
-    setToastMessage('Reconciliation Run Complete · ' + (summary.auto_matched_count + summary.fuzzy_matched_count) + ' / ' + summary.total_records + ' records matched (' + summary.match_rate_percentage + '%)');
+    setToastMessage('Reconciliation Run Complete: ' + summary.auto_matched_count + ' / ' + summary.total_records + ' records matched (' + summary.match_rate_percentage + '%)');
+    setTimeout(() => setToastMessage(null), 4000);
+  };
+
+  const handleApproveAction = (recordId: string) => {
+    setApprovedRecordIds((prev) => new Set([...prev, recordId]));
+    setToastMessage('Layer 3 Action Executed: Programmatically resolved & posted to General Ledger');
     setTimeout(() => setToastMessage(null), 4000);
   };
 
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--surface-canvas)' }}>
+      {/* Sidebar Navigation */}
       <Sidebar
         activeTab={activeTab}
         onTabChange={setActiveTab}
         summary={summary}
       />
 
+      {/* Main Workspace */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
         <Navbar
           currentDataset={currentDataset}
-          onDatasetChange={setCurrentDataset}
+          onDatasetChange={(ds) => {
+            setApprovedRecordIds(new Set());
+            setCurrentDataset(ds);
+          }}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
           onOpenCopilot={() => setIsCopilotOpen(true)}
@@ -80,6 +122,7 @@ export default function Home() {
           isReconciling={isProcessing}
         />
 
+        {/* Floating Toast Notification */}
         {toastMessage && (
           <div style={{
             position: 'fixed',
@@ -167,7 +210,7 @@ export default function Home() {
                   Root-cause clustered exceptions sorted by financial impact with progressive disclosure
                 </div>
               </div>
-              {exception_groups.map((group: ExceptionGroupSummary, idx: number) => (
+              {rawGroups.map((group: ExceptionGroupSummary, idx: number) => (
                 <ExceptionCategoryCard key={idx} group={group} onSelectRecord={setSelectedRecord} />
               ))}
             </div>
@@ -203,8 +246,17 @@ export default function Home() {
         </main>
       </div>
 
-      <AuditDrawer record={selectedRecord} onClose={() => setSelectedRecord(null)} />
+      {/* Forensic Audit Drawer with One-Click Approval */}
+      <AuditDrawer
+        record={selectedRecord}
+        onClose={() => setSelectedRecord(null)}
+        onApproveAction={handleApproveAction}
+      />
+
+      {/* Financial Copilot Drawer */}
       <FinancialCopilotDrawer isOpen={isCopilotOpen} onClose={() => setIsCopilotOpen(false)} summary={summary} records={records} />
+
+      {/* Live Processing Pipeline Modal */}
       <ProcessingModal isOpen={isProcessing} onComplete={handleProcessingComplete} summary={summary} />
     </div>
   );

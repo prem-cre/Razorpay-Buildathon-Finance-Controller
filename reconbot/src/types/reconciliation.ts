@@ -1,3 +1,16 @@
+export interface Layer3TriageInfo {
+  root_cause: string;
+  title: string;
+  risk_level: 'low' | 'medium' | 'high';
+  financial_impact_paise: number;
+  action_type: string;
+  action_label: string;
+  action_description: string;
+  evidence_chain: string[];
+  audit_hash: string;
+  approval_status: 'pending' | 'approved' | 'rejected' | 'executed';
+}
+
 import { ConfidenceLevel } from './canonical';
 
 export type RuleIdentifier = 
@@ -79,6 +92,8 @@ export interface ReconciledRecordView {
   injected_defect?: string | null;
   reasoning: string;
   audit_record: AuditRecord;
+  layer3_triage?: Layer3TriageInfo;
+  resolution_status?: string;
 }
 
 export interface ExceptionGroupSummary {

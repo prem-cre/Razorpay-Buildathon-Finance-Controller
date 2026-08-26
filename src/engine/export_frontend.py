@@ -26,6 +26,7 @@ if str(_ROOT) not in sys.path:
 from src.engine.ingest import ingest_dataset
 from src.engine.matcher import Layer1Matcher
 from src.engine.layer2 import Layer2Matcher
+from src.engine.layer3 import Layer3TriageEngine
 from src.engine.metrics import evaluate_against_manifest, evaluate_layered
 
 DATASETS = ("clean", "messy", "adversarial")
@@ -108,6 +109,7 @@ def build_dataset(ds: str) -> dict:
     layered = evaluate_layered(results, data_dir / "manifest.json")
 
     manifest = {e["record_key"]: e for e in json.load(open(data_dir / "manifest.json", encoding="utf-8"))}
+    l3_engine = Layer3TriageEngine(data.payments, data.orders, data.settlements, data.bank_txns, manifest)
     order_by_pay = {o.payment_reference: o for o in data.orders if o.payment_reference}
     result_by_key = {r.record_key: r for r in results}
 
@@ -188,6 +190,8 @@ def build_dataset(ds: str) -> dict:
                 "ground_truth_category": gt_cat,
                 "injected_defect": gt.get("injected_defect"),
             },
+            "layer3_triage": l3_engine.triage_record(p.payment_id, eval_l1) if "eval_l1" in locals() else l3_engine.triage_record(p.payment_id, r),
+            "resolution_status": "pending",
         })
 
     # ---- summary (real) --------------------------------------------------
@@ -271,8 +275,8 @@ def build_dataset(ds: str) -> dict:
                 "confidence_distribution": report["confidence_distribution"],
                 "status_distribution": report["status_distribution"],
                 "manifest_status_distribution": report["manifest_status_distribution"],
-                "matched_class": {k: v for k, v in mc.items() if k != "false_positive_records"},
-                "false_positive_records": mc["false_positive_records"],
+                "matched_class_vs_manifest": {k: v for k, v in report["matched_class_vs_manifest"].items() if k != "false_positive_records"},
+                "false_positive_records": report["matched_class_vs_manifest"]["false_positive_records"],
                 "totals": report["totals"],
             }}
 

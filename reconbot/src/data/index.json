@@ -7,13 +7,13 @@
   },
   "messy": {
     "dataset_name": "Messy Realistic Batch",
-    "match_rate": 20.5,
+    "match_rate": 59.0,
     "precision": 100.0,
     "records": 83
   },
   "adversarial": {
     "dataset_name": "Adversarial Held-Out Stress Batch",
-    "match_rate": 68.3,
+    "match_rate": 71.7,
     "precision": 100.0,
     "records": 60
   }
