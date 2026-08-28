@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'RazorpayX · Autonomous Multi-Source Financial Reconciliation Engine',
-  description: 'AI Agents for High-Stakes Finance Operations. Continuous 3-Way Reconciliation across Shopify, Razorpay PG, and Bank MT940 statement credits.',
+  title: 'ReconBot — Multi-Source Reconciliation',
+  description: 'A finance-controller agent that reconciles gateway settlements, bank credits and order records — with a measured match rate and an honest exception list.',
 };
 
 export default function RootLayout({

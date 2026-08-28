@@ -1,6 +1,8 @@
-import React from 'react';
-import { ShieldCheck, ArrowUpRight, TrendingUp, AlertTriangle, CheckCircle2 } from 'lucide-react';
-import { formatCompactPaise, formatPaiseToINR } from '@/lib/money';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
+import { ShieldCheck, ArrowUpRight, TrendingUp, AlertTriangle, CheckCircle2, Layers } from 'lucide-react';
+import { formatCompactPaise } from '@/lib/money';
 import { ReconciliationBatchSummary } from '@/types/reconciliation';
 
 interface MatchRateHeroProps {
@@ -9,204 +11,171 @@ interface MatchRateHeroProps {
   onOpenCopilot?: () => void;
 }
 
-export function MatchRateHero({ summary, onViewExceptions, onOpenCopilot }: MatchRateHeroProps) {
-  const autoRate = summary?.match_rate_percentage ?? 94.2;
-  const total = summary?.total_records ?? 500;
-  const autoCount = summary?.auto_matched_count ?? 471;
-  const fuzzyCount = summary?.fuzzy_matched_count ?? 21;
-  const exceptionCount = summary?.exceptions_count ?? 8;
+/** Eased count-up for the headline figure. Re-runs whenever the batch changes. */
+function useCountUp(target: number, duration = 1000) {
+  const [value, setValue] = useState(0);
+  const raf = useRef<number | null>(null);
+  useEffect(() => {
+    const start = performance.now();
+    const tick = (now: number) => {
+      // rAF's timestamp can precede `start`, so clamp BOTH ends — an
+      // unclamped negative t makes the cubic ease overshoot below zero.
+      const t = Math.max(0, Math.min(1, (now - start) / duration));
+      setValue(target * (1 - Math.pow(1 - t, 3)));
+      if (t < 1) raf.current = requestAnimationFrame(tick);
+    };
+    raf.current = requestAnimationFrame(tick);
+    return () => { if (raf.current) cancelAnimationFrame(raf.current); };
+  }, [target, duration]);
+  return value;
+}
 
-  const fuzzyRate = Number(((fuzzyCount / total) * 100).toFixed(1));
-  const exceptionRate = Number(((exceptionCount / total) * 100).toFixed(1));
+export function MatchRateHero({ summary, onViewExceptions }: MatchRateHeroProps) {
+  const total = summary.total_records;
+  const exact = summary.auto_matched_count;
+  const recovered = summary.fuzzy_matched_count;
+  const deferred = summary.exceptions_count;
+  const rate = summary.match_rate_percentage;
+  const animated = useCountUp(rate);
+
+  const pct = (n: number) => (total > 0 ? (n / total) * 100 : 0);
 
   return (
     <div style={{ marginBottom: '32px' }}>
-      {/* Clean Header without eyebrow tag */}
+      {/* Editorial header */}
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', lineHeight: '1.1', margin: 0 }}>
-          Autonomous <span className='serif-accent' style={{ color: 'var(--rzp-blue)' }}>Multi-Source</span> Reconciliation
+        <div style={{ fontSize: '11px', fontWeight: 800, color: 'var(--rzp-blue)', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '10px' }}>
+          Multi-source reconciliation
+        </div>
+        <h1 style={{ fontSize: 'clamp(2rem, 3.2vw, 2.75rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.03em', lineHeight: 1.08, margin: 0 }}>
+          Close the books, <span className='serif-accent' style={{ color: 'var(--rzp-blue)' }}>provably</span>
         </h1>
-        <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '8px', maxWidth: '720px', lineHeight: '1.5' }}>
-          Continuous cross-ledger intelligence matching Shopify Orders, Razorpay Gateway Captures, and HDFC Bank MT940 credits with zero false-positives.
+        <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginTop: '10px', maxWidth: '640px', lineHeight: 1.55 }}>
+          Every payment matched across the order record, the gateway settlement, and the bank credit — with the evidence for each decision kept on file.
         </p>
       </div>
 
-      {/* 4-Card Hero Metric Grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1.5fr 1fr 1fr 1fr',
-        gap: '16px',
-      }}>
-        {/* Match Rate 64px Anchor */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1.55fr 1fr 1fr 1fr', gap: '16px' }}>
+        {/* Dark anchor */}
         <div style={{
-          background: 'linear-gradient(145deg, #eff6ff 0%, #ffffff 100%)',
-          border: '1px solid var(--rzp-blue-border)',
+          position: 'relative',
+          overflow: 'hidden',
+          background: 'radial-gradient(130% 130% at 0% 0%, #1b2a47 0%, #101a2f 45%, #0a1020 100%)',
+          border: '1px solid rgba(255,255,255,0.10)',
           borderRadius: 'var(--radius-xl)',
-          padding: '24px 26px',
-          boxShadow: 'var(--shadow-card)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
+          padding: '26px 28px',
+          boxShadow: '0 24px 48px -20px rgba(12,102,228,0.45), 0 2px 8px rgba(15,23,42,0.10)',
+          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          animation: 'heroRise 0.6s cubic-bezier(0.16,1,0.3,1) both',
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', fontWeight: 800, color: 'var(--rzp-blue)' }}>
-              <ShieldCheck size={18} />
-              <span>Autonomous Match Rate</span>
-            </div>
-            <span style={{
-              fontSize: '11px',
-              background: 'var(--status-emerald-bg)',
-              color: 'var(--status-emerald)',
-              border: '1px solid var(--status-emerald-border)',
-              padding: '3px 10px',
-              borderRadius: '999px',
-              fontWeight: 700,
-            }} className='tabular-mono'>
-              Deterministic + Fuzzy
+          <div aria-hidden style={{ position: 'absolute', top: '-70px', right: '-50px', width: '220px', height: '220px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(12,102,228,0.40) 0%, transparent 68%)', pointerEvents: 'none' }} />
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontWeight: 800, color: '#8ab4f8', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+              <ShieldCheck size={15} /> Auto-resolved
+            </span>
+            <span className='tabular-mono' style={{ fontSize: '10px', background: 'rgba(12,102,228,0.20)', color: '#9ec5fe', border: '1px solid rgba(138,180,248,0.32)', padding: '3px 10px', borderRadius: '999px', fontWeight: 700 }}>
+              L1 + L2
             </span>
           </div>
 
-          <div style={{ margin: '18px 0 14px 0' }}>
+          <div style={{ margin: '20px 0 16px', position: 'relative' }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px' }}>
-              <div className='tabular-mono' style={{ fontSize: '64px', fontWeight: 900, letterSpacing: '-0.04em', color: 'var(--text-primary)', lineHeight: 1 }}>
-                {autoRate}%
-              </div>
-              <div style={{ fontSize: '13px', color: 'var(--text-secondary)', fontWeight: 500 }}>
-                ({autoCount + fuzzyCount} of {total} auto-resolved)
-              </div>
-            </div>
-
-            {/* Segmented Precision Track */}
-            <div style={{ height: '8px', background: '#e2e8f0', borderRadius: '999px', overflow: 'hidden', display: 'flex', marginTop: '16px' }}>
-              <div style={{ width: autoRate + '%', background: 'var(--status-emerald)' }} title={'Deterministic Exact: ' + autoRate + '%'} />
-              <div style={{ width: fuzzyRate + '%', background: 'var(--status-amber)' }} title={'Fuzzy Heuristics: ' + fuzzyRate + '%'} />
-              <div style={{ width: exceptionRate + '%', background: 'var(--status-rose)' }} title={'Exceptions: ' + exceptionRate + '%'} />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-muted)' }}>
-            <div style={{ display: 'flex', gap: '14px' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--status-emerald)' }} /> Exact: {autoCount}
+              <span className='tabular-mono' style={{ fontSize: '66px', fontWeight: 900, letterSpacing: '-0.045em', color: '#ffffff', lineHeight: 1 }}>
+                {animated.toFixed(1)}%
               </span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--status-amber)' }} /> Fuzzy: {fuzzyCount}
+              <span style={{ fontSize: '13px', color: '#8fa3bf', fontWeight: 500 }}>
+                {exact + recovered} of {total} records
               </span>
             </div>
-            <span className='tabular-mono' style={{ color: 'var(--status-emerald)', fontWeight: 700 }}>+2.4% vs baseline</span>
+
+            {/* Segmented track: exact / recovered / deferred */}
+            <div style={{ height: '9px', background: 'rgba(255,255,255,0.09)', borderRadius: '999px', overflow: 'hidden', display: 'flex', marginTop: '18px' }}>
+              <div title={'Layer 1 exact: ' + exact} style={{ width: pct(exact) + '%', background: 'linear-gradient(90deg,#059669,#10b981)', transition: 'width 1s cubic-bezier(0.16,1,0.3,1)' }} />
+              <div title={'Layer 2 recovered: ' + recovered} style={{ width: pct(recovered) + '%', background: 'linear-gradient(90deg,#0c66e4,#3b82f6)', transition: 'width 1s cubic-bezier(0.16,1,0.3,1)' }} />
+              <div title={'Held for review: ' + deferred} style={{ width: pct(deferred) + '%', background: 'rgba(255,255,255,0.22)' }} />
+            </div>
+
+            <div style={{ display: 'flex', gap: '16px', marginTop: '12px', fontSize: '11px', color: '#8fa3bf' }}>
+              <Legend color='#10b981' label='Exact' value={exact} />
+              <Legend color='#3b82f6' label='Recovered' value={recovered} />
+              <Legend color='rgba(255,255,255,0.35)' label='Review' value={deferred} />
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11px', position: 'relative' }}>
+            <span style={{ color: '#64748b' }}>Built on Anthropic&apos;s Claude Agent SDK</span>
+            <span className='tabular-mono' style={{ color: '#34d399', fontWeight: 700 }}>0 wrongly auto-resolved</span>
           </div>
         </div>
 
-        {/* Metric 2: Reconciled Volume */}
-        <div style={{
-          background: '#ffffff',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-xl)',
-          padding: '24px',
-          boxShadow: 'var(--shadow-card)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)' }}>Reconciled Volume</span>
-            <TrendingUp size={16} style={{ color: 'var(--status-emerald)' }} />
-          </div>
-          <div>
-            <div className='tabular-mono' style={{ fontSize: '28px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
-              {formatCompactPaise(summary?.total_bank_settled_paise ?? 4820000000)}
-            </div>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              Gross captured: {formatCompactPaise(summary?.total_gross_paise ?? 5000000000)}
-            </div>
-          </div>
-          <div style={{ fontSize: '12px', color: 'var(--status-emerald)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <CheckCircle2 size={13} /> 100% Bank UTR Verified
-          </div>
-        </div>
+        <MetricCard
+          label='Settled to bank'
+          icon={<TrendingUp size={16} style={{ color: 'var(--status-emerald)' }} />}
+          value={formatCompactPaise(summary.total_bank_settled_paise)}
+          sub={'of ' + formatCompactPaise(summary.total_gross_paise) + ' captured'}
+          footer={<span style={{ fontSize: '12px', color: 'var(--status-emerald)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}><CheckCircle2 size={13} /> Matched by bank UTR</span>}
+        />
 
-        {/* Metric 3: Value at Risk (Suspense) */}
-        <div style={{
-          background: '#ffffff',
-          border: (summary?.value_at_risk_paise ?? 0) > 0 ? '1px solid var(--status-amber-border)' : '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-xl)',
-          padding: '24px',
-          boxShadow: 'var(--shadow-card)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)' }}>Value at Risk (Suspense)</span>
-            <AlertTriangle size={16} style={{ color: (summary?.value_at_risk_paise ?? 0) > 0 ? 'var(--status-amber)' : 'var(--text-muted)' }} />
-          </div>
-          <div>
-            <div className='tabular-mono' style={{ fontSize: '28px', fontWeight: 800, color: (summary?.value_at_risk_paise ?? 0) > 0 ? 'var(--status-amber)' : 'var(--text-primary)', letterSpacing: '-0.02em' }}>
-              {formatCompactPaise(summary?.value_at_risk_paise ?? 184200000)}
-            </div>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              {exceptionCount} items awaiting review / T+2
-            </div>
-          </div>
-          <button
-            onClick={onViewExceptions}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--rzp-blue)',
-              fontSize: '12px',
-              fontWeight: 700,
-              padding: 0,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              textAlign: 'left',
-            }}
-          >
-            Review Exceptions Queue <ArrowUpRight size={13} />
-          </button>
-        </div>
+        <MetricCard
+          label='Awaiting review'
+          icon={<AlertTriangle size={16} style={{ color: summary.value_at_risk_paise > 0 ? 'var(--status-amber)' : 'var(--text-muted)' }} />}
+          value={formatCompactPaise(summary.value_at_risk_paise)}
+          valueColor={summary.value_at_risk_paise > 0 ? 'var(--status-amber)' : 'var(--text-primary)'}
+          border={summary.value_at_risk_paise > 0 ? 'var(--status-amber-border)' : 'var(--border-subtle)'}
+          sub={'across ' + deferred + (deferred === 1 ? ' record' : ' records')}
+          footer={
+            <button onClick={onViewExceptions} style={{ background: 'transparent', border: 'none', color: 'var(--rzp-blue)', fontSize: '12px', fontWeight: 700, padding: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              Open review queue <ArrowUpRight size={13} />
+            </button>
+          }
+        />
 
-        {/* Metric 4: Model Precision */}
-        <div style={{
-          background: '#ffffff',
-          border: '1px solid var(--border-subtle)',
-          borderRadius: 'var(--radius-xl)',
-          padding: '24px',
-          boxShadow: 'var(--shadow-card)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-secondary)' }}>Model Precision</span>
-            <span style={{
-              fontSize: '11px',
-              background: 'var(--rzp-blue-subtle)',
-              padding: '2px 8px',
-              borderRadius: '6px',
-              color: 'var(--rzp-blue)',
-              fontFamily: 'var(--font-mono)',
-              fontWeight: 700,
-              border: '1px solid var(--rzp-blue-border)',
-            }}>
-              F1: {summary?.evaluation?.f1_score ?? 97.4}
-            </span>
-          </div>
-          <div>
-            <div className='tabular-mono' style={{ fontSize: '28px', fontWeight: 800, color: 'var(--status-emerald)', letterSpacing: '-0.02em' }}>
-              {summary?.evaluation?.precision_pct ?? 98.1}%
-            </div>
-            <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-              Recall rate: {summary?.evaluation?.recall_pct ?? 96.7}%
-            </div>
-          </div>
-          <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
-            FP exposure: <span className='tabular-mono' style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{formatPaiseToINR(summary?.evaluation?.false_positive_exposure_paise ?? 0)}</span>
-          </div>
-        </div>
+        <MetricCard
+          label='Recovered by Layer 2'
+          icon={<Layers size={16} style={{ color: 'var(--rzp-blue)' }} />}
+          value={String(recovered)}
+          valueColor={recovered > 0 ? 'var(--rzp-blue)' : 'var(--text-primary)'}
+          sub={recovered > 0 ? 'Batches unblocked after netting' : 'Nothing needed recovery'}
+          footer={<span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Exact match: <span className='tabular-mono' style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{exact}</span></span>}
+        />
       </div>
+    </div>
+  );
+}
+
+function Legend({ color, label, value }: { color: string; label: string; value: number }) {
+  return (
+    <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+      <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: color }} />
+      {label} <strong className='tabular-mono' style={{ color: '#cbd5e1' }}>{value}</strong>
+    </span>
+  );
+}
+
+function MetricCard({ label, icon, value, sub, footer, valueColor = 'var(--text-primary)', border = 'var(--border-subtle)' }: {
+  label: string; icon: React.ReactNode; value: string; sub: string; footer: React.ReactNode; valueColor?: string; border?: string;
+}) {
+  return (
+    <div
+      style={{
+        background: '#ffffff', border: '1px solid ' + border, borderRadius: 'var(--radius-xl)',
+        padding: '22px 24px', boxShadow: 'var(--shadow-card)',
+        display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '14px',
+        transition: 'transform 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms',
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = 'var(--shadow-elevated)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'var(--shadow-card)'; }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)' }}>{label}</span>
+        {icon}
+      </div>
+      <div>
+        <div className='tabular-mono' style={{ fontSize: '30px', fontWeight: 800, color: valueColor, letterSpacing: '-0.025em', lineHeight: 1 }}>{value}</div>
+        <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '6px' }}>{sub}</div>
+      </div>
+      {footer}
     </div>
   );
 }

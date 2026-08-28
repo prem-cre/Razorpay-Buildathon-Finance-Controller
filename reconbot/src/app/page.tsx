@@ -4,6 +4,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar, NavTab } from '@/components/layout/Sidebar';
 import { MatchRateHero } from '@/features/dashboard/MatchRateHero';
+import { AgentPipelineCanvas } from '@/features/dashboard/AgentPipelineCanvas';
+import { TelemetryStream } from '@/features/dashboard/TelemetryStream';
 import { FlowWaterfall } from '@/features/dashboard/FlowWaterfall';
 import { ReconciliationTable } from '@/features/reconciliation/ReconciliationTable';
 import { AuditDrawer } from '@/features/reconciliation/AuditDrawer';
@@ -46,7 +48,11 @@ export default function Home() {
   const summary = useMemo(() => {
     const additionalApproved = approvedRecordIds.size;
     const newMatched = rawSummary.auto_matched_count + additionalApproved;
-    const newRate = Number(((newMatched / rawSummary.total_records) * 100).toFixed(1));
+    // Resolution rate counts BOTH deterministic (Layer 1) and recovered
+    // (Layer 2) records — omitting fuzzy under-reports the engine.
+    const newRate = Number(
+      (((newMatched + rawSummary.fuzzy_matched_count) / rawSummary.total_records) * 100).toFixed(1)
+    );
     const remainingExceptions = Math.max(0, rawSummary.exceptions_count - additionalApproved);
 
     return {
@@ -94,7 +100,7 @@ export default function Home() {
 
   const handleApproveAction = (recordId: string) => {
     setApprovedRecordIds((prev) => new Set([...prev, recordId]));
-    setToastMessage('Layer 3 Action Executed: Programmatically resolved & posted to General Ledger');
+    setToastMessage('Record marked resolved and moved out of the review queue');
     setTimeout(() => setToastMessage(null), 4000);
   };
 
@@ -189,7 +195,7 @@ export default function Home() {
                   3-Way Multi-Source Reconciliation Grid
                 </h1>
                 <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                  Cross-ledger line-item comparison: Shopify Order Gross vs Razorpay PG Net vs Bank MT940 Credit
+                  Line-item three-way match: order total vs gateway settlement vs bank credit
                 </div>
               </div>
               <ReconciliationTable
@@ -220,13 +226,19 @@ export default function Home() {
             <div>
               <div style={{ marginBottom: '20px' }}>
                 <h1 style={{ fontSize: '28px', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
-                  Model Integrity & Adversarial Stress Benchmarks
+                  Evaluation & engine integrity
                 </h1>
                 <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                  Rigorous evaluation metrics against 50 injected anomalies across clean, messy, and adversarial datasets
+                  Engine output diffed against the ground-truth manifest, including the held-out adversarial batch
                 </div>
               </div>
-              <EvaluationSummary summary={summary} />
+              <EvaluationSummary summary={summary} report={datasetData.evaluation_report as never} />
+              <div style={{ marginTop: '28px' }}>
+                <AgentPipelineCanvas summary={summary} />
+              </div>
+              <div style={{ marginTop: '28px' }}>
+                <TelemetryStream records={records} />
+              </div>
             </div>
           )}
 
@@ -237,7 +249,7 @@ export default function Home() {
                   Multi-Source File Ingestion Pipeline
                 </h1>
                 <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                  Upload raw settlement exports, bank MT940 files, and Shopify CSV batches
+                  Gateway settlement export, bank statement, and order export
                 </div>
               </div>
               <MultiSourceDropzone />

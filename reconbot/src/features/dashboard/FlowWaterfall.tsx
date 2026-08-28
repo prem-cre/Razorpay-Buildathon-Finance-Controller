@@ -9,11 +9,11 @@ interface FlowWaterfallProps {
 
 export function FlowWaterfall({ summary }: FlowWaterfallProps) {
   const steps = [
-    { label: '1. Shopify Gross Orders', amount: summary?.total_gross_paise ?? 5000000000, color: 'var(--text-primary)', desc: 'Total captured checkouts across channels' },
-    { label: '2. Less: MDR Gateway Fee', amount: -(summary?.total_fees_paise ?? 15240000), color: 'var(--status-rose)', desc: 'Calculated merchant gateway commission' },
-    { label: '3. Less: 18% GST on Fee', amount: -(summary?.total_tax_paise ?? 2743200), color: 'var(--status-rose)', desc: 'Statutory GST on processing charges' },
-    { label: '4. Expected Settlement Net', amount: summary?.total_net_expected_paise ?? 4820000000, color: 'var(--rzp-blue)', desc: 'Expected bank credit ledger total' },
-    { label: '5. Bank MT940 Settled', amount: summary?.total_bank_settled_paise ?? 4820000000, color: 'var(--status-emerald)', desc: 'HDFC verified bank deposits' },
+    { label: '1. Shopify Gross Orders', amount: summary.total_gross_paise, color: 'var(--text-primary)', desc: 'Total captured checkouts across channels' },
+    { label: '2. Less: MDR Gateway Fee', amount: -(summary.total_fees_paise), color: 'var(--status-rose)', desc: 'Calculated merchant gateway commission' },
+    { label: '3. Less: 18% GST on Fee', amount: -(summary.total_tax_paise), color: 'var(--status-rose)', desc: 'Statutory GST on processing charges' },
+    { label: '4. Expected Settlement Net', amount: summary.total_net_expected_paise, color: 'var(--rzp-blue)', desc: 'Expected bank credit ledger total' },
+    { label: '5. Bank credit received', amount: summary.total_bank_settled_paise, color: 'var(--status-emerald)', desc: 'Statement deposits matched by UTR' },
   ];
 
   return (
@@ -47,7 +47,7 @@ export function FlowWaterfall({ summary }: FlowWaterfallProps) {
           borderRadius: '999px',
           border: '1px solid var(--rzp-blue-border)',
         }}>
-          3-WAY HASH VERIFIED
+          UTR-VERIFIED
         </span>
       </div>
 

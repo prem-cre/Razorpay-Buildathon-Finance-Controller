@@ -26,7 +26,7 @@ if str(_ROOT) not in sys.path:
 from src.engine.ingest import ingest_dataset
 from src.engine.matcher import Layer1Matcher
 from src.engine.layer2 import Layer2Matcher
-from src.engine.layer3 import Layer3TriageEngine
+from src.engine.layer3 import Layer3Diagnosis
 from src.engine.metrics import evaluate_against_manifest, evaluate_layered
 
 DATASETS = ("clean", "messy", "adversarial")
@@ -105,11 +105,11 @@ def build_dataset(ds: str) -> dict:
     data = ingest_dataset(data_dir)
     l1_results = Layer1Matcher(data).match()
     results = Layer2Matcher(data, l1_results).refine()
+    diagnoses = Layer3Diagnosis(data).diagnose_all(results)
     report = evaluate_against_manifest(results, data_dir / "manifest.json")
     layered = evaluate_layered(results, data_dir / "manifest.json")
 
     manifest = {e["record_key"]: e for e in json.load(open(data_dir / "manifest.json", encoding="utf-8"))}
-    l3_engine = Layer3TriageEngine(data.payments, data.orders, data.settlements, data.bank_txns, manifest)
     order_by_pay = {o.payment_reference: o for o in data.orders if o.payment_reference}
     result_by_key = {r.record_key: r for r in results}
 
@@ -144,8 +144,10 @@ def build_dataset(ds: str) -> dict:
         else:
             reason = ev.get("reason", "Deferred to Layer 3.")
 
-        # engine-known category only (Layer 1 knows orphan; everything else is null)
-        engine_cat = "orphan_payment" if status == "orphan_payment" else None
+        # Engine-inferred category comes from Layer 3 diagnosis (never the
+        # manifest). Matched records have no diagnosis.
+        diagnosis = diagnoses.get(p.payment_id)
+        engine_cat = diagnosis["category"] if diagnosis else None
 
         records.append({
             "id": p.payment_id,
@@ -170,6 +172,7 @@ def build_dataset(ds: str) -> dict:
             "ground_truth_category": gt_cat if gt_cat != "matched" else None,
             "injected_defect": gt.get("injected_defect"),
             "reasoning": reason,
+            "diagnosis": diagnosis,
             "audit_record": {
                 "record_key": p.payment_id,
                 "layer": r.layer,
@@ -190,7 +193,6 @@ def build_dataset(ds: str) -> dict:
                 "ground_truth_category": gt_cat,
                 "injected_defect": gt.get("injected_defect"),
             },
-            "layer3_triage": l3_engine.triage_record(p.payment_id, eval_l1) if "eval_l1" in locals() else l3_engine.triage_record(p.payment_id, r),
             "resolution_status": "pending",
         })
 
@@ -238,36 +240,43 @@ def build_dataset(ds: str) -> dict:
         },
     }
 
-    # ---- exception groups (cluster engine exceptions by ground truth) -----
+    # ---- exception groups (clustered by the ENGINE's Layer 3 diagnosis) ---
+    # Ground truth is never used to build the UI — only Layer 3's inference.
     buckets: dict[str, list] = defaultdict(list)
     for rec in records:
-        if rec["match_status"] in ("unresolved", "orphan_payment"):
-            gt = rec["ground_truth_category"]
-            key = gt if gt else ("orphan_payment" if rec["match_status"] == "orphan_payment"
-                                 else "_deferred_clean")
-            buckets[key].append(rec)
+        d = rec.get("diagnosis")
+        if d:
+            buckets[d["category"]].append(rec)
 
+    _DISPO = {"auto_resolvable": "auto", "human_review": "human_review", "escalate": "escalate"}
     groups = []
     for cat, recs in buckets.items():
-        if cat == "_deferred_clean":
-            title, sev, rtype, auto, expl, action = DEFERRED_CLEAN
-            fe_cat = "amount_unknown"  # closest existing union member for typing
-        else:
-            title, sev, rtype, auto, expl, action = CAT_META.get(
-                cat, (cat, "medium", "human_review", False, "", ""))
-            fe_cat = cat
+        d0 = recs[0]["diagnosis"]
         groups.append({
-            "category": fe_cat,
-            "title": title,
+            "category": cat,
+            "title": d0["title"],
             "count": len(recs),
             "total_impact_paise": sum(abs(r["net_paise"]) for r in recs),
-            "auto_resolvable": auto,
-            "resolution_type": rtype,
-            "explanation": expl,
-            "recommended_action": action,
+            "auto_resolvable": all(r["diagnosis"]["disposition"] == "auto_resolvable" for r in recs),
+            "resolution_type": _DISPO.get(d0["disposition"], "human_review"),
+            "explanation": d0["evidence_chain"][1] if len(d0["evidence_chain"]) > 1 else d0["evidence_chain"][0],
+            "recommended_action": d0["recommended_action"],
             "records": recs,
         })
     groups.sort(key=lambda g: g["total_impact_paise"], reverse=True)
+
+    # ---- Layer 3 diagnostic accuracy vs manifest (fair: diagnosis is blind) --
+    l3_correct = l3_total = 0
+    l3_confusion = []
+    for k, d in diagnoses.items():
+        true = manifest.get(k, {}).get("expected_match_status")
+        if true == "matched" or true is None:
+            continue  # batch-poisoned clean residue, not a defect to diagnose
+        l3_total += 1
+        if d["category"] == true:
+            l3_correct += 1
+        else:
+            l3_confusion.append({"record_key": k, "true": true, "diagnosed": d["category"]})
 
     return {"summary": summary, "records": records, "exception_groups": groups,
             "evaluation_report": {
@@ -278,6 +287,12 @@ def build_dataset(ds: str) -> dict:
                 "matched_class_vs_manifest": {k: v for k, v in report["matched_class_vs_manifest"].items() if k != "false_positive_records"},
                 "false_positive_records": report["matched_class_vs_manifest"]["false_positive_records"],
                 "totals": report["totals"],
+                "layer3_diagnosis": {
+                    "exceptions_diagnosed": l3_total,
+                    "correct": l3_correct,
+                    "accuracy": round(l3_correct / l3_total, 4) if l3_total else 1.0,
+                    "confusion": l3_confusion,
+                },
             }}
 
 

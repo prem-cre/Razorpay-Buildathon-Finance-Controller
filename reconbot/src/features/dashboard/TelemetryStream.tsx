@@ -1,121 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import { Terminal, Shield, CheckCircle2, AlertTriangle, ArrowRight, Bot, Cpu, Sparkles } from 'lucide-react';
+'use client';
 
-interface TelemetryEvent {
-  id: string;
-  timestamp: string;
-  layer: string;
-  event: string;
-  status: 'SUCCESS' | 'WARNING' | 'INFO';
-  confidence: number;
+import React, { useState, useEffect, useMemo } from 'react';
+import { Terminal, CheckCircle2, AlertTriangle, Clock, HelpCircle } from 'lucide-react';
+import { ReconciledRecordView } from '@/types/reconciliation';
+import { formatTruncatedId } from '@/lib/formatters';
+
+interface TelemetryStreamProps {
+  records: ReconciledRecordView[];
 }
 
-const mockEvents: TelemetryEvent[] = [
-  { id: '1', timestamp: '10:14:02.112', layer: 'L1: Deterministic', event: 'Rule R1.1 Exact 3-Way Match executed for pay_00001XkL9v7 (Shopify #1001 vs HDFC3513900001)', status: 'SUCCESS', confidence: 99.8 },
-  { id: '2', timestamp: '10:14:02.128', layer: 'L1: Deterministic', event: 'Rule R1.1 Exact 3-Way Match executed for pay_00002XkL9v14 (Shopify #1002 vs HDFC3513900002)', status: 'SUCCESS', confidence: 99.7 },
-  { id: '3', timestamp: '10:14:02.145', layer: 'L2: Fuzzy OCR', event: 'Rule R2.1 Fuzzy UTR prefix match (HDFC3513... vs HDFC-3513) resolved within 1 character distance', status: 'SUCCESS', confidence: 92.4 },
-  { id: '4', timestamp: '10:14:02.162', layer: 'L1: Deterministic', event: 'Rule R1.5 MDR Fee tolerance evaluation: +2.40 rounding delta accepted under 5 threshold', status: 'WARNING', confidence: 88.5 },
-  { id: '5', timestamp: '10:14:02.180', layer: 'L3: Ray AI', event: 'Rule R3.1 LLM Anomaly diagnosis: T+2 settlement clearing window detected. No accounting adjustment required.', status: 'INFO', confidence: 94.0 },
-  { id: '6', timestamp: '10:14:02.195', layer: 'L3: Ray AI', event: 'Dispute Hold DISP_2026_8819 isolated to Suspense Ledger. Zero false-positive auto-post prevented.', status: 'WARNING', confidence: 86.2 },
-];
+const STATUS_STYLE: Record<string, { color: string; bg: string; border: string; icon: React.ElementType; label: string }> = {
+  matched: { color: 'var(--status-emerald)', bg: 'var(--status-emerald-bg)', border: 'var(--status-emerald-border)', icon: CheckCircle2, label: 'MATCHED' },
+  awaiting_settlement: { color: 'var(--status-amber)', bg: 'var(--status-amber-bg)', border: 'var(--status-amber-border)', icon: Clock, label: 'AWAITING' },
+  orphan_payment: { color: 'var(--rzp-purple)', bg: 'var(--rzp-purple-subtle)', border: 'var(--status-violet-border)', icon: AlertTriangle, label: 'ORPHAN' },
+  unresolved: { color: 'var(--text-muted)', bg: 'var(--surface-interactive)', border: 'var(--border-subtle)', icon: HelpCircle, label: 'REVIEW' },
+};
 
-export function TelemetryStream() {
-  const [events, setEvents] = useState<TelemetryEvent[]>(mockEvents);
+/**
+ * Decision log — replays this batch's ACTUAL engine decisions, one row per real
+ * record: real payment id, the rule that fired, the layer, the confidence band.
+ * Nothing here is synthesised.
+ */
+export function TelemetryStream({ records }: TelemetryStreamProps) {
+  const ordered = useMemo(() => records.slice(0, 40), [records]);
+  const [visibleCount, setVisibleCount] = useState(8);
 
   useEffect(() => {
+    setVisibleCount(Math.min(8, ordered.length));
+    if (ordered.length <= 8) return;
     const interval = setInterval(() => {
-      const newEvt: TelemetryEvent = {
-        id: Math.random().toString(),
-        timestamp: new Date().toLocaleTimeString('en-IN', { hour12: false }) + '.' + Math.floor(Math.random() * 900 + 100),
-        layer: Math.random() > 0.4 ? 'L1: Deterministic' : 'L2: Fuzzy Match',
-        event: 'Stream packet verified for order #' + Math.floor(Math.random() * 800 + 1000) + ' via HDFC Gateway pipeline',
-        status: 'SUCCESS',
-        confidence: Number((Math.random() * 2 + 98).toFixed(1)),
-      };
-      setEvents((prev) => [newEvt, ...prev.slice(0, 6)]);
-    }, 3500);
-
+      setVisibleCount((prev) => (prev >= ordered.length ? Math.min(8, ordered.length) : prev + 1));
+    }, 1500);
     return () => clearInterval(interval);
-  }, []);
+  }, [ordered]);
+
+  const shown = ordered.slice(0, visibleCount);
 
   return (
     <div style={{
-      background: 'var(--dark-workspace)',
-      border: '1px solid var(--dark-border)',
+      background: '#ffffff',
+      border: '1px solid var(--border-subtle)',
       borderRadius: 'var(--radius-xl)',
       padding: '24px 28px',
-      boxShadow: 'var(--shadow-dark-card)',
-      color: '#ffffff',
+      boxShadow: 'var(--shadow-card)',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
-            width: '28px',
-            height: '28px',
-            borderRadius: 'var(--radius-sm)',
-            background: 'linear-gradient(135deg, #7c3aed 0%, #ec4899 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <Terminal size={14} style={{ color: '#ffffff' }} />
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Terminal size={16} style={{ color: 'var(--rzp-blue)' }} />
+            <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+              Decision log
+            </span>
           </div>
-          <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--dark-text-primary)' }}>
-            Real-Time Engine Telemetry & Chain-of-Thought Stream
-          </span>
+          <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+            Replaying the engine&apos;s real decisions for this batch, in order
+          </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--status-emerald)', fontWeight: 700 }}>
-          <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--status-emerald)', boxShadow: '0 0 6px var(--status-emerald)' }} />
-          <span>WebSocket Stream Connected (0.4ms latency)</span>
-        </div>
+        <span className='tabular-mono' style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 700 }}>
+          {ordered.length} shown
+        </span>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        {events.map((evt) => (
-          <div
-            key={evt.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '12px 16px',
-              borderRadius: 'var(--radius-md)',
-              background: 'var(--dark-surface)',
-              border: '1px solid var(--dark-border)',
-              fontSize: '12px',
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1 }}>
-              <span className='tabular-mono' style={{ color: 'var(--dark-text-muted)', fontSize: '11px', fontWeight: 600 }}>
-                {evt.timestamp}
-              </span>
-              <span
-                style={{
-                  fontSize: '11px',
-                  fontWeight: 700,
-                  padding: '2px 8px',
-                  borderRadius: '4px',
-                  background: 'rgba(124, 58, 237, 0.2)',
-                  color: '#c4b5fd',
-                  fontFamily: 'var(--font-mono)',
-                  border: '1px solid rgba(124, 58, 237, 0.4)',
-                }}
-              >
-                {evt.layer}
-              </span>
-              <span style={{ color: 'var(--dark-text-secondary)', fontWeight: 500 }}>
-                {evt.event}
-              </span>
-            </div>
+        {shown.map((r) => {
+          const s = STATUS_STYLE[r.match_status] || STATUS_STYLE.unresolved;
+          const Icon = s.icon;
+          const layer = r.audit_record?.layer ?? 1;
+          return (
+            <div
+              key={r.id}
+              style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '11px 16px', borderRadius: 'var(--radius-md)',
+                background: '#f8fafc', border: '1px solid var(--border-subtle)', fontSize: '12px',
+                animation: 'fadeInUp 0.35s cubic-bezier(0.16,1,0.3,1) both',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, minWidth: 0 }}>
+                <span className='tabular-mono' style={{ color: 'var(--text-primary)', fontSize: '11px', fontWeight: 700, flexShrink: 0 }}>
+                  {formatTruncatedId(r.payment_id)}
+                </span>
+                <span
+                  className='tabular-mono'
+                  style={{
+                    fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px',
+                    background: layer === 2 ? 'var(--rzp-blue-subtle)' : 'var(--surface-interactive)',
+                    color: layer === 2 ? 'var(--rzp-blue)' : 'var(--text-secondary)',
+                    border: '1px solid ' + (layer === 2 ? 'var(--rzp-blue-border)' : 'var(--border-subtle)'),
+                    flexShrink: 0,
+                  }}
+                >
+                  {r.rule_applied || 'no rule'}
+                </span>
+                <span style={{ color: 'var(--text-muted)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {r.order_name} · {r.payment_method.toUpperCase()}
+                </span>
+              </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className='tabular-mono' style={{ fontSize: '11px', color: 'var(--status-emerald)', fontWeight: 700 }}>
-                {evt.confidence}% conf
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+                <span style={{
+                  display: 'flex', alignItems: 'center', gap: '4px',
+                  fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '999px',
+                  background: s.bg, color: s.color, border: '1px solid ' + s.border,
+                }}>
+                  <Icon size={11} /> {s.label}
+                </span>
+                <span className='tabular-mono' style={{ fontSize: '10px', color: 'var(--text-muted)', fontWeight: 700, width: '52px', textAlign: 'right' }}>
+                  L{layer} · {r.confidence}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

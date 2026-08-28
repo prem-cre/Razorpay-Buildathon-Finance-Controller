@@ -1,17 +1,19 @@
-export interface Layer3TriageInfo {
-  root_cause: string;
+import { ConfidenceLevel } from './canonical';
+
+/**
+ * Layer 3 diagnosis — inferred from the real data (currency, refund fields,
+ * batch bank gap, sibling structure), never from ground truth. It explains an
+ * exception and recommends a human action; it does NOT resolve or execute.
+ */
+export interface Layer3Diagnosis {
+  category: string;
   title: string;
   risk_level: 'low' | 'medium' | 'high';
-  financial_impact_paise: number;
-  action_type: string;
-  action_label: string;
-  action_description: string;
   evidence_chain: string[];
-  audit_hash: string;
-  approval_status: 'pending' | 'approved' | 'rejected' | 'executed';
+  recommended_action: string;
+  disposition: 'auto_resolvable' | 'human_review' | 'escalate';
+  confidence: 'LOW' | 'MEDIUM' | 'HIGH';
 }
-
-import { ConfidenceLevel } from './canonical';
 
 export type RuleIdentifier = 
   | 'R1.1_exact_three_way'
@@ -92,7 +94,7 @@ export interface ReconciledRecordView {
   injected_defect?: string | null;
   reasoning: string;
   audit_record: AuditRecord;
-  layer3_triage?: Layer3TriageInfo;
+  diagnosis?: Layer3Diagnosis | null;
   resolution_status?: string;
 }
 

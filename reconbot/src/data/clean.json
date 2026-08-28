@@ -47,6 +47,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1001 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000015QnuVdYXy",
         "layer": 1,
@@ -66,22 +67,6 @@
         "timestamp": "2026-08-17T04:23:34+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 179471,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000015QnuVdYXy (Gross: Rs 1794.71)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x99328b82e47db92b",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -108,6 +93,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1002 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00002K3yn9Ffcg",
         "layer": 1,
@@ -127,22 +113,6 @@
         "timestamp": "2026-08-17T10:13:44+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 221289,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00002K3yn9Ffcg (Gross: Rs 2212.89)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x5110aa99d9f76c58",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -169,6 +139,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1003 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00003vsjaSS8VF",
         "layer": 1,
@@ -188,22 +159,6 @@
         "timestamp": "2026-08-17T15:09:21+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 149946,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00003vsjaSS8VF (Gross: Rs 1499.46)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x01b57d1ee88fa3e6",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -230,6 +185,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1004 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_0000452Ztd26fE",
         "layer": 1,
@@ -249,22 +205,6 @@
         "timestamp": "2026-08-17T15:50:50+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 208085,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_0000452Ztd26fE (Gross: Rs 2080.85)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xa55e4016fee1e1d2",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -291,6 +231,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1005 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00005BpdbIKaRd",
         "layer": 1,
@@ -310,22 +251,6 @@
         "timestamp": "2026-08-17T22:45:33+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 194845,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00005BpdbIKaRd (Gross: Rs 1948.45)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x705c473039d0c45d",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -352,6 +277,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1006 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00006lgAACTP9g",
         "layer": 1,
@@ -371,22 +297,6 @@
         "timestamp": "2026-08-17T23:17:50+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 203987,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00006lgAACTP9g (Gross: Rs 2039.87)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xb280f9cb98f428f1",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -413,6 +323,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1007 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00007OHafUozD1",
         "layer": 1,
@@ -432,22 +343,6 @@
         "timestamp": "2026-08-18T01:27:07+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 224264,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00007OHafUozD1 (Gross: Rs 2242.64)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x2a64c352e9995ff2",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -474,6 +369,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1008 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00008ndTdtdD5G",
         "layer": 1,
@@ -493,22 +389,6 @@
         "timestamp": "2026-08-18T01:44:27+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 120579,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00008ndTdtdD5G (Gross: Rs 1205.79)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x64d51fc691d59912",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -535,6 +415,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1009 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00009mSoyPstUe",
         "layer": 1,
@@ -554,22 +435,6 @@
         "timestamp": "2026-08-18T05:30:51+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 162934,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00009mSoyPstUe (Gross: Rs 1629.34)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x7b8567e760eb48ee",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -596,6 +461,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1010 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00010RL9OaYsP6",
         "layer": 1,
@@ -615,22 +481,6 @@
         "timestamp": "2026-08-18T06:40:14+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 194867,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00010RL9OaYsP6 (Gross: Rs 1948.67)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x094fb3fd429187cb",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -657,6 +507,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1011 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000110fAraVNqT",
         "layer": 1,
@@ -676,22 +527,6 @@
         "timestamp": "2026-08-18T07:55:07+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 145829,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000110fAraVNqT (Gross: Rs 1458.29)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x5429007ffb9947b2",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -718,6 +553,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1012 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000123X13npgW2",
         "layer": 1,
@@ -737,22 +573,6 @@
         "timestamp": "2026-08-18T08:16:15+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 90965,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000123X13npgW2 (Gross: Rs 909.65)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xa90c84d7f7ff770a",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -779,6 +599,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1013 amount agrees with payment, settlement UTR HDFC351396359337 found in bank row [1], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00013RxcDm4vY2",
         "layer": 1,
@@ -798,22 +619,6 @@
         "timestamp": "2026-08-18T14:51:29+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 149941,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00013RxcDm4vY2 (Gross: Rs 1499.41)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xd21c609ca2b355dc",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -840,6 +645,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1014 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000148l7qgATtL",
         "layer": 1,
@@ -859,22 +665,6 @@
         "timestamp": "2026-08-18T23:47:12+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 87235,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000148l7qgATtL (Gross: Rs 872.35)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x5f6d66ea999beabe",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -901,6 +691,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1015 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00015Put0Sstzy",
         "layer": 1,
@@ -920,22 +711,6 @@
         "timestamp": "2026-08-19T01:00:14+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 193062,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00015Put0Sstzy (Gross: Rs 1930.62)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xa7c2c0e8234c79f8",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -962,6 +737,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1016 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00016JOCBnD3Xk",
         "layer": 1,
@@ -981,22 +757,6 @@
         "timestamp": "2026-08-19T01:52:35+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 135098,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00016JOCBnD3Xk (Gross: Rs 1350.98)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x5d67929c4a71efb1",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1023,6 +783,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1017 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00017VC2JSxyjQ",
         "layer": 1,
@@ -1042,22 +803,6 @@
         "timestamp": "2026-08-19T02:05:39+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 204554,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00017VC2JSxyjQ (Gross: Rs 2045.54)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x31c3661a15439c58",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1084,6 +829,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1018 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000189K63LSFZH",
         "layer": 1,
@@ -1103,22 +849,6 @@
         "timestamp": "2026-08-19T04:20:51+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 201803,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000189K63LSFZH (Gross: Rs 2018.03)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x6667c64103da48f6",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1145,6 +875,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1019 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00019u3ejxjnzu",
         "layer": 1,
@@ -1164,22 +895,6 @@
         "timestamp": "2026-08-19T10:30:29+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 154901,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00019u3ejxjnzu (Gross: Rs 1549.01)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xf1daed3144408383",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1206,6 +921,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1020 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_0002007zUHLnnB",
         "layer": 1,
@@ -1225,22 +941,6 @@
         "timestamp": "2026-08-19T12:24:56+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 158279,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_0002007zUHLnnB (Gross: Rs 1582.79)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xaf76ef4ff97ad824",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1267,6 +967,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1021 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00021lquCu2r6A",
         "layer": 1,
@@ -1286,22 +987,6 @@
         "timestamp": "2026-08-19T15:31:24+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 115572,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00021lquCu2r6A (Gross: Rs 1155.72)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xa2faced19e82abc5",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1328,6 +1013,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1022 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00022hPInRVkLU",
         "layer": 1,
@@ -1347,22 +1033,6 @@
         "timestamp": "2026-08-19T17:12:52+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 242879,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00022hPInRVkLU (Gross: Rs 2428.79)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xb9495863eaecf54e",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1389,6 +1059,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1023 amount agrees with payment, settlement UTR HDFC937191275575 found in bank row [2], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00023MgV0Lh8Wv",
         "layer": 1,
@@ -1408,22 +1079,6 @@
         "timestamp": "2026-08-19T18:10:58+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 235214,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00023MgV0Lh8Wv (Gross: Rs 2352.14)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x3770b67cbe0eb59f",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1450,6 +1105,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1024 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00024GOM5WCZKt",
         "layer": 1,
@@ -1469,22 +1125,6 @@
         "timestamp": "2026-08-19T18:42:28+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 194160,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00024GOM5WCZKt (Gross: Rs 1941.60)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xddba08780b58cfcf",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1511,6 +1151,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1025 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00025qrK2IGloz",
         "layer": 1,
@@ -1530,22 +1171,6 @@
         "timestamp": "2026-08-19T20:52:48+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 135605,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00025qrK2IGloz (Gross: Rs 1356.05)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x94915719c9e079b3",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1572,6 +1197,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1026 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000269IvCtoStU",
         "layer": 1,
@@ -1591,22 +1217,6 @@
         "timestamp": "2026-08-19T22:16:02+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 219177,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000269IvCtoStU (Gross: Rs 2191.77)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xf89c7a8b0c986f8b",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1633,6 +1243,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1027 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00027sRhcds6NU",
         "layer": 1,
@@ -1652,22 +1263,6 @@
         "timestamp": "2026-08-19T22:18:18+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 139633,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00027sRhcds6NU (Gross: Rs 1396.33)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x4da766242629b849",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1694,6 +1289,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1028 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00028QjY6fpIzK",
         "layer": 1,
@@ -1713,22 +1309,6 @@
         "timestamp": "2026-08-20T01:48:22+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 99420,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00028QjY6fpIzK (Gross: Rs 994.20)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x8a12cf2e004e457b",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1755,6 +1335,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1029 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00029jkeaBKsoR",
         "layer": 1,
@@ -1774,22 +1355,6 @@
         "timestamp": "2026-08-20T07:32:50+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 149375,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00029jkeaBKsoR (Gross: Rs 1493.75)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x64588bbe1bd4b92f",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1816,6 +1381,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1030 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00030ektUJrhQR",
         "layer": 1,
@@ -1835,22 +1401,6 @@
         "timestamp": "2026-08-20T08:15:46+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 149633,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00030ektUJrhQR (Gross: Rs 1496.33)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xe6cc2762a1d0ce63",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1877,6 +1427,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1031 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00031UDO4lKNEf",
         "layer": 1,
@@ -1896,22 +1447,6 @@
         "timestamp": "2026-08-20T11:26:09+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 231059,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00031UDO4lKNEf (Gross: Rs 2310.59)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xebb6e03580780368",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1938,6 +1473,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1032 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00032u8zF9OHzl",
         "layer": 1,
@@ -1957,22 +1493,6 @@
         "timestamp": "2026-08-20T11:27:56+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 103084,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00032u8zF9OHzl (Gross: Rs 1030.84)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xdf034a1fca8687f4",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -1999,6 +1519,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1033 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00033azn0h6Oj5",
         "layer": 1,
@@ -2018,22 +1539,6 @@
         "timestamp": "2026-08-20T11:31:44+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 121517,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00033azn0h6Oj5 (Gross: Rs 1215.17)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x1d1e6d025b9a6bc2",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2060,6 +1565,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1034 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00034FYrsK9EjH",
         "layer": 1,
@@ -2079,22 +1585,6 @@
         "timestamp": "2026-08-20T14:47:25+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 169096,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00034FYrsK9EjH (Gross: Rs 1690.96)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x62c79bc9b462ffe5",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2121,6 +1611,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1035 amount agrees with payment, settlement UTR HDFC462427453848 found in bank row [3], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00035RYxPY8EcF",
         "layer": 1,
@@ -2140,22 +1631,6 @@
         "timestamp": "2026-08-20T15:53:39+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 163408,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00035RYxPY8EcF (Gross: Rs 1634.08)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x65f00ea8382effef",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2182,6 +1657,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1036 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00036QO001xtSV",
         "layer": 1,
@@ -2201,22 +1677,6 @@
         "timestamp": "2026-08-21T04:32:24+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 149474,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00036QO001xtSV (Gross: Rs 1494.74)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x22cd04f849932929",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2243,6 +1703,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1037 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000374cXsxjGJX",
         "layer": 1,
@@ -2262,22 +1723,6 @@
         "timestamp": "2026-08-21T05:36:18+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 123611,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000374cXsxjGJX (Gross: Rs 1236.11)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xd5aca290080d520f",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2304,6 +1749,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1038 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00038BvKNAp0mx",
         "layer": 1,
@@ -2323,22 +1769,6 @@
         "timestamp": "2026-08-21T06:41:03+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 223287,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00038BvKNAp0mx (Gross: Rs 2232.87)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x4565cd8208bdc5f1",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2365,6 +1795,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1039 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00039MQSOZM4Ot",
         "layer": 1,
@@ -2384,22 +1815,6 @@
         "timestamp": "2026-08-21T09:58:48+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 137410,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00039MQSOZM4Ot (Gross: Rs 1374.10)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x92df315811034a74",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2426,6 +1841,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1040 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00040ZpZDYUvh7",
         "layer": 1,
@@ -2445,22 +1861,6 @@
         "timestamp": "2026-08-21T11:03:37+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 211542,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00040ZpZDYUvh7 (Gross: Rs 2115.42)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xc4669655b2547024",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2487,6 +1887,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1041 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00041PPKY6gob2",
         "layer": 1,
@@ -2506,22 +1907,6 @@
         "timestamp": "2026-08-21T11:50:01+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 112398,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00041PPKY6gob2 (Gross: Rs 1123.98)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x7720962ee1c7174a",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2548,6 +1933,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1042 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00042oHyx6RHKT",
         "layer": 1,
@@ -2567,22 +1953,6 @@
         "timestamp": "2026-08-21T12:45:54+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 209138,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00042oHyx6RHKT (Gross: Rs 2091.38)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x927b4d6cfffce0b1",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2609,6 +1979,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1043 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00043Ndr86ZfnN",
         "layer": 1,
@@ -2628,22 +1999,6 @@
         "timestamp": "2026-08-21T14:19:22+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 222728,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00043Ndr86ZfnN (Gross: Rs 2227.28)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xdac23ff26ed32dd9",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2670,6 +2025,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1044 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_000441iipkObaW",
         "layer": 1,
@@ -2689,22 +2045,6 @@
         "timestamp": "2026-08-21T16:45:22+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 236233,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_000441iipkObaW (Gross: Rs 2362.33)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x46ff195276b6e8b9",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2731,6 +2071,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1045 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00045cW1GC7dDy",
         "layer": 1,
@@ -2750,22 +2091,6 @@
         "timestamp": "2026-08-21T17:09:42+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 138077,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00045cW1GC7dDy (Gross: Rs 1380.77)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x92f69b7d9960bdf5",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2792,6 +2117,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1046 amount agrees with payment, settlement UTR HDFC804397510145 found in bank row [4], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00046LgR0OVSnB",
         "layer": 1,
@@ -2811,22 +2137,6 @@
         "timestamp": "2026-08-21T17:13:11+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 157305,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00046LgR0OVSnB (Gross: Rs 1573.05)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xb37d3da73edc9082",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2853,6 +2163,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1047 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00047ffTYIKIuh",
         "layer": 1,
@@ -2872,22 +2183,6 @@
         "timestamp": "2026-08-22T04:41:38+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 103914,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00047ffTYIKIuh (Gross: Rs 1039.14)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xbb65c2fdcf706165",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2914,6 +2209,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1048 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00048vIhroAIVM",
         "layer": 1,
@@ -2933,22 +2229,6 @@
         "timestamp": "2026-08-22T05:35:43+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 138784,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00048vIhroAIVM (Gross: Rs 1387.84)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x5df6e3e25e32b747",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -2975,6 +2255,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1049 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00049yiNbUnAvw",
         "layer": 1,
@@ -2994,22 +2275,6 @@
         "timestamp": "2026-08-22T13:20:29+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 117552,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00049yiNbUnAvw (Gross: Rs 1175.52)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0xd957792044b7d4fb",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -3036,6 +2301,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1050 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00050qUhArQEPc",
         "layer": 1,
@@ -3055,22 +2321,6 @@
         "timestamp": "2026-08-22T14:33:55+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 239141,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00050qUhArQEPc (Gross: Rs 2391.41)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x416780b206fac78d",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -3097,6 +2347,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1051 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00051RFZXe1cb5",
         "layer": 1,
@@ -3116,22 +2367,6 @@
         "timestamp": "2026-08-22T16:19:01+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 113865,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00051RFZXe1cb5 (Gross: Rs 1138.65)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x5935e63d28c74067",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -3158,6 +2393,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1052 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00052gBye1UnWe",
         "layer": 1,
@@ -3177,22 +2413,6 @@
         "timestamp": "2026-08-22T17:08:34+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 103102,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00052gBye1UnWe (Gross: Rs 1031.02)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x8e253e9cc1456ce1",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -3219,6 +2439,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1053 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00053Ve6MCIJQ2",
         "layer": 1,
@@ -3238,22 +2459,6 @@
         "timestamp": "2026-08-23T05:41:43+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 237915,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00053Ve6MCIJQ2 (Gross: Rs 2379.15)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x9f4699a70d4c05e4",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -3280,6 +2485,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1054 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00054CcwrN8fKx",
         "layer": 1,
@@ -3299,22 +2505,6 @@
         "timestamp": "2026-08-23T14:04:46+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 212995,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00054CcwrN8fKx (Gross: Rs 2129.95)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x4bbf2d2ea4d53c2b",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     },
@@ -3341,6 +2531,7 @@
       "ground_truth_category": null,
       "injected_defect": null,
       "reasoning": "Exact 3-way link: order #1055 amount agrees with payment, settlement UTR HDFC230731094874 found in bank row [5], batch aggregate reconciles (\u0394 \u20b90).",
+      "diagnosis": null,
       "audit_record": {
         "record_key": "pay_00055Z8fOcR9GL",
         "layer": 1,
@@ -3360,22 +2551,6 @@
         "timestamp": "2026-08-23T14:41:15+00:00",
         "ground_truth_category": "matched",
         "injected_defect": null
-      },
-      "layer3_triage": {
-        "root_cause": "GENERAL_RECONCILIATION_EXCEPTION",
-        "title": "Unreconciled Ledger Variance",
-        "risk_level": "medium",
-        "financial_impact_paise": 107132,
-        "action_type": "MANUAL_REVIEW",
-        "action_label": "Escalate to Finance Controller",
-        "action_description": "Route to manual audit queue with cross-ledger diff payload.",
-        "evidence_chain": [
-          "Payment ID: pay_00055Z8fOcR9GL (Gross: Rs 1071.32)",
-          "Manifest anomaly diagnosis: unknown_anomaly",
-          "Deterministic ledger hash validated via Layer 3 forensic rules"
-        ],
-        "audit_hash": "0x5645b4decf89b165",
-        "approval_status": "pending"
       },
       "resolution_status": "pending"
     }
@@ -3408,6 +2583,12 @@
       "covered": 55,
       "only_in_engine": [],
       "only_in_manifest": []
+    },
+    "layer3_diagnosis": {
+      "exceptions_diagnosed": 0,
+      "correct": 0,
+      "accuracy": 1.0,
+      "confusion": []
     }
   }
 }

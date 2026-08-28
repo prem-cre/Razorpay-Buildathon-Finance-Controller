@@ -23,11 +23,11 @@ export function Sidebar({ activeTab, onTabChange, summary, exceptionCount: expCo
   const totalRecords = summary?.total_records ?? totalRecProp ?? 0;
 
   const navItems = [
-    { id: 'dashboard' as NavTab, label: 'Executive Radar', icon: LayoutDashboard, badge: null, isAlert: false },
-    { id: 'reconciliation' as NavTab, label: '3-Way Recon Grid', icon: TableProperties, badge: totalRecords > 0 ? totalRecords.toString() : null, isAlert: false },
-    { id: 'exceptions' as NavTab, label: 'Exception Triage', icon: AlertCircle, badge: exceptionCount > 0 ? exceptionCount.toString() : null, isAlert: true },
-    { id: 'evaluation' as NavTab, label: 'Agent Benchmarks', icon: BarChart3, badge: summary?.evaluation ? summary.evaluation.precision_pct + '%' : '100%', isAlert: false },
-    { id: 'ingest' as NavTab, label: 'Data Ingestion', icon: UploadCloud, badge: '3/3', isAlert: false },
+    { id: 'dashboard' as NavTab, label: 'Overview', icon: LayoutDashboard, badge: null, isAlert: false },
+    { id: 'reconciliation' as NavTab, label: 'Reconciliation', icon: TableProperties, badge: totalRecords > 0 ? totalRecords.toString() : null, isAlert: false },
+    { id: 'exceptions' as NavTab, label: 'Exceptions', icon: AlertCircle, badge: exceptionCount > 0 ? exceptionCount.toString() : null, isAlert: true },
+    { id: 'evaluation' as NavTab, label: 'Evaluation', icon: BarChart3, badge: summary?.evaluation ? summary.evaluation.precision_pct + '%' : '100%', isAlert: false },
+    { id: 'ingest' as NavTab, label: 'Data sources', icon: UploadCloud, badge: '3/3', isAlert: false },
   ];
 
   return (

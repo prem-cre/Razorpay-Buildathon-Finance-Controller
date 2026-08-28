@@ -16,7 +16,7 @@ export function AuditDrawer({ record, onClose, onApproveAction }: AuditDrawerPro
   if (!record) return null;
 
   const isMatched = record.match_status === 'matched';
-  const triage = record.layer3_triage;
+  const diagnosis = record.diagnosis;
   const isActionApproved = executionState === 'executed' || record.resolution_status === 'approved';
 
   const handleApprove = () => {
@@ -72,7 +72,7 @@ export function AuditDrawer({ record, onClose, onApproveAction }: AuditDrawerPro
                 color: isActionApproved || isMatched ? 'var(--status-emerald)' : 'var(--status-amber)',
                 border: isActionApproved || isMatched ? '1px solid var(--status-emerald-border)' : '1px solid var(--status-amber-border)',
               }}>
-                {isActionApproved ? 'ACTION EXECUTED' : isMatched ? 'MATCHED (100% CONF)' : (record.exception_category ? record.exception_category.toUpperCase() : 'UNRESOLVED')}
+                {isActionApproved ? 'REVIEWED' : isMatched ? 'MATCHED' : (record.exception_category ? record.exception_category.toUpperCase() : 'UNRESOLVED')}
               </span>
             </div>
             <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.02em' }}>
@@ -114,7 +114,7 @@ export function AuditDrawer({ record, onClose, onApproveAction }: AuditDrawerPro
               </div>
             </div>
 
-            {/* Bank MT940 Card */}
+            {/* Bank credit card */}
             <div style={{ background: '#f8fafc', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '14px' }}>
               <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>3. Bank Deposit</div>
               <div className='tabular-mono' style={{ fontSize: '16px', fontWeight: 800, color: isMatched ? 'var(--status-emerald)' : 'var(--status-amber)', margin: '6px 0 2px 0' }}>
@@ -138,7 +138,7 @@ export function AuditDrawer({ record, onClose, onApproveAction }: AuditDrawerPro
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
             <ShieldCheck size={16} style={{ color: 'var(--rzp-blue)' }} />
             <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Deterministic Rule Checksum Trace
+              Engine reasoning
             </span>
           </div>
           <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.5', margin: 0 }}>
@@ -146,120 +146,84 @@ export function AuditDrawer({ record, onClose, onApproveAction }: AuditDrawerPro
           </p>
           <div style={{ marginTop: '10px', display: 'flex', gap: '14px', fontSize: '11px', color: 'var(--text-muted)' }}>
             <span>Settlement UTR: <strong className='tabular-mono' style={{ color: 'var(--text-primary)' }}>{record.bank_utr}</strong></span>
-            <span>Rule: <strong className='tabular-mono' style={{ color: 'var(--rzp-blue)' }}>{record.rule_applied || 'R1.1_exact_three_way'}</strong></span>
+            <span>Rule: <strong className='tabular-mono' style={{ color: 'var(--rzp-blue)' }}>{record.rule_applied || 'deferred to review'}</strong></span>
           </div>
         </div>
 
-        {/* Layer 3 Forensic AI Triage & One-Click Resolution Card */}
-        {triage && (
+        {/* Layer 3 diagnosis — inferred from data, recommends a human action */}
+        {diagnosis && (
           <div style={{
             background: isActionApproved ? 'var(--status-emerald-bg)' : '#ffffff',
-            border: isActionApproved ? '1px solid var(--status-emerald-border)' : '1px solid var(--status-violet-border)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '20px',
-            marginBottom: '24px',
-            boxShadow: 'var(--shadow-card)',
+            border: isActionApproved ? '1px solid var(--status-emerald-border)' : '1px solid var(--border-subtle)',
+            borderRadius: 'var(--radius-lg)', padding: '20px', marginBottom: '24px', boxShadow: 'var(--shadow-card)',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Bot size={18} style={{ color: isActionApproved ? 'var(--status-emerald)' : 'var(--rzp-purple)' }} />
-                <span style={{ fontSize: '13px', fontWeight: 800, color: isActionApproved ? 'var(--status-emerald)' : 'var(--rzp-purple)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  Layer 3 Forensic Triage & Resolution
+                <Cpu size={16} style={{ color: 'var(--rzp-blue)' }} />
+                <span style={{ fontSize: '12px', fontWeight: 800, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Layer 3 diagnosis
                 </span>
               </div>
-              <span className='tabular-mono' style={{
-                fontSize: '10px',
-                fontWeight: 700,
-                color: 'var(--text-muted)',
-                background: 'var(--surface-interactive)',
-                padding: '2px 8px',
-                borderRadius: '4px',
-              }}>
-                {triage.audit_hash}
+              <div style={{ display: 'flex', gap: '6px' }}>
+                <span className='tabular-mono' style={{
+                  fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '999px',
+                  background: 'var(--surface-interactive)', color: 'var(--text-muted)', border: '1px solid var(--border-subtle)',
+                }}>{diagnosis.confidence} confidence</span>
+                <span style={{
+                  fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '999px', textTransform: 'uppercase',
+                  color: '#ffffff', background: diagnosis.risk_level === 'high' ? 'var(--status-rose)' : diagnosis.risk_level === 'medium' ? 'var(--status-amber)' : 'var(--status-emerald)',
+                }}>{diagnosis.risk_level} risk</span>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+              <span style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-primary)' }}>{diagnosis.title}</span>
+              <span className='tabular-mono' style={{ fontSize: '10px', color: 'var(--rzp-blue)', background: 'var(--rzp-blue-subtle)', border: '1px solid var(--rzp-blue-border)', padding: '2px 7px', borderRadius: '4px' }}>
+                {diagnosis.category}
               </span>
             </div>
 
-            <div style={{ fontSize: '14px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '4px' }}>
-              {triage.title}
-            </div>
-            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '12px' }}>
-              {triage.action_description}
-            </div>
-
-            {/* Evidence Chain */}
-            <div style={{ background: '#f8fafc', borderRadius: 'var(--radius-md)', padding: '10px 14px', marginBottom: '14px' }}>
-              <div style={{ fontSize: '10px', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '6px' }}>
-                Verifiable Forensic Evidence Chain:
+            <div style={{ background: '#f8fafc', borderRadius: 'var(--radius-md)', padding: '12px 14px', marginBottom: '14px', border: '1px solid var(--border-subtle)' }}>
+              <div style={{ fontSize: '10px', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px' }}>
+                Evidence (from the record, not the answer key)
               </div>
-              {triage.evidence_chain.map((ev, i) => (
-                <div key={i} style={{ fontSize: '11px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '3px' }}>
-                  <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--rzp-purple)' }} />
+              {diagnosis.evidence_chain.map((ev, i) => (
+                <div key={i} style={{ fontSize: '12px', color: 'var(--text-secondary)', display: 'flex', gap: '8px', marginBottom: '5px', lineHeight: 1.45 }}>
+                  <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--rzp-blue)', marginTop: '6px', flexShrink: 0 }} />
                   {ev}
                 </div>
               ))}
             </div>
 
-            {/* One-Click Action Execution Controls */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '16px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+              <ArrowRight size={14} style={{ color: 'var(--rzp-blue)', marginTop: '2px', flexShrink: 0 }} />
+              <span><strong style={{ color: 'var(--text-primary)' }}>Recommended:</strong> {diagnosis.recommended_action}</span>
+            </div>
+
             {isActionApproved ? (
               <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 14px',
-                background: 'var(--status-emerald-bg)',
-                border: '1px solid var(--status-emerald-border)',
-                borderRadius: 'var(--radius-md)',
-                color: 'var(--status-emerald)',
-                fontSize: '12px',
-                fontWeight: 700,
+                display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px',
+                background: 'var(--status-emerald-bg)', border: '1px solid var(--status-emerald-border)',
+                borderRadius: 'var(--radius-md)', color: 'var(--status-emerald)', fontSize: '12px', fontWeight: 700,
               }}>
                 <CheckCircle2 size={16} />
-                <span>Action Approved & Programmatically Executed to General Ledger</span>
+                <span>Marked reviewed — removed from the queue for this session</span>
               </div>
             ) : (
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button
-                  onClick={handleApprove}
-                  disabled={executionState === 'executing'}
-                  style={{
-                    flex: 2,
-                    padding: '10px 16px',
-                    background: executionState === 'executing' ? 'var(--surface-interactive)' : 'linear-gradient(135deg, #7c3aed 0%, #0c66e4 100%)',
-                    border: '1px solid rgba(124, 58, 237, 0.4)',
-                    borderRadius: 'var(--radius-md)',
-                    color: '#ffffff',
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    cursor: executionState === 'executing' ? 'wait' : 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '6px',
-                    boxShadow: '0 2px 8px rgba(124, 58, 237, 0.25)',
-                  }}
-                >
-                  <Sparkles size={14} />
-                  <span>{executionState === 'executing' ? 'Executing Settlement Action...' : triage.action_label}</span>
-                </button>
-
-                <button
-                  onClick={handleEscalate}
-                  disabled={isEscalated}
-                  style={{
-                    flex: 1,
-                    padding: '10px 14px',
-                    background: '#ffffff',
-                    border: '1px solid var(--border-default)',
-                    borderRadius: 'var(--radius-md)',
-                    color: isEscalated ? 'var(--text-muted)' : 'var(--text-primary)',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    cursor: isEscalated ? 'default' : 'pointer',
-                  }}
-                >
-                  {isEscalated ? 'Escalated' : 'Escalate'}
-                </button>
-              </div>
+              <button
+                onClick={handleApprove}
+                disabled={executionState === 'executing'}
+                style={{
+                  width: '100%', padding: '11px 16px',
+                  background: executionState === 'executing' ? 'var(--surface-interactive)' : 'var(--rzp-blue)',
+                  border: '1px solid var(--rzp-blue)', borderRadius: 'var(--radius-md)', color: '#ffffff',
+                  fontSize: '12px', fontWeight: 700, cursor: executionState === 'executing' ? 'wait' : 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+                }}
+              >
+                <Check size={14} />
+                <span>{executionState === 'executing' ? 'Marking reviewed…' : 'Accept & mark reviewed'}</span>
+              </button>
             )}
           </div>
         )}

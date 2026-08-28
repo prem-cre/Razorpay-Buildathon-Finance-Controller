@@ -34,8 +34,8 @@ export function MultiSourceDropzone() {
     {
       id: 'hdfc_bank',
       title: 'HDFC Corporate Bank Statement',
-      sourceType: 'Bank MT940 / CAMT.053',
-      format: 'MT940 / CSV',
+      sourceType: 'Bank statement',
+      format: 'CSV',
       status: 'SYNCED',
       recordCount: 485,
       description: 'Official bank ledger credits with 16-character UTR numbers and clearing timestamps.',
@@ -140,10 +140,10 @@ export function MultiSourceDropzone() {
         </div>
         <div>
           <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--text-primary)' }}>
-            Drag and drop custom settlement files or MT940 statements
+            Drop a settlement export, bank statement, or order export
           </div>
           <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-            Supported formats: CSV, XLSX, ISO 20022 CAMT.053, MT940 banking batches
+            Supported: CSV exports from the gateway, bank, and store
           </div>
         </div>
         <button style={{
